@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import MyFooter from './UI/MyFooter';
-import AppNavBar from './UI/AppNavBar';
+import AppNavBar from './UI/NavBar/AppNavBar';
 
 export default function Layout(): JSX.Element {
   // if (user.status === 'fetching') {
@@ -11,7 +11,7 @@ export default function Layout(): JSX.Element {
     <>
       <AppNavBar />
       <Outlet />
-      <MyFooter/>
+      <MyFooter />
     </>
   );
 }
