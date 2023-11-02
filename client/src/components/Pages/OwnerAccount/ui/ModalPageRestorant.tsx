@@ -33,7 +33,6 @@ function ModalPageRestorant({ isOpen, onClose, overlay }: ModalPageProps): JSX.E
             <FormLabel>Изменить Название Компании</FormLabel>
             <Input placeholder="Название Компании" />
           </FormControl>
-
           <FormControl mt={4}>
             <FormLabel>Изменить номер</FormLabel>
             <Input placeholder="Телефон" />
