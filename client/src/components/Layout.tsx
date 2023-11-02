@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import MyFooter from './UI/MyFooter';
+import MyFooter from './UI/Footer/MyFooter';
 import AppNavBar from './UI/AppNavBar';
 
 export default function Layout(): JSX.Element {
