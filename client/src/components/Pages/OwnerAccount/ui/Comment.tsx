@@ -51,7 +51,7 @@ export default function Comment(): JSX.Element {
       </Button>
       {isReplyFormOpen && (
         <Box mt="2">
-          <Textarea placeholder="Ваш ответ" />
+          <Textarea colorScheme="blackAlpha" placeholder="Ваш ответ" />
           <Button size="sm" mt="2" colorScheme="blackAlpha" variant="outline" className={style.btn}>
             Отправить
           </Button>
