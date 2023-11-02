@@ -14,9 +14,49 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import type ymaps from 'yandex-maps';
+import style from '../../UserAccount/style.module.css';
 
-function ModalNewRestorant({ isOpen, onClose, overlay }): JSX.Element {
+type ModalPageProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  overlay: any;
+};
+type Coordinates = {
+  lat: number;
+  lng: number;
+};
+
+function ModalNewRestorant({ isOpen, onClose, overlay }: ModalPageProps): JSX.Element {
+  const [mapCoordinates, setMapCoordinates] = useState<Coordinates>({
+    lat: 55.751574,
+    lng: 37.573856,
+  });
+  const ymapRef = useRef<ymaps.Map | null>(null);
+
+  const handleMapClick = (e: any): void => {
+    const coords: number[] = e.get('coords');
+    setMapCoordinates({ lat: coords[0], lng: coords[1] });
+  };
+
+  const loadMap = (): void => {
+    if (window.ymaps) {
+      window.ymaps.ready(() => {
+        ymapRef.current = new window.ymaps.Map('mapadd', {
+          center: [mapCoordinates.lat, mapCoordinates.lng],
+          zoom: 8,
+        });
+        const myMap = ymapRef.current;
+        myMap.events.add('click', handleMapClick);
+      });
+    }
+  };
+
+  useEffect(() => {
+    loadMap();
+  }, []);
+
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       {overlay}
@@ -31,8 +71,13 @@ function ModalNewRestorant({ isOpen, onClose, overlay }): JSX.Element {
 
           <FormControl mt={4}>
             <FormLabel>Адрес Заведения</FormLabel>
-            <Input placeholder="Телефон" />
+            <Input placeholder="Адрес" />
           </FormControl>
+          <FormControl mt={4}>
+            <FormLabel>Выберите точку на карте</FormLabel>
+            <div id="mapadd" style={{ width: '400px', height: '400px' }} />
+          </FormControl>
+
           <FormControl mt={4}>
             <FormLabel>Выберите категорию</FormLabel>
             <Select placeholder="Кухня">
@@ -50,7 +95,11 @@ function ModalNewRestorant({ isOpen, onClose, overlay }): JSX.Element {
             <Input type="file" placeholder="Email" />
           </FormControl>
         </ModalBody>
-        <ModalFooter />
+        <ModalFooter>
+          <Button type="submit" className={style.btn} colorScheme="blackAlpha" variant="outline">
+            Отправить
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );

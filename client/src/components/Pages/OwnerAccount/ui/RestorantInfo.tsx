@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdBuild } from 'react-icons/md';
 import { Button, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import style from '../../UserAccount/style.module.css';
@@ -9,10 +9,9 @@ function OverlayTwo(): any {
   return <ModalOverlay bg="none" backdropFilter="auto" backdropInvert="80%" backdropBlur="2px" />;
 }
 function RestorantInfo(): JSX.Element {
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = React.useState(<OverlayTwo />);
-  const [selectedModal, setSelectedModal] = useState(null);
+  const [selectedModal, setSelectedModal] = useState<string | null>(null);
 
   return (
     <div className={style.usercardinfo}>
@@ -29,7 +28,7 @@ function RestorantInfo(): JSX.Element {
         </div>
 
         <div className={style['profile-card-loc']}>
-          <span className={style['profile-card-loc__txt']}>kompany@yandex.ru</span>
+          <span className={style['profile-card-loc__txt']}>company@yandex.ru</span>
         </div>
       </div>
       <div className={style['btn-container']}>

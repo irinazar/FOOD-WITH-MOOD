@@ -15,6 +15,7 @@ import {
   Wrap,
 } from '@chakra-ui/react';
 import React from 'react';
+import style from '../style.module.css';
 
 type ModalPageProps = {
   isOpen: boolean;
@@ -70,7 +71,11 @@ function ModalPage({ isOpen, onClose, overlay }: ModalPageProps): JSX.Element {
             <Input type="file" placeholder="Email" />
           </FormControl>
         </ModalBody>
-        <ModalFooter />
+        <ModalFooter>
+          <Button type="submit" className={style.btn} colorScheme="blackAlpha" variant="outline">
+            Сохранить
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );

@@ -9,7 +9,6 @@ export default function OwnerAccount(): JSX.Element {
 
       <div className={style['favorite-restaurants']}>Я владелец </div>
 
-      <div className={style['favorite-restaurants']}>Ваша подборка</div>
     </div>
   );
 }

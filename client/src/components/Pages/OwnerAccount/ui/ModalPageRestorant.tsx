@@ -13,8 +13,15 @@ import {
 } from '@chakra-ui/react';
 
 import React from 'react';
+import style from '../../UserAccount/style.module.css';
 
-function ModalPageRestorant({ isOpen, onClose, overlay }): JSX.Element {
+type ModalPageProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  overlay: any;
+};
+
+function ModalPageRestorant({ isOpen, onClose, overlay }: ModalPageProps): JSX.Element {
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       {overlay}
@@ -40,7 +47,11 @@ function ModalPageRestorant({ isOpen, onClose, overlay }): JSX.Element {
             <Input type="file" placeholder="Email" />
           </FormControl>
         </ModalBody>
-        <ModalFooter />
+        <ModalFooter>
+          <Button type="submit" className={style.btn} colorScheme="blackAlpha" variant="outline">
+            Сохранить
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
