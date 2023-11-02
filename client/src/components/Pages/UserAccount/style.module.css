@@ -5,13 +5,13 @@
 }
 
 .usercardinfo {
-  min-height: 300px;
+  max-height: 400px;
   margin: 50px 30px 30px 30px;
   box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
   background: rgb(230, 229, 237);
   background: linear-gradient(90deg, rgba(230, 229, 237, 1) 0%, rgba(118, 120, 120, 1) 100%);
   border-radius: 12px;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   position: relative;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .usercardinfo .profile-card__cnt {
-  margin-top: -30px;
+  margin-top: -40px;
   text-align: center;
   padding: 0 20px;
   padding-bottom: 10px;
@@ -94,16 +94,20 @@
   background-size: 50% 100%; /* Ширина линий 50% от блока */
   background-repeat: no-repeat; /* Не повторять фон */
   box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
-
 }
 
-
-.btn-container{
+.btn-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.btn-rest{
-  margin: 0 0 5px 0;
+@media screen and (max-width: 576px) {
+  .btn-container {
+    justify-content: center;
+  }
+}
+
+.btn-rest {
+  margin: 5px;
 }

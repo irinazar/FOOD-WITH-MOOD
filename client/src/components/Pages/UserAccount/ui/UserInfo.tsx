@@ -4,11 +4,10 @@ import { Button, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import style from '../style.module.css';
 import ModalPage from './ModalPage';
 
+function OverlayTwo(): any {
+  return <ModalOverlay bg="none" backdropFilter="auto" backdropInvert="80%" backdropBlur="2px" />;
+}
 function UserInfo(): JSX.Element {
-  function OverlayTwo() {
-    return <ModalOverlay bg="none" backdropFilter="auto" backdropInvert="80%" backdropBlur="2px" />;
-  }
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayTwo />);
 
@@ -34,6 +33,7 @@ function UserInfo(): JSX.Element {
           setOverlay(<OverlayTwo />);
           onOpen();
         }}
+        className={style['btn-rest']}
         leftIcon={<MdBuild />}
         variant="outline"
         size={{ base: 'sm', md: 'md', lg: 'lg' }}

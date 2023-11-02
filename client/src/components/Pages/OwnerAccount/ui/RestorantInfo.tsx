@@ -5,11 +5,10 @@ import style from '../../UserAccount/style.module.css';
 import ModalPageRestorant from './ModalPageRestorant';
 import ModalNewRestorant from './ModalNewRestorant';
 
+function OverlayTwo(): any {
+  return <ModalOverlay bg="none" backdropFilter="auto" backdropInvert="80%" backdropBlur="2px" />;
+}
 function RestorantInfo(): JSX.Element {
-
-  function OverlayTwo() {
-    return <ModalOverlay bg="none" backdropFilter="auto" backdropInvert="80%" backdropBlur="2px" />;
-  }
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = React.useState(<OverlayTwo />);
@@ -48,11 +47,13 @@ function RestorantInfo(): JSX.Element {
           Редактировать
         </Button>
         <Button
+          className={style['btn-rest']}
           onClick={() => {
             setOverlay(<OverlayTwo />);
             setSelectedModal('request');
             onOpen();
           }}
+          fontSize="10px"
           variant="outline"
           size={{ base: 'sm', md: 'md', lg: 'lg' }}
         >

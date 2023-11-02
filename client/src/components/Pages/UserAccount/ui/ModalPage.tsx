@@ -16,7 +16,13 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-function ModalPage({ isOpen, onClose, overlay }): JSX.Element {
+type ModalPageProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  overlay: any;
+};
+
+function ModalPage({ isOpen, onClose, overlay }: ModalPageProps): JSX.Element {
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       {overlay}
