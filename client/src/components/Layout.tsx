@@ -11,7 +11,7 @@ export default function Layout(): JSX.Element {
     <>
       <AppNavBar />
       <Outlet />
-      <MyFooter/>
+      <MyFooter />
     </>
   );
 }
