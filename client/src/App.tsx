@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import CountryPage from './components/Pages/CountryPage';
-import OwnerAccount from './components/Pages/OwnerAccount';
-import MainPage from './components/Pages/MainPage';
-import RestaurantPage from './components/Pages/RestaurantPage';
-import AdminPage from './components/Pages/AdminAccount';
-import UserAccount from './components/Pages/UserAccount';
-import UserAuthPage from './components/Pages/UserAuthPage';
-import OwnerAuthPage from './components/Pages/OwnerAuthPage';
+import CountryPage from './components/Pages/CountryPage/CountryPage';
+import OwnerAccount from './components/Pages/OwnerAccount/OwnerAccount';
+import MainPage from './components/Pages/MainPage/MainPage';
+import RestaurantPage from './components/Pages/RestaurantPage/RestaurantPage';
+import AdminPage from './components/Pages/AdminAccount/AdminAccount';
+import UserAccount from './components/Pages/UserAccount/UserAccount';
+import UserAuthPage from './components/Pages/Auth/UserAuthPage';
+import OwnerAuthPage from './components/Pages/Auth/OwnerAuthPage';
 import Layout from './components/Layout';
 import PrivateRoute from './components/hocs/PrivateRoute';
 
