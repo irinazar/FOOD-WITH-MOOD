@@ -10,8 +10,14 @@ import UserAuthPage from './components/Pages/Auth/UserAuthPage';
 import OwnerAuthPage from './components/Pages/Auth/OwnerAuthPage';
 import Layout from './components/Layout';
 import PrivateRoute from './components/hocs/PrivateRoute';
+import UserCodePage from './components/Pages/Auth/UserCodePage';
+import { useAppSelector } from './hooks/reduxHooks';
+import useUserCheck from './hooks/useCheckUser';
+import UserLoginPage from './components/Pages/Auth/UserLoginPage';
 
 function App(): JSX.Element {
+  useUserCheck();
+  const user = useAppSelector((store) => store.user);
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -43,18 +49,35 @@ function App(): JSX.Element {
           }
         />
         <Route
-          path="/user/:auth"
+          path="/authUser/login"
           element={
-            <PrivateRoute isAllowed redirectTo="/">
+            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+              <UserLoginPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/authUser/signup"
+          element={
+            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
               <UserAuthPage />
             </PrivateRoute>
           }
         />
+
         <Route
           path="/owner/:auth"
           element={
             <PrivateRoute isAllowed redirectTo="/">
               <OwnerAuthPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/code"
+          element={
+            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+              <UserCodePage />
             </PrivateRoute>
           }
         />
