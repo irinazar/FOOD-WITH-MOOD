@@ -77,9 +77,9 @@ function App(): JSX.Element {
         <Route
           path="/code"
           element={
-            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
-            <UserCodePage />
-            // </PrivateRoute>
+            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+              <UserCodePage />
+            </PrivateRoute>
           }
         />
       </Route>
