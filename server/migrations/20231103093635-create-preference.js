@@ -1,29 +1,30 @@
-"use strict";
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Confirms", {
+    await queryInterface.createTable('Preferences', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      randomString: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER
       },
       userId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Users",
-          key: "id",
+          model: {
+            tableName: 'Users',
+          },
+          key: 'id',
         },
       },
-      restOwnerId: {
+      countryId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "RestOwners",
-          key: "id",
+          model: {
+            tableName: 'Countries',
+          },
+          key: 'id',
         },
       },
       createdAt: {
@@ -39,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Confirms");
-  },
+    await queryInterface.dropTable('Preferences');
+  }
 };
