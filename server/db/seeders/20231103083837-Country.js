@@ -22,7 +22,7 @@ module.exports = {
           name: "Италия ",
           description:
             "основная особенность италианской кухни — простота. В состав многих блюд входит от четырех до восьми ингредиентов, при этом акцент делается не столько на продукты, сколько на подготовку и сам процесс приготовления еды.",
-          img: "https://https://dreamplanexperience.com/wp-content/uploads/IT_UNESCO17-2.jpg.r9cdn.net/rimg/dimg/c1/f7/06109851-ctry-132-171a795fe02.jpg?width=1366&height=768&xhint=3330&yhint=2439&crop=true",
+          img: "https://traveller-eu.ru/sites/default/files/styles/main_img/public/israel-ferrera-ewxZ27OmFrs-unsplash_0.jpg?itok=MiqPevzc",
         },
         {
           name: "Индия ",
