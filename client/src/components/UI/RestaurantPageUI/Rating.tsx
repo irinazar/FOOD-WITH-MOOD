@@ -1,10 +1,11 @@
 import React from 'react'
-import {  HStack } from '@chakra-ui/react';
+import {  Center, HStack } from '@chakra-ui/react';
 import { FaRegStar } from 'react-icons/fa';
 
 export default function Rating(): JSX.Element {
   const ratingprop = 4;
   return (
+    <Center>
     <HStack gap={1}>
             {Array(5)
               .fill('')
@@ -20,5 +21,6 @@ export default function Rating(): JSX.Element {
                 />
               ))}
           </HStack>
+          </Center>
   )
 }
