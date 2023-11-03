@@ -1,0 +1,116 @@
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert(
+      "Restaurants",
+      [
+        {
+          title: "Restaurant 1",
+          description: "Description 1",
+          address: "Москва, Тверская улица, 1",
+          coordX: 55.755831,
+          coordY: 37.617673,
+          img: "image1.jpg",
+          status: "Pending",
+          countryId: 1,
+          restOwnerId: 1,
+        },
+        {
+          title: "Restaurant 2",
+          description: "Description 2",
+          address: "Москва, Новый Арбат, 2",
+          coordX: 55.752121,
+          coordY: 37.595939,
+          img: "image2.jpg",
+          status: "Pending",
+          countryId: 2,
+          restOwnerId: 2,
+        },
+        {
+          title: "Restaurant 3",
+          description: "Description 3",
+          address: "Москва, Красная площадь, 3",
+          coordX: 55.75393,
+          coordY: 37.620795,
+          img: "image3.jpg",
+          status: "Pending",
+          countryId: 3,
+          restOwnerId: 3,
+        },
+        {
+          title: "Restaurant 4",
+          description: "Description 4",
+          address: "Москва, Пресненская набережная, 4",
+          coordX: 55.748491,
+          coordY: 37.535711,
+          img: "image4.jpg",
+          status: "Pending",
+          countryId: 4,
+          restOwnerId: 4,
+        },
+        {
+          title: "Restaurant 5",
+          description: "Description 5",
+          address: "Москва, Арбатская улица, 5",
+          coordX: 55.751563,
+          coordY: 37.598507,
+          img: "image5.jpg",
+          status: "Pending",
+          countryId: 5,
+          restOwnerId: 5,
+        },
+        {
+          title: "Restaurant 6",
+          description: "Description 6",
+          address: "Москва, Садовая-Кудринская улица, 6",
+          coordX: 55.752548,
+          coordY: 37.57436,
+          img: "image6.jpg",
+          status: "Pending",
+          countryId: 6,
+          restOwnerId: 6,
+        },
+        {
+          title: "Restaurant 7",
+          description: "Description 7",
+          address: "Москва, Пречистенка, 7",
+          coordX: 55.750431,
+          coordY: 37.588731,
+          img: "image7.jpg",
+          status: "Pending",
+          countryId: 7,
+          restOwnerId: 7,
+        },
+        {
+          title: "Restaurant 8",
+          description: "Description 8",
+          address: "Москва, Таганская улица, 8",
+          coordX: 55.74015,
+          coordY: 37.66124,
+          img: "image8.jpg",
+          status: "Pending",
+          countryId: 8,
+          restOwnerId: 8,
+        },
+        {
+          title: "Restaurant 9",
+          description: "Description 9",
+          address: "Москва, Новослободская улица, 9",
+          coordX: 55.778673,
+          coordY: 37.602273,
+          img: "image9.jpg",
+          status: "Pending",
+          countryId: 9,
+          restOwnerId: 9,
+        },
+      ],
+      {}
+    );
+  },
+
+  async down(queryInterface, Sequelize) {
+    // Добавьте команды для отката данных здесь, если необходимо.
+  },
+};
