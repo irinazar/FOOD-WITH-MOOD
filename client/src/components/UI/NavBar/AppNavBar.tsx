@@ -21,6 +21,8 @@ import { Link, NavLink } from 'react-router-dom';
 import style from './style.module.css';
 
 import ThemeSwitch from '../ThemeSwitch';
+import { useAppDispatch } from '../../../hooks/reduxHooks';
+import { logoutUserThunk } from '../../../features/redux/slices/user/UserThuncks';
 
 type Props = {
   children: React.ReactNode;
@@ -30,6 +32,7 @@ const Links = ['Dashboard', 'Projects', 'Team'];
 
 export default function MyNavBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useAppDispatch();
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} mb={5}>
@@ -48,8 +51,9 @@ export default function MyNavBar(): JSX.Element {
             <NavLink to="/admin">Админ</NavLink>
             <NavLink to="/user/:id">ЛК пользователя</NavLink>
             <NavLink to="/owner/:id">ЛК ресторана</NavLink>
-        
-            <NavLink to="/user/:auth">Авторизация физ</NavLink>
+
+            <NavLink to="/authUser/signup">Авторизация физ</NavLink>
+            <NavLink to="/authUser/login">Логин физ</NavLink>
             <NavLink to="/owner/:auth">Авторизация юр</NavLink>
           </HStack>
         </HStack>
@@ -68,7 +72,7 @@ export default function MyNavBar(): JSX.Element {
             </MenuButton>
             <MenuList>
               <MenuItem>Мой профиль</MenuItem>
-              <MenuItem>Выйти</MenuItem>
+              <MenuItem onClick={() => void dispatch(logoutUserThunk())}>Выйти</MenuItem>
               <MenuDivider />
             </MenuList>
           </Menu>

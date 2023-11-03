@@ -19,7 +19,6 @@ import { useAppDispatch } from '../../../hooks/reduxHooks';
 
 export default function UserAuthPage(): JSX.Element {
   const navigate = useNavigate();
-  // const { auth } = useParams();
 
   const dispatch = useAppDispatch();
   const toast = useToast();
