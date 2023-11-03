@@ -6,7 +6,7 @@ export type UserType = {
 };
 
 export type UserSignUpType = Omit<UserType, 'id'> & { password: string };
-export type UserLoginType = Omit<UserSignUpType, 'username'>;
+export type UserLoginType = Omit<UserSignUpType, 'name'>;
 
 export type ConfirmType = {
   id: number;

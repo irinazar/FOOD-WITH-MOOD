@@ -28,7 +28,7 @@ app.use(
   })
 );
 
-app.use("/api", userRouter);
+app.use("/api/user", userRouter);
 
 
 app.listen(PORT, () => {
