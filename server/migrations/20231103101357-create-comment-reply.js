@@ -2,27 +2,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Confirms", {
+    await queryInterface.createTable("CommentReplies", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      randomString: {
-        type: Sequelize.STRING,
+      body: {
+        type: Sequelize.TEXT,
       },
-      userId: {
+      commentId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Users",
+          model: {
+            tableName: "Comments",
+          },
           key: "id",
         },
       },
       restOwnerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "RestOwners",
+          model: {
+            tableName: "RestOwners",
+          },
           key: "id",
         },
       },
@@ -39,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Confirms");
+    await queryInterface.dropTable("CommentReplies");
   },
 };
