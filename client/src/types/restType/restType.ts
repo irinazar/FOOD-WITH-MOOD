@@ -1,4 +1,4 @@
-export type CountryType = {
+export type RestType = {
     title: number;
     name: string;
     adress: string;
