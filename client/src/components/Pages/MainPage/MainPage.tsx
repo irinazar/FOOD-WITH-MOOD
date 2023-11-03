@@ -17,7 +17,7 @@ export default function MainPage(): JSX.Element {
         </div>
       </div>
       <div className={style.shadow}>sdv</div>
-
+      
       <Description />
 
       <Categories />
