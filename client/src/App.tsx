@@ -12,7 +12,7 @@ import Layout from './components/Layout';
 import PrivateRoute from './components/hocs/PrivateRoute';
 import UserCodePage from './components/Pages/Auth/UserCodePage';
 import { useAppSelector } from './hooks/reduxHooks';
-import useUserCheck from './hooks/useCheckUser';
+import useUserCheck from './hooks/userHooks/useCheckUser';
 import UserLoginPage from './components/Pages/Auth/UserLoginPage';
 
 function App(): JSX.Element {
@@ -28,6 +28,7 @@ function App(): JSX.Element {
           path="/admin"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
+
             <AdminPage />
             // </PrivateRoute>
           }
@@ -59,11 +60,9 @@ function App(): JSX.Element {
         <Route
           path="/authUser/signup"
           element={
-            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
-
-            <UserAuthPage />
-
-            // </PrivateRoute>
+            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
+              <UserAuthPage />
+            </PrivateRoute>
           }
         />
 
@@ -78,9 +77,9 @@ function App(): JSX.Element {
         <Route
           path="/code"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
-              <UserCodePage />
-            </PrivateRoute>
+            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+            <UserCodePage />
+            // </PrivateRoute>
           }
         />
       </Route>

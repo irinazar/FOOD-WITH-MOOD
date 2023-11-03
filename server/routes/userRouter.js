@@ -3,7 +3,7 @@
 // module.exports = userRouter;
 const express = require("express");
 const bcrypt = require("bcrypt");
-const { User, Confirm } = require("../models");
+const { User, Confirm } = require("../db/models");
 const sendConfirmationCodeEmail = require("../mailer/sendConfirmationCodeEmail"); // Добавлен импорт функции отправки электронной почты
 
 const userRouter = express.Router();
@@ -50,7 +50,7 @@ userRouter.post("/code", async (req, res) => {
   });
 
   if (!codeEntry) {
-    return res.sendStatus(403); //
+    return res.sendStatus(403); 
   }
 
   const usernew = await User.findByPk(codeEntry.userId);
@@ -65,7 +65,6 @@ userRouter.post("/code", async (req, res) => {
 
   return res.sendStatus(200);
 });
-
 
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -103,4 +102,3 @@ userRouter.get("/logout", (req, res) => {
 });
 
 module.exports = userRouter;
-
