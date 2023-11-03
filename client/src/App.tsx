@@ -12,7 +12,7 @@ import Layout from './components/Layout';
 import PrivateRoute from './components/hocs/PrivateRoute';
 import UserCodePage from './components/Pages/Auth/UserCodePage';
 import { useAppSelector } from './hooks/reduxHooks';
-import useUserCheck from './hooks/useCheckUser';
+import useUserCheck from './hooks/userHooks/useCheckUser';
 import UserLoginPage from './components/Pages/Auth/UserLoginPage';
 
 function App(): JSX.Element {
@@ -28,7 +28,7 @@ function App(): JSX.Element {
           path="/admin"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
-              <AdminPage />
+            <AdminPage />
             // </PrivateRoute>
           }
         />
@@ -36,7 +36,7 @@ function App(): JSX.Element {
           path="/user/:id"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
-              <UserAccount />
+            <UserAccount />
             // </PrivateRoute>
           }
         />
@@ -44,7 +44,7 @@ function App(): JSX.Element {
           path="/owner/:id"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
-              <OwnerAccount />
+            <OwnerAccount />
             // </PrivateRoute>
           }
         />
@@ -52,7 +52,7 @@ function App(): JSX.Element {
           path="/authUser/login"
           element={
             // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
-              <UserLoginPage />
+            <UserLoginPage />
             // </PrivateRoute>
           }
         />
@@ -61,8 +61,7 @@ function App(): JSX.Element {
           element={
             // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
 
-        
-              <UserAuthPage />
+            <UserAuthPage />
 
             // </PrivateRoute>
           }
@@ -72,7 +71,7 @@ function App(): JSX.Element {
           path="/authOwner/:auth"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
-              <OwnerAuthPage />
+            <OwnerAuthPage />
             // </PrivateRoute>
           }
         />
@@ -80,7 +79,7 @@ function App(): JSX.Element {
           path="/code"
           element={
             // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
-              <UserCodePage />
+            <UserCodePage />
             // </PrivateRoute>
           }
         />

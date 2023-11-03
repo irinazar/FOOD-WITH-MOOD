@@ -5,14 +5,14 @@ import type {
   UserLoginType,
   UserSignUpType,
   UserType,
-} from '../../../../types/userTypes';
+} from '../../../../types/userType/userTypes';
 import {
   checkUserService,
   logoutUserService,
   submitCodeService,
   submitLoginService,
   submitSignupService,
-} from '../../../../services/userService';
+} from '../../../../services/userService/userService';
 
 export const checkUserThunk = createAsyncThunk<UserType>('user/checkUserThunk', () =>
   checkUserService(),

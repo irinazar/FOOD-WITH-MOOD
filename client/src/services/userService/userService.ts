@@ -5,8 +5,8 @@ import type {
   UserLoginType,
   UserSignUpType,
   UserType,
-} from '../types/userTypes';
-import apiService from '.';
+} from '../../types/userType/userTypes';
+import apiService from '..';
 
 export const checkUserService = async (): Promise<UserType> => {
   const { data } = await apiService<UserType>('/check');
@@ -23,9 +23,7 @@ export const submitLoginService = async (formData: UserLoginType): Promise<UserT
   return data;
 };
 
-export const submitCodeService = async (
-  formData: CreateConfirmType,
-): Promise<string> => {
+export const submitCodeService = async (formData: CreateConfirmType): Promise<string> => {
   const { data } = await apiService.post<string>('/code', formData);
   return data;
 };
