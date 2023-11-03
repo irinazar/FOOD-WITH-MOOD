@@ -66,7 +66,7 @@ function App(): JSX.Element {
         />
 
         <Route
-          path="/owner/:auth"
+          path="/authOwner/:auth"
           element={
             <PrivateRoute isAllowed redirectTo="/">
               <OwnerAuthPage />

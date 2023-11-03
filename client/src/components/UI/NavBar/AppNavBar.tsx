@@ -49,8 +49,10 @@ export default function MyNavBar(): JSX.Element {
             <NavLink to="/user/:id">ЛК пользователя</NavLink>
             <NavLink to="/owner/:id">ЛК ресторана</NavLink>
         
-            <NavLink to="/user/:auth">Авторизация физ</NavLink>
-            <NavLink to="/owner/:auth">Авторизация юр</NavLink>
+            <NavLink to="/authUser/signup">Регистрация физ</NavLink>
+            <NavLink to="/authUser/login">Авторизация физ</NavLink>
+            <NavLink to="/authUser/signup">Регистрация физ</NavLink>
+            <NavLink to="/authUser/login">Авторизация физ</NavLink>
           </HStack>
         </HStack>
         <Flex alignItems="center">
