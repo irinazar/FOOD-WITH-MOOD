@@ -13,8 +13,8 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import style from './style.module.css';
-import { loginUserThunk, signUpUserThunk } from '../../../features/redux/slices/user/UserThuncks';
-import type { UserLoginType, UserSignUpType } from '../../../types/userTypes';
+import { loginUserThunk } from '../../../features/redux/slices/user/UserThuncks';
+import type { UserLoginType } from '../../../types/userTypes';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
 
 export default function UserLoginPage(): JSX.Element {
@@ -36,9 +36,9 @@ export default function UserLoginPage(): JSX.Element {
       });
       return;
     }
-    const userSignUpData: UserSignUpType = {
-      email: formData.email,
-      password: formData.password,
+    const userSignUpData: UserLoginType = {
+      email: formData.email.toString(),
+      password: formData.password.toString(),
     };
 
     void dispatch(loginUserThunk(userSignUpData));
@@ -46,13 +46,7 @@ export default function UserLoginPage(): JSX.Element {
 
   return (
     <div className={style.divRegist}>
-      <Box
-        bg={useColorModeValue('', 'gray.900')}
-        w="lg"
-        p={8}
-        borderRadius="md"
-        // className={style.boxtRegist}
-      >
+      <Box bg={useColorModeValue('', 'gray.900')} w="lg" p={8} borderRadius="md">
         <form className={style.formRegist} onSubmit={submitHandler}>
           <VStack spacing={4}>
             <FormControl>

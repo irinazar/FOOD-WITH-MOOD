@@ -28,7 +28,7 @@ function App(): JSX.Element {
           path="/admin"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
-              <AdminPage />
+            <AdminPage />
             // </PrivateRoute>
           }
         />
@@ -36,7 +36,7 @@ function App(): JSX.Element {
           path="/user/:id"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
-              <UserAccount />
+            <UserAccount />
             // </PrivateRoute>
           }
         />
@@ -44,16 +44,16 @@ function App(): JSX.Element {
           path="/owner/:id"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
-              <OwnerAccount />
+            <OwnerAccount />
             // </PrivateRoute>
           }
         />
         <Route
           path="/authUser/login"
           element={
-            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
               <UserLoginPage />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
         <Route
@@ -61,8 +61,7 @@ function App(): JSX.Element {
           element={
             // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
 
-        
-              <UserAuthPage />
+            <UserAuthPage />
 
             // </PrivateRoute>
           }
@@ -72,16 +71,16 @@ function App(): JSX.Element {
           path="/authOwner/:auth"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
-              <OwnerAuthPage />
+            <OwnerAuthPage />
             // </PrivateRoute>
           }
         />
         <Route
           path="/code"
           element={
-            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
               <UserCodePage />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
       </Route>

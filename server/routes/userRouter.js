@@ -1,5 +1,6 @@
 // const userRouter = express.Router();
 
+// module.exports = userRouter;
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { User, Confirm } = require("../models");
@@ -65,6 +66,7 @@ userRouter.post("/code", async (req, res) => {
   return res.sendStatus(200);
 });
 
+
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
@@ -101,3 +103,4 @@ userRouter.get("/logout", (req, res) => {
 });
 
 module.exports = userRouter;
+
