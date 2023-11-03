@@ -13,13 +13,12 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import style from './style.module.css';
-import { signUpUserThunk } from '../../../features/redux/slices/user/UserThuncks';
-import type { UserSignUpType } from '../../../types/userTypes';
+import { loginUserThunk, signUpUserThunk } from '../../../features/redux/slices/user/UserThuncks';
+import type { UserLoginType, UserSignUpType } from '../../../types/userTypes';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
 
-export default function UserAuthPage(): JSX.Element {
-  const navigate = useNavigate();
-  // const { auth } = useParams();
+export default function UserLoginPage(): JSX.Element {
+  //   const { auth } = useParams();
 
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -27,7 +26,7 @@ export default function UserAuthPage(): JSX.Element {
   const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.currentTarget));
-    if (!formData.name || !formData.email || !formData.password) {
+    if (!formData.email || !formData.password) {
       toast({
         title: 'Error',
         description: 'Please fill all the fields',
@@ -38,29 +37,24 @@ export default function UserAuthPage(): JSX.Element {
       return;
     }
     const userSignUpData: UserSignUpType = {
-      name: formData.name.toString(),
-      email: formData.email.toString(),
-      password: formData.password.toString(),
+      email: formData.email,
+      password: formData.password,
     };
 
-    void dispatch(signUpUserThunk(userSignUpData));
-    navigate('/code');
+    void dispatch(loginUserThunk(userSignUpData));
   };
 
   return (
     <div className={style.divRegist}>
-      <Box bg={useColorModeValue('', 'gray.900')} w="lg" p={8} borderRadius="md">
+      <Box
+        bg={useColorModeValue('', 'gray.900')}
+        w="lg"
+        p={8}
+        borderRadius="md"
+        // className={style.boxtRegist}
+      >
         <form className={style.formRegist} onSubmit={submitHandler}>
           <VStack spacing={4}>
-            <FormControl>
-              <FormLabel color={useColorModeValue('gray.900', 'gray.100')}>Name</FormLabel>
-              <Input
-                placeholder="Name"
-                name="name"
-                bg={useColorModeValue('gray.100', 'gray.900')}
-                color={useColorModeValue('current', 'white')}
-              />
-            </FormControl>
             <FormControl>
               <FormLabel color={useColorModeValue('gray.900', 'gray.100')}>Email</FormLabel>
               <Input
@@ -83,7 +77,7 @@ export default function UserAuthPage(): JSX.Element {
               </Text>
             </FormControl>
             <Button type="submit" colorScheme="messenger" variant="outline" w="full" mt={4}>
-              Signup
+              Login
             </Button>
           </VStack>
         </form>
