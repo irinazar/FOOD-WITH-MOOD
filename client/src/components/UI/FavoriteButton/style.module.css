@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+
+:root {
+  --color-background: #5ccccc;
+  --favorite-color: #000000;
+  --favorited-color: red;
+}
+
+
+
+
+.favorite {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--favorite-color);
+  color: var(--favorite-color);
+  border-radius: 999px;
+  background: transparent;
+  transition: all ease-in-out 0.3s;
+  transition-delay: 0.1s;
+}
+
+.favorite:focus {
+  outline: 0;
+}
+
+.favorite:before {
+  content: '\f08a';
+  font-family: 'FontAwesome';
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  left: 9px;
+}
+
+.favorite:after {
+  content: '';
+  opacity: 0;
+  font-family: 'Lato';
+  position: absolute;
+  top: 9px;
+  right: 10px;
+}
+
+.favorite:hover {
+  width: 150px;
+  transition: all ease-in-out 0.3s;
+}
+
+.favorite:hover:after {
+  content: "Favorite This";
+  opacity: 1;
+  transition: all ease-in-out 0.5s;
+}
+
+.favorite.favorited:before {
+  content: '\f004';
+  color: var(--favorited-color);
+}
+
+.favorite.favorited:hover:after {
+  content: "Favorited!";
+}

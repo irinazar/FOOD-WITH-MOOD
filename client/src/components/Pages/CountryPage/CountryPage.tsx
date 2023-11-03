@@ -1,5 +1,7 @@
 import React from 'react';
 import style from './style.module.css';
+import FavoriteButton from '../../UI/FavoriteButton/FavoriteButton';
+import Rating from '../../UI/RestaurantPageUI/Rating';
 
 export default function CountryPage(): JSX.Element {
   return (
@@ -15,6 +17,9 @@ export default function CountryPage(): JSX.Element {
         <div className={style.imageText}>
        <h1 className={style.restName}> Some interesting text</h1>
        <p> some interesting text</p>
+       <br />
+          <FavoriteButton/>
+          <Rating/>
 
        </div>
         <div className={style.image}>
