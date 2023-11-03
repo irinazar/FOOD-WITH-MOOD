@@ -14,8 +14,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"/>
-    
-
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=915cb457-6cd9-4082-9b13-3e8ad2203675&lang=ru_RU"></script>
+    <script type="module" src="/src/main.tsx"></script>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,17 +23,5 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      var categories = $("#catgories");
-      var h2Elements = categories.children("h2");
-
-      h2Elements.sort(function() {
-        return 0.5 - Math.random();
-      }).detach().appendTo(categories);
-    });
-  </script>
   </body>
 </html>
