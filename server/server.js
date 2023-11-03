@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
 const userRouter = require("./routes/userRouter");
+const countryRouter = require("./routes/countryRouter");
 const FileStore = require("session-file-store")(session);
 
 const PORT = process.env.PORT || 3001;
@@ -28,7 +29,8 @@ app.use(
   })
 );
 
-app.use("/api", userRouter);
+app.use("/api/user", userRouter);
+app.use('/api/country', countryRouter)
 
 
 app.listen(PORT, () => {
