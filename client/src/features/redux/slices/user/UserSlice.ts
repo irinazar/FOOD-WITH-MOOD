@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { UserLoadingType } from '../../../../types/userTypes';
+import type { UserLoadingType } from '../../../../types/userType/userTypes';
 import {
   checkUserThunk,
   codeUserThunk,

@@ -30,6 +30,7 @@ app.use(
 
 app.use("/api", userRouter);
 
+
 app.listen(PORT, () => {
   console.log("Server start on port ", PORT);
 });

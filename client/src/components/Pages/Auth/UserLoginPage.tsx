@@ -13,8 +13,8 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import style from './style.module.css';
-import { loginUserThunk } from '../../../features/redux/slices/user/UserThuncks';
-import type { UserLoginType } from '../../../types/userTypes';
+import { loginUserThunk, signUpUserThunk } from '../../../features/redux/slices/user/UserThuncks';
+import type { UserLoginType, UserSignUpType } from '../../../types/userType/userTypes';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
 
 export default function UserLoginPage(): JSX.Element {

@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import style from './style.module.css';
 import { signUpUserThunk } from '../../../features/redux/slices/user/UserThuncks';
-import type { UserSignUpType } from '../../../types/userTypes';
+import type { UserSignUpType } from '../../../types/userType/userTypes';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
 
 export default function UserAuthPage(): JSX.Element {
