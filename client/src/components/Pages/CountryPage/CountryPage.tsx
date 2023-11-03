@@ -13,7 +13,7 @@ export default function CountryPage(): JSX.Element {
       <div className={style.miniCard}>
        
         <div className={style.imageText}>
-       <h1 className={style.restName}> some interesting text</h1>
+       <h1 className={style.restName}> Some interesting text</h1>
        <p> some interesting text</p>
 
        </div>
