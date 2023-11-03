@@ -27,58 +27,61 @@ function App(): JSX.Element {
         <Route
           path="/admin"
           element={
-            <PrivateRoute isAllowed redirectTo="/">
+            // <PrivateRoute isAllowed redirectTo="/">
               <AdminPage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
         <Route
           path="/user/:id"
           element={
-            <PrivateRoute isAllowed redirectTo="/">
+            // <PrivateRoute isAllowed redirectTo="/">
               <UserAccount />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
         <Route
           path="/owner/:id"
           element={
-            <PrivateRoute isAllowed redirectTo="/">
+            // <PrivateRoute isAllowed redirectTo="/">
               <OwnerAccount />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
         <Route
           path="/authUser/login"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
               <UserLoginPage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
         <Route
           path="/authUser/signup"
           element={
             // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
-            <UserAuthPage />
+
+        
+              <UserAuthPage />
+
             // </PrivateRoute>
           }
         />
 
         <Route
-          path="/owner/:auth"
+          path="/authOwner/:auth"
           element={
-            <PrivateRoute isAllowed redirectTo="/">
+            // <PrivateRoute isAllowed redirectTo="/">
               <OwnerAuthPage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
         <Route
           path="/code"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
               <UserCodePage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
       </Route>
