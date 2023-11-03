@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, CardBody, Divider, Heading, ModalOverlay, Stack, Text, useDisclosure } from '@chakra-ui/react';
+import { Button, Card, CardBody, Center, Divider, Heading, ModalOverlay, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import style from './style.module.css'
 import Rating from './Rating';
 import BookingModal from './BookingModal';
@@ -20,6 +20,7 @@ export default function RestaurantCard(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [overlay, setOverlay] = React.useState(<OverlayTwo />)
   return (
+    <Center>
     <Card className={style.restCard}>
       <CardBody>
         <Stack mt="1" spacing="3">
@@ -46,12 +47,13 @@ export default function RestaurantCard(): JSX.Element {
           </Text>
         </Stack>
       </CardBody>
-      <Button className={style.btn} colorScheme='blackAlpha' variant='outline' _hover={{ bg: 'rgba(255, 0, 0, 0.5)' }} onClick={() => {
+      <Button className={style.btn} colorScheme='blackAlpha' variant='outline' _hover={{ bg: 'rgba(196, 77, 86, 0.6)' }} onClick={() => {
           setOverlay(<OverlayTwo />)
           onOpen()
         }}>Забронировать</Button>
          <BookingModal isOpen={isOpen} onClose={onClose} overlay={overlay}/>
       <Divider />
     </Card>
+    </Center>
   );
 }

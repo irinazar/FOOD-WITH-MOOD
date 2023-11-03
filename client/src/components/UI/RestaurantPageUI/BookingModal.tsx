@@ -40,12 +40,12 @@ function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Elem
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       {overlay}
       <ModalContent>
-        <ModalHeader>Забронировать столик</ModalHeader>
+        <ModalHeader textAlign="center">Забронировать столик</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form onSubmit={handleSubmit}>
             <FormControl>
-              <FormLabel>Имя для брони</FormLabel>
+              <FormLabel textAlign="center">Имя для брони</FormLabel>
               <Input
                 type="text"
                 name="name"
@@ -55,7 +55,7 @@ function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Elem
               />
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>Номер для связи</FormLabel>
+              <FormLabel textAlign="center">Номер для связи</FormLabel>
               <Input
                 type="tel"
                 name="phone"
@@ -65,7 +65,7 @@ function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Elem
               />
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>Время</FormLabel>
+              <FormLabel textAlign="center">Время</FormLabel>
               <Input
                 type="datetime-local"
                 name="datetime"
