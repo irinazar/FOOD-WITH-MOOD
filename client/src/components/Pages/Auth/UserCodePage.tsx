@@ -12,7 +12,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
 import { codeUserThunk } from '../../../features/redux/slices/user/UserThuncks';
-import type { CreateConfirmType } from '../../../types/userTypes';
+import type { CreateConfirmType } from '../../../types/userType/userTypes';
 
 export default function UserCodePage(): JSX.Element {
   const dispatch = useAppDispatch();
