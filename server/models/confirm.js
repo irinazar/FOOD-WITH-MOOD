@@ -9,12 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: "userId" });
+      this.belongsTo(models.RestOwner, { foreignKey: "restOwnerId" });
     }
   }
   Confirm.init(
     {
       randomString: DataTypes.STRING,
       userId: DataTypes.INTEGER,
+      restOwnerId: DataTypes.INTEGER,
     },
     {
       sequelize,
