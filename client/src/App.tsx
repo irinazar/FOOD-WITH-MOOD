@@ -60,7 +60,10 @@ function App(): JSX.Element {
           path="/authUser/signup"
           element={
             // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
+
+        
               <UserAuthPage />
+
             // </PrivateRoute>
           }
         />

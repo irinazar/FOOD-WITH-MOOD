@@ -1,6 +1,5 @@
 // const userRouter = express.Router();
 
-// module.exports = userRouter;
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { User, Confirm } = require("../models");
@@ -65,38 +64,6 @@ userRouter.post("/code", async (req, res) => {
 
   return res.sendStatus(200);
 });
-
-//====
-// userRouter.post("/confirm", async (req, res) => {
-//   const { email, confirm } = req.body;
-
-//   // Поиск кода подтверждения в базе данных
-//   const codeEntry = await Confirm.findOne({
-//     where: {
-//       randomString: confirm,
-//     },
-//   });
-
-//   if (!codeEntry) {
-//     return res.sendStatus(403);
-//   }
-
-//   // Поиск пользователя по userId из кода подтверждения
-//   const user = await User.findByPk(codeEntry.userId);
-
-//   if (!user) {
-//     return res.sendStatus(403);
-//   }
-
-//   // Подтверждение регистрации
-//   user.active = true;
-//   await user.save();
-
-//   // Удаление использованного кода подтверждения
-//   await codeEntry.destroy();
-
-//   return res.sendStatus(200);
-// });
 
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
