@@ -31,10 +31,21 @@ module.exports = {
         type: Sequelize.STRING
       },
       countryId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+        model: 'Countries',
+        key: 'id',
+        },
+        onDelete: 'CASCADE'
       },
       restOwnerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'RestOwners',
+          key: 'id',
+          },
+          onDelete: 'CASCADE'
+        
       },
       createdAt: {
         allowNull: false,
