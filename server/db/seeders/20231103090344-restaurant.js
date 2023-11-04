@@ -13,7 +13,7 @@ module.exports = {
             adress: "Москва, ул. Итальянская, 123",
           coordX: 55.751123,
           coordY: 37.586987,
-          img: "italy.jpg",
+          img: ['https://media.admagazine.ru/photos/61b72419ff3c94c5af356cd4/16:9/w_2560%2Cc_limit/Tiramisu_web_001.jpg'],
           status: "Pending",
           countryId: 1,
           restOwnerId: 1,

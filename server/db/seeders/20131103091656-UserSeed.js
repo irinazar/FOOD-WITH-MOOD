@@ -9,7 +9,7 @@ module.exports = {
         {
           name: "John Doe",
           email: "dbvkjrd",
-          avatar: "png",
+          avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcsGZ98NkcA4yU1hoh8BUG2mDdBMbZku3ijdepPkhM0g&s",
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,

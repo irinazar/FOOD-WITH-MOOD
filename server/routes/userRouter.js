@@ -2,7 +2,7 @@
 
 const express = require("express");
 const bcrypt = require("bcrypt");
-const { User, Confirm } = require("../models");
+const { User, Confirm } = require("../db/models");
 const sendConfirmationCodeEmail = require("../mailer/sendConfirmationCodeEmail"); // Добавлен импорт функции отправки электронной почты
 
 const userRouter = express.Router();

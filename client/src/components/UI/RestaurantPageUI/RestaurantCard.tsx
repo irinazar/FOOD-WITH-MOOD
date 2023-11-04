@@ -3,6 +3,7 @@ import { Button, Card, CardBody, Center, Divider, Heading, ModalOverlay, Stack, 
 import style from './style.module.css'
 import Rating from './Rating';
 import BookingModal from './BookingModal';
+import type OneRestaurantType from '../../../types/oneRestaurantType/oneRestaurantTypes';
 
 function OverlayTwo(): any {
   return (
@@ -15,7 +16,11 @@ function OverlayTwo(): any {
   );
 }
 
-export default function RestaurantCard(): JSX.Element {
+type RestaurantCardProps = {
+  oneRestaurant: OneRestaurantType
+}
+
+export default function RestaurantCard({oneRestaurant}:RestaurantCardProps): JSX.Element {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [overlay, setOverlay] = React.useState(<OverlayTwo />)
@@ -25,25 +30,18 @@ export default function RestaurantCard(): JSX.Element {
       <CardBody>
         <Stack mt="1" spacing="3">
           <Heading size="md" className={style.restName}>
-            Дарбарс
+          {oneRestaurant.title}
           </Heading>
 
-          <Rating />
+          <Rating oneRestaurant={oneRestaurant} />
           <Text fontSize="m" className={style.textGray}>
-            Адрес: пр. Мира 79, м. Сухаревская
+          {oneRestaurant.adress}
           </Text>
-          <Text fontSize="m" className={style.textGray}>
+          {/* <Text fontSize="m" className={style.textGray}>
             Контакты : +7 (495) 930-23-65
-          </Text>
+          </Text> */}
           <Text>
-            Cетевой индийский ресторан на проспекте Мира. Большое меню «Дарбарса» состоит из
-            аутентичных блюд юга и севера Индии, более 50 позиций в нем — вегетарианские. Основными
-            ингредиентами являются креветки, курица, мясо ягненка, баранина, овощи, травы, орехи и
-            специи. Есть разделы с блюдами из тандура, с карри, с рисом. На отдельную страницу
-            вынесены позиции южно-индийского региона: блины с овощами и мясом, пирожки, лепешки. По
-            будням предлагают меню бизнес-ланчей, можно выбрать вегетарианский вариант. Интерьер
-            современный, с восточными элементами в виде индийских картин и резных украшений из
-            дерева на стенах и окнах.
+          {oneRestaurant.description}
           </Text>
         </Stack>
       </CardBody>
