@@ -5,10 +5,14 @@ const cors = require("cors");
 const session = require("express-session");
 const userRouter = require("./routes/userRouter");
 const FileStore = require("session-file-store")(session);
+const lkRouter = require("./routes/lkRouter");
+
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
@@ -28,8 +32,8 @@ app.use(
   })
 );
 
-app.use("/api", userRouter);
-
+app.use("/api/user", userRouter);
+app.use("/api/lk", lkRouter);
 
 app.listen(PORT, () => {
   console.log("Server start on port ", PORT);

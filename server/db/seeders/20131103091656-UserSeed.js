@@ -10,6 +10,7 @@ module.exports = {
           name: "John Doe",
           email: "dbvkjrd",
           avatar: "png",
+          telephone: 89107077777,
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,
