@@ -19,6 +19,8 @@ export default function UserAccount(): JSX.Element {
   }, []);
 
   const userlk = useAppSelector((state) => state.lkReducer.currentUserLk) as UserLkType;
+
+
   const userRest = useAppSelector(
     (state) => state.restREducer.restaurant,
   ) as SubmitRestaurantType[];

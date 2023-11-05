@@ -29,10 +29,10 @@ export default function OwnerAccount(): JSX.Element {
         <AbsoluteCenter bg="gray.100" px="4" fontSize="xl" fontWeight="bold">
           Я владелец
         </AbsoluteCenter>
-        <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-3 mt-4 mb-5 mx-auto">
-          {owner?.Restaurants?.map((el) => <OwnerCard key={el?.id} rest={el} />)}
-        </div>
       </Box>
+      <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-3 mt-4 mb-5 mx-auto">
+        {owner?.Restaurants?.map((el) => <OwnerCard key={el?.id} rest={el} />)}
+      </div>
       <Box position="relative" padding="10">
         <Divider />
         <AbsoluteCenter bg="gray.100" px="4" fontSize="xl" fontWeight="bold">

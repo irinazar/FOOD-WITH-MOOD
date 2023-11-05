@@ -78,16 +78,20 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
         await fs.writeFile(`./public/img/${name}`, outputBuffer);
         updatedFields.avatar = name;
       }
-      const countries = countryId.split(" ");
-      const newcountries = countries.map((el) => +el);
-      await Preference.destroy({
-        where: { userId: id },
-      });
-      const preferense = [];
-      for (country of newcountries) {
-        preferense.push({ userId: id, countryId: country });
+
+      if (countryId) {
+        const countries = countryId.split(" ");
+        const newcountries = countries.map((el) => +el);
+        await Preference.destroy({
+          where: { userId: id },
+        });
+
+        const preferense = [];
+        for (country of newcountries) {
+          preferense.push({ userId: id, countryId: country });
+        }
+        await Preference.bulkCreate(preferense);
       }
-      await Preference.bulkCreate(preferense);
       await existingUser.update(updatedFields);
 
       const user = await User.findByPk(id, {

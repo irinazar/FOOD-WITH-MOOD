@@ -41,7 +41,6 @@ export const newRestaurantThunk = createAsyncThunk<SubmitRestaurantType, SubmitR
   'newrestowner',
   async (formdata) => {
     const data = await newRestaurantServer(formdata);
-    console.log(data); 
     return data;
   },
 );
