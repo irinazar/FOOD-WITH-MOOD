@@ -1,8 +1,13 @@
+export type UserComments = {
+  userName: string;
+  avatar: string;
+}
+
 export type CommentType = {
   restaurantId: number;
   body: string;
-  userName: string;
-  avatar: string;
+  user: UserComments
+  
 };
 
 export type PictureType = {

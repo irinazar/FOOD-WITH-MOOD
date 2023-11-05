@@ -10,6 +10,8 @@ type CommentProp = {
 export default function CommentSection({ comments }: CommentProp): JSX.Element {
   const [input, setInput] = useState({ body: '' });
   const dispatch = useAppDispatch()
+  console.log(comments, 'AAAAAAAAAAAA');
+  
 
   const changeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -54,10 +56,10 @@ export default function CommentSection({ comments }: CommentProp): JSX.Element {
                   <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                     <img
                       className="mr-2 w-10 h-10 rounded-full"
-                      src={`${el.avatar}`}
-                      alt={`${el.userName}`}
+                      src={`../../../public/img/users/${el.user.avatar}`}
+                      alt={`${el.user.userName}`}
                     />
-                    {el.userName}
+                    {el.user.userName}
                   </p>
                 </div>
               </footer>

@@ -9,7 +9,7 @@ module.exports = {
         {
           name: "Антон",
           email: "anton@gmail.com",
-          avatar: "../../client/public/img/users/Антон.png",
+          avatar: "Антон.png",
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,
@@ -17,7 +17,7 @@ module.exports = {
         {
           name: "Саша",
           email: "sasha@gmail.com",
-          avatar: "../../client/public/img/users/Саша.png",
+          avatar: "Саша.png",
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,
@@ -25,7 +25,7 @@ module.exports = {
         {
           name: "Витя",
           email: "victor@gmail.com",
-          avatar: "../../client/public/img/users/Витя.png",
+          avatar: "Витя.png",
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,
@@ -33,7 +33,7 @@ module.exports = {
         {
           name: "Юля",
           email: "julia@gmail.com",
-          avatar: "../../client/public/img/users/Юля.png",
+          avatar: "Юля.png",
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,
@@ -41,7 +41,7 @@ module.exports = {
         {
           name: "Адам",
           email: "adam@gmail.com",
-          avatar: "../../client/public/img/users/Адам.png",
+          avatar: "Адам.png",
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,
