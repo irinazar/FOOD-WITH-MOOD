@@ -14,14 +14,15 @@ import {
 import React from 'react';
 import Carousel from '../../../UI/RestaurantPageUI/Carousel';
 import type { SubmitRestaurantType } from '../../../../types/lkTypes/lkTypes';
+import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
 
 type OwnerCardProps = {
   rest: SubmitRestaurantType;
 };
 
-export default function OwnerCard({ rest }: OwnerCardProps): JSX.Element {
+function OwnerCard({ rest }: OwnerCardProps): JSX.Element {
+  const { deleteHandler } = useLkHooks();
   return (
-    
     <Card>
       <CardHeader textAlign="center">
         <Heading size="md">{rest.title}</Heading>
@@ -49,21 +50,29 @@ export default function OwnerCard({ rest }: OwnerCardProps): JSX.Element {
         </Stack>
       </CardBody>
       <CardFooter display="flex" justifyContent="center" alignItems="center">
-        <Box textAlign="center">
-          <Heading size="xs" textTransform="uppercase">
-            Состояние
-          </Heading>
-          <Text pt="2" fontSize="sm">
-            {rest.status === 'Pending' ? (
-              <div>Ожидает </div>
-            ) : rest.status === 'Accepted' ? (
-              <div>Одобрен</div>
-            ) : (
-              <div>Отклонен</div>
-            )}
-          </Text>
-        </Box>
+        <ButtonGroup variant="outline" spacing={4}>
+          {rest.status === 'Pending' && (
+            <Button colorScheme="blue" isDisabled>
+              Ожидает
+            </Button>
+          )}
+          {rest.status === 'Accepted' && (
+            <Button colorScheme="green" isDisabled>
+              Одобрен
+            </Button>
+          )}
+          {rest.status === 'Declined' && (
+            <Button colorScheme="red" isDisabled>
+              Отклонен
+            </Button>
+          )}
+          <Button onClick={(e) => deleteHandler(e, Number(rest.id))} colorScheme="red">
+            Удалить заявку
+          </Button>
+        </ButtonGroup>
       </CardFooter>
     </Card>
   );
 }
+
+export default React.memo(OwnerCard);

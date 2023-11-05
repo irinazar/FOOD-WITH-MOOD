@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../reduxHooks';
 import {
+  deleteThunk,
   getAllCountryThunk,
   getOwnerThunk,
   getUserRestaurants,
@@ -29,10 +30,9 @@ const useLkHooks = (): {
     id: number,
     mapCoordinates: { lat: number; lng: number },
   ) => void;
-  // mapCoordinates: Coordinates;
-  // setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>;
   handleCountryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   selectedCountryIds: number[];
+  deleteHandler: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void;
 } => {
   const dispatch = useAppDispatch();
 
@@ -101,16 +101,18 @@ const useLkHooks = (): {
     void dispatch(newRestaurantThunk(data));
   };
 
+  const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {
+    e.preventDefault();
+    void dispatch(deleteThunk(id));
+  };
+
   //= =============================== map
 
   return {
     handlerSubmit,
     handlerOwnerSubmit,
     handlerRestaurantSubmit,
-    // setMapCoordinates,
-    // mapCoordinates,
-    // handleCountryChange,
-    // selectedCountryIds,
+    deleteHandler,
   };
 };
 

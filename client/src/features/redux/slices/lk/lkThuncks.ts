@@ -8,6 +8,7 @@ import type {
   SubmitRestaurantType,
 } from '../../../../types/lkTypes/lkTypes';
 import {
+  deleteServer,
   editOwnerServer,
   editUserServer,
   getAllCountry,
@@ -48,4 +49,8 @@ export const newRestaurantThunk = createAsyncThunk<SubmitRestaurantType, SubmitR
 export const getUserRestaurants = createAsyncThunk<SubmitRestaurantType[], number>(
   'getuserrest',
   async (id) => getUserRestaurantServer(id).then((data) => data),
+);
+
+export const deleteThunk = createAsyncThunk<number, number>('deleterest', async (id) =>
+  deleteServer(id).then(() => id),
 );

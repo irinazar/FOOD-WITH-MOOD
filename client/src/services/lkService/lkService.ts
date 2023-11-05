@@ -35,3 +35,6 @@ export const newRestaurantServer = (
 
 export const getUserRestaurantServer = (id: number): Promise<SubmitRestaurantType[]> =>
   apiService.post<SubmitRestaurantType[]>(`/lk/getmyrest/${id}`, id).then((res) => res.data);
+
+export const deleteServer = (id: number): Promise<void | number> =>
+  apiService.delete<void>(`/lk/delmyrest/${id}`).then(() => id);

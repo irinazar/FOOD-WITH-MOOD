@@ -6,6 +6,7 @@ import type {
   UserLkType,
 } from '../../../../types/lkTypes/lkTypes';
 import {
+  deleteThunk,
   getAllCountryThunk,
   getOwnerThunk,
   getUserRestaurants,
@@ -48,6 +49,13 @@ export const lkSlice = createSlice({
     builder.addCase(newRestaurantThunk.fulfilled, (state, action) => {
       if (state.currentOwner) {
         state.currentOwner.Restaurants.push(action.payload);
+      }
+    });
+    builder.addCase(deleteThunk.fulfilled, (state, action) => {
+      if (state.currentOwner) {
+        state.currentOwner.Restaurants = state.currentOwner.Restaurants.filter(
+          (el) => Number(el.id) !== action.payload,
+        );
       }
     });
   },

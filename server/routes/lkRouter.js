@@ -98,6 +98,15 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
         include: Preference,
       });
 
+      // const user = await User.findByPk(id, {
+      //   include: [
+      //     {
+      //       model: Preference,
+      //       include: [Country],
+      //     },
+      //   ],
+      // });
+
       res.send(user);
     } else {
       return res.status(404).json({ message: "User not found" });
@@ -219,6 +228,19 @@ lkRouter.post("/getmyrest/:id", async (req, res) => {
       },
     });
     res.json(restaurants);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+lkRouter.delete("/delmyrest/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const rest = await Restaurant.findByPk(id);
+    rest.destroy();
+    res.sendStatus(200);
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
