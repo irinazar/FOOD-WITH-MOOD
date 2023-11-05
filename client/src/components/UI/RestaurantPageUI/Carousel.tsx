@@ -1,11 +1,9 @@
 import React from 'react';
 import { Box, Center, IconButton, useBreakpointValue } from '@chakra-ui/react';
-// Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
-// And react-slick as our Carousel Lib
 import Slider from 'react-slick';
 import style from './style.module.css';
-import type OneRestaurantType from '../../../types/oneRestaurantType/oneRestaurantTypes';
+import type { PictureType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
 
 // Settings for the slider
 const settings = {
@@ -21,15 +19,13 @@ const settings = {
 };
 
 type CarouselProps = {
-  oneRestaurant: OneRestaurantType;
+  pictures: PictureType[];
 };
 
-export default function Carousel({ oneRestaurant }: CarouselProps): JSX.Element {
+export default function Carousel({ pictures }: CarouselProps): JSX.Element {
   const [slider, setSlider] = React.useState<Slider | null>(null);
   const top = useBreakpointValue({ base: '90%', md: '50%' });
   const side = useBreakpointValue({ base: '30%', md: '10px' });
-  const cards = oneRestaurant.img.split(',');
-  // console.log(cards, 'CAAAAAAAAARDS');
 
   return (
     <Center>
@@ -92,15 +88,18 @@ export default function Carousel({ oneRestaurant }: CarouselProps): JSX.Element 
           slidesToScroll={settings.slidesToScroll}
           ref={(sliderRef) => setSlider(sliderRef)}
         >
-          {cards.map((img: string) => (
+          {pictures?.map((picture: PictureType) => (
             <Box
-              key={img}
+              key={picture.restaurantId}
               height="6xl"
               position="relative"
               backgroundPosition="center"
               backgroundRepeat="no-repeat"
               backgroundSize="cover"
-              backgroundImage={img.includes('http') ? img : `../../img/${img}`}
+              backgroundImage={
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                picture.img.includes('http') ? picture.img : `../../img/${picture.img}`
+              }
             />
           ))}
         </Slider>
