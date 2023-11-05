@@ -15,6 +15,7 @@ import React from 'react';
 import Carousel from '../../../UI/RestaurantPageUI/Carousel';
 import type { SubmitRestaurantType } from '../../../../types/lkTypes/lkTypes';
 import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
+import style from '../../UserAccount/style.module.css';
 
 type OwnerCardProps = {
   rest: SubmitRestaurantType;
@@ -50,25 +51,34 @@ function OwnerCard({ rest }: OwnerCardProps): JSX.Element {
         </Stack>
       </CardBody>
       <CardFooter display="flex" justifyContent="center" alignItems="center">
-        <ButtonGroup variant="outline" spacing={4}>
+        <ButtonGroup
+          style={{ flexWrap: 'wrap', justifyContent: 'center' }}
+          variant="outline"
+          spacing={4}
+        >
           {rest.status === 'Pending' && (
             <Button colorScheme="blue" isDisabled>
-              Ожидает
+              Ожидает подтверждения
             </Button>
           )}
           {rest.status === 'Accepted' && (
-            <Button colorScheme="green" isDisabled>
-              Одобрен
+            <Button colorScheme="yellow" isDisabled>
+              Одобрена
             </Button>
           )}
           {rest.status === 'Declined' && (
             <Button colorScheme="red" isDisabled>
-              Отклонен
+              Отклонена
             </Button>
           )}
-          <Button onClick={(e) => deleteHandler(e, Number(rest.id))} colorScheme="red">
+
+          <button
+            className={style.buttondel}
+            type="submit"
+            onClick={(e) => deleteHandler(e, Number(rest.id))}
+          >
             Удалить заявку
-          </Button>
+          </button>
         </ButtonGroup>
       </CardFooter>
     </Card>

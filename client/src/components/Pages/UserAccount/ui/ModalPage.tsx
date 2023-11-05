@@ -22,7 +22,11 @@ type ModalPageProps = {
   onClose: () => void;
   overlay: any;
   id: number;
-  handlerSubmit: (e: React.FormEvent<HTMLFormElement>, id: number) => void;
+  handlerSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    id: number,
+    selectedCountryIds: string[],
+  ) => void;
 };
 
 function ModalPage({ isOpen, onClose, overlay, id, handlerSubmit }: ModalPageProps): JSX.Element {

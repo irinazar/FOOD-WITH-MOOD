@@ -16,8 +16,7 @@ type UserInfoProps = {
 function UserInfo({ userlk }: UserInfoProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayTwo />);
-    const { handlerSubmit } = useLkHooks();
-
+  const { handlerSubmit } = useLkHooks();
 
   return (
     <div className={style.usercardinfo}>
@@ -36,19 +35,24 @@ function UserInfo({ userlk }: UserInfoProps): JSX.Element {
           <span className={style['profile-card-loc__txt']}>{userlk?.email}</span>
         </div>
       </div>
-      <Button
+      <button
         onClick={() => {
           setOverlay(<OverlayTwo />);
           onOpen();
         }}
-        className={style['btn-rest']}
-        leftIcon={<MdBuild />}
-        variant="outline"
-        size={{ base: 'sm', md: 'md', lg: 'lg' }}
+        className={style.buttondel}
+        style={{ padding: '5px -5px', marginTop: '10px', marginBottom: '10px' }}
+        type="submit"
       >
         Редактировать
-      </Button>
-      <ModalPage handlerSubmit={handlerSubmit} id={userlk?.id} isOpen={isOpen} onClose={onClose} overlay={overlay} />
+      </button>
+      <ModalPage
+        handlerSubmit={handlerSubmit}
+        id={userlk?.id}
+        isOpen={isOpen}
+        onClose={onClose}
+        overlay={overlay}
+      />
     </div>
   );
 }

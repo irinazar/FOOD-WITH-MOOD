@@ -23,7 +23,11 @@ type ModalPageProps = {
   isOpen: boolean;
   onClose: () => void;
   overlay: any;
-  handlerRestaurantSubmit: (e: React.FormEvent<HTMLFormElement>, id: number) => void;
+  handlerRestaurantSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    id: number,
+    mapCoordinates: Coordinates,
+  ) => void;
   restOwnerId: number;
 };
 type Coordinates = {

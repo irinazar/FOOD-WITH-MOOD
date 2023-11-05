@@ -42,32 +42,30 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
         </div>
       </div>
       <div className={style['btn-container']}>
-        <Button
-          className={style['btn-rest']}
+        <button
+          className={style.buttondel}
+          style={{ padding: '5px -5px', marginTop: '10px', marginBottom: '10px' }}
+          type="submit"
           onClick={() => {
             setOverlay(<OverlayTwo />);
             setSelectedModal('edit');
             onOpen();
           }}
-          leftIcon={<MdBuild />}
-          variant="outline"
-          size={{ base: 'sm', md: 'md', lg: 'lg' }}
         >
           Редактировать
-        </Button>
-        <Button
-          className={style['btn-rest']}
+        </button>
+        <button
+          className={style.buttondel}
+          style={{ padding: '5px -5px', marginTop: '10px', marginBottom: '10px' }}
+          type="submit"
           onClick={() => {
             setOverlay(<OverlayTwo />);
             setSelectedModal('request');
             onOpen();
           }}
-          fontSize="10px"
-          variant="outline"
-          size={{ base: 'sm', md: 'md', lg: 'lg' }}
         >
           Оставить заявку на ваше заведение
-        </Button>
+        </button>
       </div>
       {selectedModal === 'edit' && (
         <ModalPageRestorant
