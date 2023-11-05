@@ -21,7 +21,7 @@ export default function RestaurantPage(): JSX.Element {
     <Box w="100%" p={4} color="black">
     {oneRestaurant && (
       <>
-        <Carousel pictures={pictures} />
+        {/* <Carousel pictures={pictures} /> */}
         <br/>
         <RestaurantCard oneRestaurant={oneRestaurant} />
         <br/>

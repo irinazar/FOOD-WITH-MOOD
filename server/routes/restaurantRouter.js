@@ -17,12 +17,25 @@ restaurantRouter.get("/:id", async (req, res) => {
       ],
     });
 
-    const comments = await Comment.findAll({
+    const allComments = await Comment.findAll({
       where: { restaurantId: id },
       include: [
-        { model: User, attributes: ['name', 'avatar']}, 
+        {
+          model: User,
+          attributes: ['name', 'avatar'],
+        },
       ],
-    })
+    });
+
+    const comments = allComments.map((comment) => {
+      return {
+        body: comment.body,
+        user: {
+          userName: comment.User.name,
+          avatar: comment.User.avatar,
+        },
+      };
+    });
     const pictures = await Image.findAll({
       where: { restaurantId: id },
     })
@@ -33,7 +46,7 @@ restaurantRouter.get("/:id", async (req, res) => {
         ratings.reduce((total, rating) => total + rating, 0) / ratings.length;
       oneRestaurant.averageRating = averageRating;
 
-      res.json({oneRestaurant, comments});
+      res.json({oneRestaurant, comments, pictures});
     } else {
       res.status(404).json({ error: "restaurant not found" });
     }

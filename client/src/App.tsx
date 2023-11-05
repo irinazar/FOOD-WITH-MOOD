@@ -52,17 +52,17 @@ function App(): JSX.Element {
         <Route
           path="/authUser/login"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
               <UserLoginPage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
         <Route
           path="/authUser/signup"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
+            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
               <UserAuthPage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
 
@@ -77,9 +77,9 @@ function App(): JSX.Element {
         <Route
           path="/code"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+            // <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
               <UserCodePage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
       </Route>
