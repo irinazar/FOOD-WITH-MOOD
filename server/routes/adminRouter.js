@@ -3,7 +3,7 @@ const { Restaurant } = require("../db/models");
 
 const adminRouter = express.Router();
 
-restaurantRouter.get("/", async (req, res) => {
+adminRouter.get("/", async (req, res) => {
   try {
     const pendingRestaurants = await Restaurant.findAll({
       where: { status: 'Pending' },
@@ -24,7 +24,7 @@ restaurantRouter.get("/", async (req, res) => {
   }
 });
 
-restaurantRouter.patch('/accept', async (req, res) => {
+adminRouter.patch('/accept', async (req, res) => {
   const restaurantId = req.body.restaurantId; 
   try {
     const updatedRestaurant = await Restaurant.update(
@@ -45,7 +45,7 @@ restaurantRouter.patch('/accept', async (req, res) => {
   }
 });
 
-restaurantRouter.patch('/decline', async (req, res) => {
+adminRouter.patch('/decline', async (req, res) => {
   const restaurantId = req.body.restaurantId; 
   try {
     const updatedRestaurant = await Restaurant.update(
