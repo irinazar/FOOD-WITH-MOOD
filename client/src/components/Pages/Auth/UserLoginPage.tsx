@@ -36,9 +36,9 @@ export default function UserLoginPage(): JSX.Element {
       });
       return;
     }
-    const userSignUpData: UserSignUpType = {
-      email: formData.email,
-      password: formData.password,
+    const userSignUpData: UserLoginType = {
+      email: formData.email.toString(),
+      password: formData.password.toString(),
     };
 
     void dispatch(loginUserThunk(userSignUpData));
@@ -46,13 +46,7 @@ export default function UserLoginPage(): JSX.Element {
 
   return (
     <div className={style.divRegist}>
-      <Box
-        bg={useColorModeValue('', 'gray.900')}
-        w="lg"
-        p={8}
-        borderRadius="md"
-        // className={style.boxtRegist}
-      >
+      <Box bg={useColorModeValue('', 'gray.900')} w="lg" p={8} borderRadius="md">
         <form className={style.formRegist} onSubmit={submitHandler}>
           <VStack spacing={4}>
             <FormControl>

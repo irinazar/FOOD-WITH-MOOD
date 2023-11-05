@@ -1,14 +1,13 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Restaurant extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
+     * The models/index file will call this method automatically.
      */
+    
     static associate({Comment, Favourite, Rating, Country, RestOwner, Booking, Image}) {
       this.hasMany(Comment, {foreignKey:'restaurantId'})
       this.hasMany(Favourite, {foreignKey:'restaurantId'})
@@ -33,5 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Restaurant',
   });
+
   return Restaurant;
 };
