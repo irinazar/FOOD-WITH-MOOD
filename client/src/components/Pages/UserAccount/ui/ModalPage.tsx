@@ -12,7 +12,7 @@ import {
   ModalHeader,
   Wrap,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '../style.module.css';
 import { useAppSelector } from '../../../../hooks/reduxHooks';
 import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
@@ -27,6 +27,10 @@ type ModalPageProps = {
 
 function ModalPage({ isOpen, onClose, overlay, id, handlerSubmit }: ModalPageProps): JSX.Element {
   const country = useAppSelector((state) => state.lkReducer.country);
+  const pref = useAppSelector(
+    (state) =>
+      state.lkReducer.currentUserLk?.Preferences.map((el) => el.countryId.toString()) || [],
+  );
 
   //= =================checkbox
   const [selectedCountryIds, setSelectedCountryIds] = useState<string[]>([]);
@@ -37,6 +41,11 @@ function ModalPage({ isOpen, onClose, overlay, id, handlerSubmit }: ModalPagePro
       setSelectedCountryIds([...selectedCountryIds, countryId]);
     }
   };
+
+  useEffect(() => {
+    setSelectedCountryIds(pref);
+  }, []);
+
   //= =================checkbox
 
   return (

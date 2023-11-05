@@ -32,3 +32,6 @@ export const newRestaurantServer = (
   formData: SubmitRestaurantType2,
 ): Promise<SubmitRestaurantType> =>
   apiService.post<SubmitRestaurantType>('/lk/newrestaurant', formData).then((res) => res.data);
+
+export const getUserRestaurantServer = (id: number): Promise<SubmitRestaurantType[]> =>
+  apiService.post<SubmitRestaurantType[]>(`/lk/getmyrest/${id}`, id).then((res) => res.data);

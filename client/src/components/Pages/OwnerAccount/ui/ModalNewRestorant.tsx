@@ -26,7 +26,10 @@ type ModalPageProps = {
   handlerRestaurantSubmit: (e: React.FormEvent<HTMLFormElement>, id: number) => void;
   restOwnerId: number;
 };
-
+type Coordinates = {
+  lat: number;
+  lng: number;
+};
 //= ============================= map
 
 function ModalNewRestorant({
@@ -36,12 +39,17 @@ function ModalNewRestorant({
   handlerRestaurantSubmit,
   restOwnerId,
 }: ModalPageProps): JSX.Element {
-  const { mapCoordinates, setMapCoordinates } = useLkHooks();
+  const [mapCoordinates, setMapCoordinates] = useState<Coordinates>({
+    lat: 55.751574,
+    lng: 37.573856,
+  });
   const ymapRef = useRef<ymaps.Map | null>(null);
 
   const handleMapClick = (e: any): void => {
     const coords: number[] = e.get('coords');
-    setMapCoordinates({ lat: coords[0], lng: coords[1] });
+    const newCoordinates = { lat: coords[0], lng: coords[1] };
+    setMapCoordinates(newCoordinates);
+    console.log(newCoordinates);
   };
 
   const loadMap = (): void => {
@@ -53,6 +61,7 @@ function ModalNewRestorant({
         });
         const myMap = ymapRef.current;
         myMap.events.add('click', handleMapClick);
+        myMap.events.add('submit', handleMapClick);
       });
     }
   };
@@ -69,7 +78,7 @@ function ModalNewRestorant({
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       {overlay}
       <ModalContent>
-        <form onSubmit={(e) => handlerRestaurantSubmit(e, restOwnerId)}>
+        <form onSubmit={(e) => handlerRestaurantSubmit(e, restOwnerId, mapCoordinates)}>
           <ModalHeader>Заполните данные о вашем заведении</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

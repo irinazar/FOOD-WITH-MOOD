@@ -3,6 +3,7 @@ import { useAppDispatch } from '../reduxHooks';
 import {
   getAllCountryThunk,
   getOwnerThunk,
+  getUserRestaurants,
   newRestaurantThunk,
   updateOwnerThunk,
   updateUserThunk,
@@ -16,10 +17,6 @@ import type {
   SubmitUserTypeHTML,
 } from '../../types/lkTypes/lkTypes';
 
-type Coordinates = {
-  lat: number;
-  lng: number;
-};
 const useLkHooks = (): {
   handlerSubmit: (
     e: React.FormEvent<HTMLFormElement>,
@@ -27,9 +24,13 @@ const useLkHooks = (): {
     selectedCountryIds: string[],
   ) => void;
   handlerOwnerSubmit: (e: React.FormEvent<HTMLFormElement>, id: number) => void;
-  handlerRestaurantSubmit: (e: React.FormEvent<HTMLFormElement>, id: number) => void;
-  mapCoordinates: Coordinates;
-  setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>;
+  handlerRestaurantSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    id: number,
+    mapCoordinates: { lat: number; lng: number },
+  ) => void;
+  // mapCoordinates: Coordinates;
+  // setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>;
   handleCountryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   selectedCountryIds: number[];
 } => {
@@ -53,10 +54,10 @@ const useLkHooks = (): {
     formData.append('file', e.currentTarget.file.files[0]);
     formData.append('countryId', selectedCountryIds.join(' '));
 
-
     const data = { id, ...Object.fromEntries(formData) } as SubmitUserType2;
 
     void dispatch(updateUserThunk(data));
+    void dispatch(getUserRestaurants(Number(id))); //! !!!!!!!! не работает второй диспатч
   };
 
   const handlerOwnerSubmit = (e: React.FormEvent<SubmitUserTypeHTML>, id: number): void => {
@@ -73,12 +74,12 @@ const useLkHooks = (): {
     void dispatch(updateOwnerThunk(data));
   };
   //= ============================map
-  const [mapCoordinates, setMapCoordinates] = useState<Coordinates>({
-    lat: 55.751574,
-    lng: 37.573856,
-  });
 
-  const handlerRestaurantSubmit = (e: React.FormEvent<SubmitRestTypeHTML>, id: number): void => {
+  const handlerRestaurantSubmit = (
+    e: React.FormEvent<SubmitRestTypeHTML>,
+    id: number,
+    mapCoordinates: { lat: number; lng: number },
+  ): void => {
     e.preventDefault();
     const formData = new FormData();
 
@@ -106,8 +107,8 @@ const useLkHooks = (): {
     handlerSubmit,
     handlerOwnerSubmit,
     handlerRestaurantSubmit,
-    setMapCoordinates,
-    mapCoordinates,
+    // setMapCoordinates,
+    // mapCoordinates,
     // handleCountryChange,
     // selectedCountryIds,
   };

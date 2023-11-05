@@ -136,3 +136,16 @@
   display: flex;
   justify-content: center;
 }
+
+.containermini {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.restName{
+  text-align: center;
+  display: block;
+
+}
+

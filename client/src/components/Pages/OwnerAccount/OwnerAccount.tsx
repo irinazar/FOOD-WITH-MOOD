@@ -7,6 +7,7 @@ import Comment from './ui/Comment';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { getOwnerThunk } from '../../../features/redux/slices/lk/lkThuncks';
 import type { OwnerType } from '../../../types/lkTypes/lkTypes';
+import OwnerCard from './ui/OwnerCard';
 
 export default function OwnerAccount(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,6 +29,9 @@ export default function OwnerAccount(): JSX.Element {
         <AbsoluteCenter bg="gray.100" px="4" fontSize="xl" fontWeight="bold">
           Я владелец
         </AbsoluteCenter>
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-3 mt-4 mb-5 mx-auto">
+          {owner?.Restaurants?.map((el) => <OwnerCard key={el?.id} rest={el} />)}
+        </div>
       </Box>
       <Box position="relative" padding="10">
         <Divider />

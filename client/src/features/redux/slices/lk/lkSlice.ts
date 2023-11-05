@@ -1,9 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { CountryType, OwnerType, UserLkType } from '../../../../types/lkTypes/lkTypes';
+import type {
+  CountryType,
+  OwnerType,
+  SubmitRestaurantType,
+  UserLkType,
+} from '../../../../types/lkTypes/lkTypes';
 import {
   getAllCountryThunk,
   getOwnerThunk,
+  getUserRestaurants,
   getUserThunk,
+  newRestaurantThunk,
   updateOwnerThunk,
   updateUserThunk,
 } from './lkThuncks';
@@ -37,6 +44,11 @@ export const lkSlice = createSlice({
     });
     builder.addCase(updateOwnerThunk.fulfilled, (state, action) => {
       state.currentOwner = action.payload;
+    });
+    builder.addCase(newRestaurantThunk.fulfilled, (state, action) => {
+      if (state.currentOwner) {
+        state.currentOwner.Restaurants.push(action.payload);
+      }
     });
   },
 });

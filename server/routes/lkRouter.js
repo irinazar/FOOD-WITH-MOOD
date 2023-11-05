@@ -9,6 +9,7 @@ const {
 } = require("../db/models");
 const upload = require("../middlewares/multerLoad");
 const sharp = require("sharp");
+const { Op } = require("sequelize");
 const fs = require("fs").promises;
 
 lkRouter.get("/country", async (req, res) => {
@@ -24,7 +25,9 @@ lkRouter.get("/country", async (req, res) => {
 lkRouter.get("/owner/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const owner = await RestOwner.findOne({ where: { id } });
+    const owner = await RestOwner.findByPk(id, {
+      include: Restaurant,
+    });
 
     res.send(owner);
   } catch (error) {
@@ -36,7 +39,9 @@ lkRouter.get("/owner/:id", async (req, res) => {
 lkRouter.get("/user/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findByPk(id, {
+      include: Preference,
+    });
 
     res.send(user);
   } catch (error) {
@@ -75,6 +80,9 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
       }
       const countries = countryId.split(" ");
       const newcountries = countries.map((el) => +el);
+      await Preference.destroy({
+        where: { userId: id },
+      });
       const preferense = [];
       for (country of newcountries) {
         preferense.push({ userId: id, countryId: country });
@@ -82,7 +90,9 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
       await Preference.bulkCreate(preferense);
       await existingUser.update(updatedFields);
 
-      const user = await User.findByPk(id);
+      const user = await User.findByPk(id, {
+        include: Preference,
+      });
 
       res.send(user);
     } else {
@@ -142,6 +152,17 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
   try {
     const { id, title, adress, countryId, description, coordX, coordY } =
       req.body;
+    if (
+      !id ||
+      !title ||
+      !adress ||
+      !countryId ||
+      !description ||
+      !coordX ||
+      !coordY
+    ) {
+      res.sendStatus(606);
+    }
 
     const newRestaurant = await Restaurant.create({
       title,
@@ -150,25 +171,25 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
       description,
       coordX,
       coordY,
-      img: avatar,
-      status: "pending",
+      status: "Pending",
       restOwnerId: id,
     });
 
     if (newRestaurant) {
       const newRestaurantId = newRestaurant.id;
 
-      const images = [];
+      //! МУЛЬТЕР
+      //    const images = [];
 
-      for (const file of req.files) {
-        const name = `${Date.now()}.webp`;
-        const outputBuffer = await sharp(file.buffer).webp().toBuffer();
-        await fs.writeFile(`./public/img/${name}`, outputBuffer);
+      //   for (const file of req.file) {
+      //     const name = `${Date.now()}.webp`;
+      //     const outputBuffer = await sharp(file.buffer).webp().toBuffer();
+      //     await fs.writeFile(`./public/img/${name}`, outputBuffer);
 
-        images.push({ img: name, restId: newRestaurantId });
-      }
+      //     images.push({ img: name, restId: newRestaurantId });
+      //   }
 
-      await Picture.bulkCreate(images);
+      //   await Picture.bulkCreate(images);
 
       res.status(201).json(newRestaurant);
     } else {
@@ -176,6 +197,26 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
     }
   } catch (error) {
     console.log("Error:", error);
+    res.sendStatus(400);
+  }
+});
+
+lkRouter.post("/getmyrest/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const preferense = await Preference.findAll({ where: { userId: id } });
+    const countryIds = preferense.map((preference) => preference.countryId);
+
+    const restaurants = await Restaurant.findAll({
+      where: {
+        countryId: {
+          [Op.in]: countryIds,
+        },
+      },
+    });
+    res.json(restaurants);
+  } catch (error) {
+    console.log(error);
     res.sendStatus(400);
   }
 });

@@ -12,6 +12,7 @@ import {
   editUserServer,
   getAllCountry,
   getOwnerServer,
+  getUserRestaurantServer,
   getUserServer,
   newRestaurantServer,
 } from '../../../../services/lkService/lkService';
@@ -37,8 +38,15 @@ export const updateOwnerThunk = createAsyncThunk<UserLkType, SubmitUserType2>(
   async (formdata) => editOwnerServer(formdata).then((data) => data),
 );
 export const newRestaurantThunk = createAsyncThunk<SubmitRestaurantType, SubmitRestaurantType2>(
-    'updateowner',
-    async (formdata) => newRestaurantServer(formdata).then((data) => data),
-  );
+  'newrestowner',
+  async (formdata) => {
+    const data = await newRestaurantServer(formdata);
+    console.log(data); 
+    return data;
+  },
+);
 
-
+export const getUserRestaurants = createAsyncThunk<SubmitRestaurantType[], number>(
+  'getuserrest',
+  async (id) => getUserRestaurantServer(id).then((data) => data),
+);

@@ -13,6 +13,13 @@ export type OwnerType = {
   password: string;
   avatar: string;
   active: boolean;
+  Restaurants: SubmitRestaurantType[];
+};
+
+export type PreferenceType = {
+  id: number;
+  userId: number;
+  countryId: number;
 };
 
 export type UserLkType = {
@@ -24,6 +31,7 @@ export type UserLkType = {
   avatar: string;
   active: boolean;
   isAdmin?: boolean;
+  Preferences: PreferenceType[];
 };
 
 export type SubmitUserType = {
@@ -64,6 +72,7 @@ export type SubmitRestTypeHTML = {
 
 export type SubmitRestaurantType = {
   title: string;
+  id?: string;
   adress: string;
   countryId: string;
   description: string;
