@@ -20,6 +20,7 @@ module.exports = {
           },
           key: 'id',
         },
+        onDelete: 'CASCADE'
       },
       restaurantId: {
         type: Sequelize.INTEGER,
@@ -29,6 +30,7 @@ module.exports = {
           },
           key: 'id',
         },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

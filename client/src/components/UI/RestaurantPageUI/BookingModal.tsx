@@ -11,7 +11,12 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@chakra-ui/react';
+
+import { useParams } from 'react-router-dom';
 import style from './style.module.css';
+import { useAppDispatch } from '../../../hooks/reduxHooks';
+import type { BookingInputType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
+import { addBookingThunk } from '../../../features/redux/slices/oneRestaurantSlice/oneRestaurantThunk';
 
 type BookingModalProps = {
   isOpen: boolean;
@@ -21,19 +26,29 @@ type BookingModalProps = {
 
 function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Element {
   const [bookingData, setBookingData] = useState({
-    name: '',
-    phoneNumber: '',
-    dateTime: '',
+    bookerName: '',
+    bookerPhone: '',
+    date: '',
   });
+  const { id } = useParams();
+  const idParam = Number(id)
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setBookingData({ ...bookingData, [name]: value });
+    setBookingData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (): void => {
-    // Здесь вы можете отправить bookingData на ваш бэкенд
-    console.log(bookingData);
+  const bookingSubmitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    if (bookingData) {
+      const formData = Object.fromEntries(new FormData(e.currentTarget)) as BookingInputType;
+      void dispatch(addBookingThunk({ id: idParam, formData }));
+      setBookingData({
+        bookerName: '',
+        bookerPhone: '',
+        date: '',
+      });
+    }
   };
 
   return (
@@ -43,13 +58,13 @@ function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Elem
         <ModalHeader textAlign="center">Забронировать столик</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={bookingSubmitHandler}>
             <FormControl>
               <FormLabel textAlign="center">Имя для брони</FormLabel>
               <Input
                 type="text"
-                name="name"
-                value={bookingData.name}
+                name="bookerName"
+                value={bookingData.bookerName}
                 onChange={handleChange}
                 placeholder="Имя"
               />
@@ -58,20 +73,20 @@ function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Elem
               <FormLabel textAlign="center">Номер для связи</FormLabel>
               <Input
                 type="tel"
-                name="phone"
-                value={bookingData.phoneNumber}
+                name="bookerPhone"
+                value={bookingData.bookerPhone}
                 onChange={handleChange}
-                placeholder="Телефон"
+                placeholder="+7(000)000-00-00"
               />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel textAlign="center">Время</FormLabel>
               <Input
                 type="datetime-local"
-                name="datetime"
-                value={bookingData.dateTime}
+                name="date"
+                value={bookingData.date}
                 onChange={handleChange}
-                placeholder="Select Date and Time"
+                placeholder="Дата и и время"
               />
             </FormControl>
             <ModalFooter>

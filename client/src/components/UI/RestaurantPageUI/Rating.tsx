@@ -1,26 +1,33 @@
-import React from 'react'
-import {  Center, HStack } from '@chakra-ui/react';
+import React from 'react';
+import { Center, HStack } from '@chakra-ui/react';
 import { FaRegStar } from 'react-icons/fa';
+import type OneRestaurantType from '../../../types/oneRestaurantType/oneRestaurantTypes';
 
-export default function Rating(): JSX.Element {
-  const ratingprop = 4;
+type RestaurantCardProps = {
+  oneRestaurant: OneRestaurantType;
+};
+
+export default function Rating({ oneRestaurant }: RestaurantCardProps): JSX.Element {
+  const rating = oneRestaurant.averageRating;
   return (
     <Center>
-    <HStack gap={1}>
-            {Array(5)
-              .fill('')
-              .map((_, i) => (
-                <FaRegStar
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={i}
-                  style={{
-                    color: i < ratingprop ? '#ffc107' : '#e4e5e9',
-                  }}
-                  // onClick={() => ratingHandler(i + 1)}
-                  className="cursor-pointer text-xl"
-                />
-              ))}
-          </HStack>
-          </Center>
-  )
+      {rating && (
+        <HStack gap={1}>
+          {Array(5)
+            .fill('')
+            .map((_, i) => (
+              <FaRegStar
+                // eslint-disable-next-line react/no-array-index-key
+                key={i}
+                style={{
+                  color: i < rating ? '#ffc107' : '#e4e5e9',
+                }}
+                // onClick={() => ratingHandler(i + 1)}
+                className="cursor-pointer text-xl"
+              />
+            ))}
+        </HStack>
+      )}
+    </Center>
+  );
 }
