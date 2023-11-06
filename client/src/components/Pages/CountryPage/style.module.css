@@ -15,11 +15,15 @@
     display: flex;
 
     align-items: center; /* Выравнивание элементов по вертикали */
+
+    justify-content: center;
+    max-width: 75vw;
     
   }
   
   .image {
     flex: 1; /* Занимает доступное пространство по горизонтали */
+    padding-left: 4vw;
 
   }
   

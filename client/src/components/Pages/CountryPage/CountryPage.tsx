@@ -1,27 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import style from './style.module.css';
 import FavoriteButton from '../../UI/FavoriteButton/FavoriteButton';
 import Rating from '../../UI/RestaurantPageUI/Rating';
 import { Reveal } from '../../UI/Animations/Reveal';
 import { OnTheLeft } from '../../UI/Animations/OnLeft';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
+import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 
 export default function CountryPage(): JSX.Element {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const oneCountry = useAppSelector((state) => state.countries.oneCountry);
+  
+  console.log('----------------------',oneCountry?.Restaurants[0].Images[0].image)
+  useEffect(() => {
+
+    void dispatch(oneCountryActionThunk(Number(id)));
+  }, []);
+
   return (
-    <>
+    < >
       <div className={style.cuisine}>
         <Reveal>
-          <h1>Итальянская кухня</h1>
+          <>
+            <h1>{oneCountry?.name}</h1>
+            <p style={{fontSize:'25px'}}>{oneCountry?.description}</p>
+          </>
         </Reveal>
       </div>
+
+    {oneCountry?.Restaurants?.map((el)=> 
+    
       <div className={style.miniCardContainer}>
         <div className={style.miniCard}>
           <div className={style.imageText}>
             <Reveal>
-              <h1 className={style.restName}> Some interesting text</h1>
+              <h1 className={style.restName}> {el.title}</h1>
             </Reveal>
 
             <OnTheLeft>
-              <p> some interesting text</p>
+              <p>{el.description}</p>
             </OnTheLeft>
             <br />
             <FavoriteButton />
@@ -30,13 +50,14 @@ export default function CountryPage(): JSX.Element {
           <Reveal>
             <div className={style.image}>
               <img
-                src="https://toohotel.com/wp-content/uploads/2022/09/TOO_restaurant_Panoramique_vue_Paris_Seine_Tour_Eiffel_2.jpg"
+                src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`}
                 alt=""
               />
             </div>
           </Reveal>
         </div>
       </div>
+    )}
     </>
   );
 }
