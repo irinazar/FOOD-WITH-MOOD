@@ -28,7 +28,7 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
   return (
     <div className={style.usercardinfo}>
       <div className={style['profile-card__img']}>
-        <img src={`${STATIC_URL}/img/${owner?.avatar}`} alt="profile card" />{' '}
+        <img src={`${STATIC_URL}/img/${owner?.avatar}`} alt="" />
       </div>
       <div className={style['profile-card__cnt']}>
         <div className={style['profile-card__name']}>{owner?.name}</div>
