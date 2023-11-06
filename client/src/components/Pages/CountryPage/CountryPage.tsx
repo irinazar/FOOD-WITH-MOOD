@@ -25,7 +25,7 @@ export default function CountryPage(): JSX.Element {
             </OnTheLeft>
             <br />
             <FavoriteButton />
-            <Rating />
+            {/* <Rating /> */}
           </div>
           <Reveal>
             <div className={style.image}>
