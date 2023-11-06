@@ -15,7 +15,7 @@ function sendConfirmationCodeEmail(email, code) {
     from: "FOOD-WITH-MOOD <elbrustestemail@gmail.com>",
     to: email,
     subject: "Код подтверждения регистрации",
-    text: `Ваш код подтверждения: ${code}`,
+    text: `Введите представленный ниже 6-значный код, чтобы подтвердить свою регистрацию в FOOD-WITH-MOOD: ${code} `,
   };
 
   transporter.sendMail(message, (err, info) => {

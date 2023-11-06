@@ -1,25 +1,23 @@
-// import { AxiosResponse } from 'axios';
-import type {
-  ConfirmType,
-  CreateConfirmType,
-  UserLoginType,
-  UserSignUpType,
-  UserType,
-} from '../../types/userType/userTypes';
 import apiService from '..';
+import type {
+  AuthLoginType,
+  AuthSignUpType,
+  AuthType,
+  CreateConfirmType,
+} from '../../types/authType/authTypes';
 
-export const checkUserService = async (): Promise<UserType> => {
-  const { data } = await apiService<UserType>('/user/check');
+export const checkUserService = async (): Promise<AuthType> => {
+  const { data } = await apiService<AuthType>('/user/check');
   return data;
 };
 
-export const submitSignupService = async (formData: UserSignUpType): Promise<UserType> => {
-  const { data } = await apiService.post<UserType>('/user/signup', formData);
+export const submitSignupService = async (formData: AuthSignUpType): Promise<AuthType> => {
+  const { data } = await apiService.post<AuthType>('/user/signup', formData);
   return data;
 };
 
-export const submitLoginService = async (formData: UserLoginType): Promise<UserType> => {
-  const { data } = await apiService.post<UserType>('/user/login', formData);
+export const submitLoginService = async (formData: AuthLoginType): Promise<AuthType> => {
+  const { data } = await apiService.post<AuthType>('/user/login', formData);
   return data;
 };
 
