@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const lkRouter = require("express").Router();
 const {
+  Image,
   Country,
   RestOwner,
   User,
@@ -28,7 +29,10 @@ lkRouter.get("/owner/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const owner = await RestOwner.findByPk(id, {
-      include: Restaurant,
+      include: {
+        model: Restaurant,
+        include: Image,
+      },
     });
 
     res.send(owner);
@@ -100,7 +104,6 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
         include: Preference,
       });
 
-
       // const user = await User.findByPk(id, {
       //   include: [
       //     {
@@ -142,7 +145,6 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
         updatedFields.email = email;
       }
 
-      // Проверьте наличие файла
       if (req.file) {
         const name = `${Date.now()}.webp`;
         const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
@@ -193,21 +195,31 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
 
     if (newRestaurant) {
       const newRestaurantId = newRestaurant.id;
+      //! МУЛЬТЕР
+      if (req.files) {
+        const images = [];
+
+        for (const file of req.files) {
+          const name = `${Date.now()}.webp`;
+          const outputBuffer = await sharp(file.buffer).webp().toBuffer();
+          await fs.writeFile(`./public/img/restaurants/${name}`, outputBuffer);
+
+          images.push({ image: name, restaurantId: newRestaurantId });
+        }
+
+        await Image.bulkCreate(images);
+      }
+
+      const newRestaurantWithImages = await Restaurant.findByPk(
+        newRestaurantId,
+        {
+          include: Image,
+        }
+      );
 
       //! МУЛЬТЕР
-      //    const images = [];
 
-      //   for (const file of req.file) {
-      //     const name = `${Date.now()}.webp`;
-      //     const outputBuffer = await sharp(file.buffer).webp().toBuffer();
-      //     await fs.writeFile(`./public/img/${name}`, outputBuffer);
-
-      //     images.push({ img: name, restId: newRestaurantId });
-      //   }
-
-      //   await Picture.bulkCreate(images);
-
-      res.status(201).json(newRestaurant);
+      res.status(201).json(newRestaurantWithImages);
     } else {
       return res.status(404);
     }

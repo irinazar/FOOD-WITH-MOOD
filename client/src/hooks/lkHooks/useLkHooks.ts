@@ -21,17 +21,17 @@ import type { Coordinates } from '../../components/Pages/OwnerAccount/ui/ModalNe
 
 const useLkHooks = (): {
   handlerSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
+    e: React.FormEvent<SubmitUserTypeHTML>,
     id: number,
     selectedCountryIds: string[],
   ) => void;
-  handlerOwnerSubmit: (e: React.FormEvent<HTMLFormElement>, id: number) => void;
+  handlerOwnerSubmit: (e: React.FormEvent<SubmitUserTypeHTML>, id: number) => void;
   handlerRestaurantSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
+    e: React.FormEvent<SubmitRestTypeHTML>,
     id: number,
     mapCoordinates: Coordinates,
   ) => void;
-  handleCountryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCountryChange: (e: React.FormEvent<SubmitUserTypeHTML>) => void;
   selectedCountryIds: number[];
   deleteHandler: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void;
 } => {
@@ -63,15 +63,13 @@ const useLkHooks = (): {
   const handlerOwnerSubmit = (e: React.FormEvent<SubmitUserTypeHTML>, id: number): void => {
     e.preventDefault();
     const formData = new FormData();
+    formData.append('id', id.toString());
     formData.append('telephone', e.currentTarget.telephone.value);
     formData.append('name', e.currentTarget.name.value);
     formData.append('email', e.currentTarget.email.value);
     formData.append('file', e.currentTarget.file.files[0]);
-    console.log(e.currentTarget.file.files[0]);
 
-    const data = { id, ...Object.fromEntries(formData) } as SubmitUserType2;
-
-    void dispatch(updateOwnerThunk(data));
+    void dispatch(updateOwnerThunk({ formData, id }));
   };
   //= ============================map
 
@@ -86,6 +84,7 @@ const useLkHooks = (): {
     const fileInput = e.currentTarget.file as HTMLInputElement;
 
     formData.append('title', e.currentTarget.title.value);
+    formData.append('id', id.toString());
     formData.append('adress', e.currentTarget.adress.value);
     formData.append('countryId', e.currentTarget.countryId.value);
     formData.append('description', e.currentTarget.description.value);
@@ -95,10 +94,7 @@ const useLkHooks = (): {
       formData.append('file', fileInput.files[i]);
     }
 
-    const data = { id, ...Object.fromEntries(formData) } as SubmitRestaurantType2;
-    console.log(data);
-
-    void dispatch(newRestaurantThunk(data));
+    void dispatch(newRestaurantThunk(formData));
   };
 
   const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>, id: number): void => {

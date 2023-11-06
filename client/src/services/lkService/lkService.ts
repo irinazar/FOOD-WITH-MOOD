@@ -18,17 +18,15 @@ export const getOwnerServer = (id: number): Promise<OwnerType> =>
 export const getUserServer = (id: number): Promise<UserLkType> =>
   apiService.get<UserLkType>(`/lk/user/${id}`).then((res) => res.data);
 
-export const editUserServer = (formData: SubmitUserType2): Promise<UserLkType> => {
-  console.log(formData);
-  return apiService
+export const editUserServer = (formData: SubmitUserType2): Promise<UserLkType> =>
+  apiService
     .post<UserLkType>(`/lk/userupdate/${formData.id}`, formData.formData)
     .then((res) => res.data);
-};
 
-export const editOwnerServer = (formData: SubmitUserType2): Promise<UserLkType> => {
-  const { id, ...otherData } = formData;
-  return apiService.post<UserLkType>(`/lk/ownerupdate/${id}`, otherData).then((res) => res.data);
-};
+export const editOwnerServer = (formData: SubmitUserType2): Promise<UserLkType> =>
+  apiService
+    .post<UserLkType>(`/lk/ownerupdate/${formData.id}`, formData.formData)
+    .then((res) => res.data);
 
 export const newRestaurantServer = (
   formData: SubmitRestaurantType2,

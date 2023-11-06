@@ -21,6 +21,8 @@ export default function OwnerAccount(): JSX.Element {
 
   const owner = useAppSelector((state) => state.lkReducer.currentOwner) as OwnerType;
 
+  console.log(owner);
+
   return (
     <div className={style.container}>
       <RestorantInfo owner={owner} />

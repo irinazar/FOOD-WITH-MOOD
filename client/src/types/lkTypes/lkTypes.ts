@@ -5,6 +5,12 @@ export type CountryType = {
   img: string;
 };
 
+export type ImagesType = {
+  id: number;
+  restaurantId: number;
+  image: string;
+};
+
 export type OwnerType = {
   id: number;
   telephone: number;
@@ -87,9 +93,10 @@ export type SubmitRestaurantType = {
   status: string;
   resOwnerId: number;
   file?: File;
+  Images: ImagesType[];
 };
 
-export type SubmitRestaurantType2 = {
+export type RestFormType = {
   id?: number;
   title: string;
   adress: string;
@@ -99,6 +106,10 @@ export type SubmitRestaurantType2 = {
   coordY: number;
 
   file: File;
+};
+
+export type SubmitRestaurantType2 = {
+  FormData: FormData;
 };
 
 export type CommentsType = {

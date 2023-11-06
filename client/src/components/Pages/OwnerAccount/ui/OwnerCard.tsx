@@ -31,7 +31,7 @@ function OwnerCard({ rest }: OwnerCardProps): JSX.Element {
 
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">
-          <Carousel />
+          <Carousel pictures={rest.Images}/>
           <Box textAlign="center">
             <Heading size="xs" textTransform="uppercase">
               Адрес
