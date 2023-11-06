@@ -100,7 +100,6 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
         include: Preference,
       });
 
-
       // const user = await User.findByPk(id, {
       //   include: [
       //     {
@@ -142,7 +141,6 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
         updatedFields.email = email;
       }
 
-      // Проверьте наличие файла
       if (req.file) {
         const name = `${Date.now()}.webp`;
         const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
@@ -165,6 +163,8 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
 });
 
 lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
+  console.log(req.body, "body=====================");
+  console.log(req.file, "fileeeeeeeeeee11111111111");
   try {
     const { id, title, adress, countryId, description, coordX, coordY } =
       req.body;
@@ -193,19 +193,22 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
 
     if (newRestaurant) {
       const newRestaurantId = newRestaurant.id;
+      //! МУЛЬТЕР
+      if (req.file) {
+        const images = [];
+
+        for (const file of req.file) {
+          const name = `${Date.now()}.webp`;
+          const outputBuffer = await sharp(file.buffer).webp().toBuffer();
+          await fs.writeFile(`./public/img/${name}`, outputBuffer);
+
+          images.push({ img: name, restId: newRestaurantId });
+        }
+
+        await Picture.bulkCreate(images);
+      }
 
       //! МУЛЬТЕР
-      //    const images = [];
-
-      //   for (const file of req.file) {
-      //     const name = `${Date.now()}.webp`;
-      //     const outputBuffer = await sharp(file.buffer).webp().toBuffer();
-      //     await fs.writeFile(`./public/img/${name}`, outputBuffer);
-
-      //     images.push({ img: name, restId: newRestaurantId });
-      //   }
-
-      //   await Picture.bulkCreate(images);
 
       res.status(201).json(newRestaurant);
     } else {

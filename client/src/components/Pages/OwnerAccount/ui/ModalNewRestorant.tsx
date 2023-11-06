@@ -82,7 +82,10 @@ function ModalNewRestorant({
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       {overlay}
       <ModalContent>
-        <form onSubmit={(e) => handlerRestaurantSubmit(e, restOwnerId, mapCoordinates)}>
+        <form
+          encType="multipart/form-data"
+          onSubmit={(e) => handlerRestaurantSubmit(e, restOwnerId, mapCoordinates)}
+        >
           <ModalHeader>Заполните данные о вашем заведении</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

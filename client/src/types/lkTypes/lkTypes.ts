@@ -89,7 +89,7 @@ export type SubmitRestaurantType = {
   file?: File;
 };
 
-export type SubmitRestaurantType2 = {
+export type RestFormType = {
   id?: number;
   title: string;
   adress: string;
@@ -99,6 +99,10 @@ export type SubmitRestaurantType2 = {
   coordY: number;
 
   file: File;
+};
+
+export type SubmitRestaurantType2 = {
+  FormData: RestFormType;
 };
 
 export type CommentsType = {
