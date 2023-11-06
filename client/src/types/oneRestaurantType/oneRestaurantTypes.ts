@@ -1,20 +1,24 @@
 export type UserComments = {
   userName: string;
   avatar: string;
-}
+};
 
 export type CommentType = {
   restaurantId: number;
   body: string;
-  user: UserComments
-  
+  user: UserComments;
 };
 
 export type PictureType = {
   restaurantId: number;
-  image: string
-}
+  image: string;
+};
 
+export type RatingType = {
+  userId: number;
+  restaurantId: number;
+  rating: number;
+};
 
 export type OneRestaurantType = {
   id: number;
@@ -27,9 +31,8 @@ export type OneRestaurantType = {
   status: string;
   countryId: number;
   restOwnerId: number;
-  averageRating?: number;
-  pictures: PictureType[]
-  
+  averageRating?: RatingType;
+  pictures: PictureType[];
 };
 
 export type BookingType = {
@@ -44,4 +47,4 @@ export type BookingInputType = {
   bookerName: string;
   bookerPhone: string;
   date: string;
-}
+};

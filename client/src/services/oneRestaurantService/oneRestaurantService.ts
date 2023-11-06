@@ -5,6 +5,7 @@ import type {
   CommentType,
   OneRestaurantType,
   PictureType,
+  RatingType,
 } from '../../types/oneRestaurantType/oneRestaurantTypes';
 
 export const getOneRestaurantService = (
@@ -13,12 +14,15 @@ export const getOneRestaurantService = (
   oneRestaurant: OneRestaurantType;
   comments: CommentType[];
   pictures: PictureType[];
-  averageRating: number
+  averageRating: number;
 }> =>
   apiService
-    .get<{ oneRestaurant: OneRestaurantType; comments: CommentType[]; pictures: PictureType[], averageRating: number }>(
-      `/restaurants/${id}`,
-    )
+    .get<{
+      oneRestaurant: OneRestaurantType;
+      comments: CommentType[];
+      pictures: PictureType[];
+      averageRating: number;
+    }>(`/restaurants/${id}`)
     .then((response) => response.data)
     .catch((error) => {
       console.error('Ошибка:', error);
@@ -36,6 +40,15 @@ export const addOneCommentService = (id: number, body: string): Promise<CommentT
       throw error;
     });
 };
+
+export const addRatingService = (id: number, rating: number): Promise<RatingType> =>
+  apiService
+    .patch<RatingType>(`/restaurants/${id}/addRating`, { rating })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Ошибка:', error);
+      throw error;
+    });
 
 export const addBookingService = (id: number, formData: BookingInputType): Promise<BookingType> =>
   apiService

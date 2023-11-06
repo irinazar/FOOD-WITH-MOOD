@@ -87,6 +87,41 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
   }
 });
 
+restaurantRouter.patch("/:id/addRating", async (req, res) => {
+  const { id } = req.params;
+  const { rating } = req.body;
+
+  if (Number.isNaN(+id) || !rating || rating < 1 || rating > 5) {
+    res.status(400).json({ message: "Invalid rating value" });
+    return;
+  }
+
+  try {
+    const restaurant = await Restaurant.findByPk(id);
+    if (!restaurant) {
+      res.status(404).json({ error: "Restaurant not found" });
+      return;
+    }
+
+    const [newRating, created] = await Rating.findOrCreate({
+      where: {
+        restaurantId: id,
+        userId: req.session.id,
+      },
+      defaults: {
+        rating,
+      },
+    });
+
+    if (created) {
+      res.json(newRating);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 restaurantRouter.post("/:id/booking", async (req, res) => {
   const { bookerName, bookerPhone, date } = req.body;
   if (!(bookerName && bookerPhone && date)) return res.sendStatus(400);

@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addBookingThunk, addCommentThunk, getOneRestaurantThunk } from './oneRestaurantThunk';
+import { addBookingThunk, addCommentThunk, addRatingThunk, getOneRestaurantThunk } from './oneRestaurantThunk';
 import type {
   BookingType,
   CommentType,
   OneRestaurantType,
   PictureType,
+  RatingType,
 } from '../../../../types/oneRestaurantType/oneRestaurantTypes';
 
 const initialState: {
@@ -13,7 +14,8 @@ const initialState: {
   pictures: PictureType[];
   booking: BookingType[];
   averageRating: number;
-} = { oneRestaurant: null, comments: [], pictures: [], booking: [], averageRating: 0 };
+  ratings: RatingType[]
+} = { oneRestaurant: null, comments: [], pictures: [], booking: [], averageRating: 0, ratings: []};
 
 const oneRestaurantSlice = createSlice({
   name: 'oneRestaurant',
@@ -30,6 +32,10 @@ const oneRestaurantSlice = createSlice({
 
     builder.addCase(addCommentThunk.fulfilled, (state, action) => {
       state.comments.push(action.payload);
+    });
+
+    builder.addCase(addRatingThunk.fulfilled, (state, action) => {
+      state.ratings.push(action.payload);
     });
 
     builder.addCase(addBookingThunk.fulfilled, (state, action) => {
