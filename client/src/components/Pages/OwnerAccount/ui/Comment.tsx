@@ -47,6 +47,12 @@ function Comment({ comment }: CommentProps): JSX.Element {
       >
         Ответить
       </Button>
+      <div className={style.containercomment}>
+        <div>Ответ</div>
+        {comment?.CommentReplies.map((reply) => (
+          <div style={{ maxWidth: '400px', textAlign: 'right' }}>{reply.body}</div>
+        ))}
+      </div>
       {isReplyFormOpen && (
         <Box mt="2">
           <Textarea colorScheme="blackAlpha" placeholder="Ваш ответ" />

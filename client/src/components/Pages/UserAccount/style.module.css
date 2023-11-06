@@ -212,3 +212,8 @@
     font-size: 14px;
   }
 }
+
+.containercomment {
+  display: flex;
+  justify-content: space-between;
+}
