@@ -12,7 +12,7 @@ export type CommentType = {
 
 export type PictureType = {
   restaurantId: number;
-  img: string[]
+  image: string
 }
 
 export type OneRestaurantType = {

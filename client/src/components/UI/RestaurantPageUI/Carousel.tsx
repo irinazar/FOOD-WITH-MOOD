@@ -98,7 +98,7 @@ export default function Carousel({ pictures }: CarouselProps): JSX.Element {
               backgroundSize="cover"
               backgroundImage={
                 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                picture.img.includes('http') ? picture.img : `../../img/${picture.img}`
+                picture.image.includes('http') ? picture.image : `../../../public/img/restaurants/${picture.image}`
               }
             />
           ))}
