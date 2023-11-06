@@ -1,7 +1,9 @@
 import type {
+  CommentResponseType,
   CommentsType,
   CountryType,
   OwnerType,
+  ReplyType,
   SubmitRestaurantType,
   SubmitRestaurantType2,
   SubmitUserType2,
@@ -18,17 +20,15 @@ export const getOwnerServer = (id: number): Promise<OwnerType> =>
 export const getUserServer = (id: number): Promise<UserLkType> =>
   apiService.get<UserLkType>(`/lk/user/${id}`).then((res) => res.data);
 
-export const editUserServer = (formData: SubmitUserType2): Promise<UserLkType> => {
-  console.log(formData);
-  return apiService
+export const editUserServer = (formData: SubmitUserType2): Promise<UserLkType> =>
+  apiService
     .post<UserLkType>(`/lk/userupdate/${formData.id}`, formData.formData)
     .then((res) => res.data);
-};
 
-export const editOwnerServer = (formData: SubmitUserType2): Promise<UserLkType> => {
-  const { id, ...otherData } = formData;
-  return apiService.post<UserLkType>(`/lk/ownerupdate/${id}`, otherData).then((res) => res.data);
-};
+export const editOwnerServer = (formData: SubmitUserType2): Promise<UserLkType> =>
+  apiService
+    .post<UserLkType>(`/lk/ownerupdate/${formData.id}`, formData.formData)
+    .then((res) => res.data);
 
 export const newRestaurantServer = (
   formData: SubmitRestaurantType2,
@@ -41,5 +41,8 @@ export const getUserRestaurantServer = (id: number): Promise<SubmitRestaurantTyp
 export const deleteServer = (id: number): Promise<void | number> =>
   apiService.delete<void>(`/lk/delmyrest/${id}`).then(() => id);
 
-export const getCommentsServer = (id: number): Promise<CommentsType[]> =>
-  apiService.get<CommentsType[]>(`/lk/mycomments/${id}`).then((res) => res.data);
+export const getCommentsServer = (id: number): Promise<CommentResponseType[]> =>
+  apiService.get<CommentResponseType[]>(`/lk/mycomments/${id}`).then((res) => res.data);
+
+export const newReplyComment = (data: ReplyType): Promise<ReplyType> =>
+  apiService.post<ReplyType>('/lk/replycomment', data).then((res) => res.data);

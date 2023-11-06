@@ -35,6 +35,7 @@ restaurantRouter.get("/:id", async (req, res) => {
 
     const comments = allComments.map((comment) => {
       return {
+        restaurantId: comment.restaurantId,
         body: comment.body,
         user: comment.User
           ? {
@@ -65,7 +66,7 @@ restaurantRouter.get("/:id", async (req, res) => {
 restaurantRouter.post("/:id/addComment", async (req, res) => {
   const { id } = req.params;
   const { body } = req.body;
-  console.log(req.body);
+
   if (Number.isNaN(+id)) {
     res.status(400).json({ message: "Id is not a number" });
     return;

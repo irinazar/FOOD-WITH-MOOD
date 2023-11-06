@@ -33,7 +33,7 @@ export default function Carousel({ pictures }: CarouselProps): JSX.Element {
       <Box
         className={style.shadow}
         position="relative"
-        height="600px"
+        height="800px"
         width="80%"
         overflow="hidden"
       >
@@ -99,7 +99,9 @@ export default function Carousel({ pictures }: CarouselProps): JSX.Element {
               backgroundSize="cover"
               backgroundImage={
                 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                picture.image.includes('http') ? picture.image : `${STATIC_URL}/img/restaurants/${picture.image}`
+                picture.image.includes('http')
+                  ? picture.image
+                  : `${STATIC_URL}/img/restaurants/${picture.image}`
               }
             />
           ))}

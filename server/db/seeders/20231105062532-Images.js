@@ -294,6 +294,23 @@ module.exports = {
           restaurantId: 24,
           image: "michelada3.jpg",
         },
+        {
+          restaurantId: 25,
+          image: "michelada1.jpg",
+        },
+        {
+          restaurantId: 25,
+          image: "michelada2.jpg",
+        },
+        {
+          restaurantId: 25,
+          image: "michelada3.jpg",
+        },
+        
+        {
+          restaurantId: 26,
+          image: "shurma.webp",
+        },
       ],
       {}
     );

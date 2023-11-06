@@ -17,6 +17,8 @@ function OverlayTwo(): any {
 type RestorantInfoProps = {
   owner: OwnerType;
 };
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const STATIC_URL = import.meta.env.VITE_STATIC_URL;
 
 function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,10 +28,7 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
   return (
     <div className={style.usercardinfo}>
       <div className={style['profile-card__img']}>
-        <img
-          src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg"
-          alt="profile card"
-        />
+        <img src={`${STATIC_URL}/img/${owner?.avatar}`} alt="profile card" />{' '}
       </div>
       <div className={style['profile-card__cnt']}>
         <div className={style['profile-card__name']}>{owner?.name}</div>

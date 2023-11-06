@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
@@ -7,42 +7,60 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Radio,
+  RadioGroup,
+  Stack,
   Text,
   VStack,
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
 import style from './style.module.css';
-import { signUpUserThunk } from '../../../features/redux/slices/user/UserThuncks';
-import type { UserSignUpType } from '../../../types/userType/userTypes';
+import { signUpUserThunk } from '../../../features/redux/slices/user/UserThunks';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
+import { signUpOwnerThunk } from '../../../features/redux/slices/authOwner/authOwnerThunks';
 
-export default function UserAuthPage(): JSX.Element {
+export default function AuthPage(): JSX.Element {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const toast = useToast();
 
   const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+    console.log();
     e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.currentTarget));
+    const formData = Object.fromEntries(new FormData(e.currentTarget)) as {
+      name: string;
+      email: string;
+      password: string;
+      radio: string;
+    };
+    if (formData.password.length < 8) {
+      toast({
+        title: 'Ошибка',
+        description: 'Пароль должен быть длиной не менее 8 символов',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
     if (!formData.name || !formData.email || !formData.password) {
       toast({
-        title: 'Error',
-        description: 'Please fill all the fields',
+        title: 'Ошибка',
+        description: 'Пожалуйста, заполните все поля',
         status: 'error',
         duration: 3000,
         isClosable: true,
       });
       return;
     }
-    const userSignUpData: UserSignUpType = {
-      name: formData.name.toString(),
-      email: formData.email.toString(),
-      password: formData.password.toString(),
-    };
 
-    void dispatch(signUpUserThunk(userSignUpData));
+    if (formData.radio === 'user') {
+      void dispatch(signUpUserThunk(formData));
+    }
+    if (formData.radio === 'owner') {
+      void dispatch(signUpOwnerThunk(formData));
+    }
     navigate('/code');
   };
 
@@ -75,12 +93,23 @@ export default function UserAuthPage(): JSX.Element {
                 type="password"
                 name="password"
                 placeholder="Password"
+                autoComplete=""
                 bg={useColorModeValue('gray.100', 'gray.900')}
               />
               <Text mt={1} color={useColorModeValue('gray.900', 'gray.100')}>
                 At least 8 characters long
               </Text>
             </FormControl>
+            <RadioGroup name="radio" defaultValue="user">
+              <Stack spacing={5} direction="row">
+                <Radio colorScheme="red" value="user">
+                  Пользователь
+                </Radio>
+                <Radio colorScheme="green" value="owner">
+                  Владелец ресторана
+                </Radio>
+              </Stack>
+            </RadioGroup>
             <Button type="submit" colorScheme="messenger" variant="outline" w="full" mt={4}>
               Signup
             </Button>

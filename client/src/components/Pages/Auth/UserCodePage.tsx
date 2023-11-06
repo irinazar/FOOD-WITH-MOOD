@@ -9,24 +9,34 @@ import {
   VStack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/reduxHooks';
-import { codeUserThunk } from '../../../features/redux/slices/user/UserThuncks';
-import type { CreateConfirmType } from '../../../types/userType/userTypes';
+import axios from 'axios';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import type { AuthType, CreateConfirmType } from '../../../types/authType/authTypes';
+import { setOwner } from '../../../features/redux/slices/authOwner/authOwnerSlice';
+import { setUser } from '../../../features/redux/slices/user/UserSlice';
 
 export default function UserCodePage(): JSX.Element {
   const dispatch = useAppDispatch();
+  const { VITE_BASE_URL } = import.meta.env as unknown as { VITE_BASE_URL: string };
 
-  const submitCodeHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const submitCodeHandler: React.FormEventHandler<HTMLFormElement> = (e): void => {
     e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.currentTarget));
+    const formData = Object.fromEntries(new FormData(e.currentTarget)) as CreateConfirmType;
 
-    const createConfirmData: CreateConfirmType = {
-      randomString: formData.randomString.toString(),
-      // userId: formData.userId,
-    };
-
-    void dispatch(codeUserThunk(createConfirmData));
+    axios
+      .post<AuthType>(`${VITE_BASE_URL}/validate`, formData, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data.isOwner) {
+          void dispatch(setOwner(response.data));
+        } else {
+          void dispatch(setUser(response.data));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

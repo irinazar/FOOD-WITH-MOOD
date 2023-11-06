@@ -1,58 +1,85 @@
-import { Box, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Heading, Stack, StackDivider, Text } from '@chakra-ui/react'
-import React from 'react'
-import Carousel from '../RestaurantPageUI/Carousel'
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Heading,
+  Stack,
+  StackDivider,
+  Text,
+} from '@chakra-ui/react';
+import React from 'react';
+import Carousel from '../RestaurantPageUI/Carousel';
 import type { OneRestaurantType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
+import { useAppDispatch } from '../../../hooks/reduxHooks';
+import {
+  acceptRestaurantThunk,
+  declineRestaurantThunk,
+} from '../../../features/redux/slices/adminSlice/adminThunk';
 
 type PendingCardProps = {
-  rest: OneRestaurantType
+  rest: OneRestaurantType;
 };
 
+export default function PendingCard({ rest }: PendingCardProps): JSX.Element {
+  const { Images } = rest;
+  const dispatch = useAppDispatch();
+  const acceptHandler = (): void => {
+    void dispatch(acceptRestaurantThunk(rest.id));
+  };
 
-export default function PendingCard({rest}:PendingCardProps): JSX.Element {
-  const { pictures } = rest;
-  
+  const declineHandler = (): void => {
+    void dispatch(declineRestaurantThunk(rest.id));
+  };
   return (
     <Card>
       <CardHeader textAlign="center">
-        <Heading size='md'>{rest.title}</Heading>
+        <Heading size="md">{rest.title}</Heading>
       </CardHeader>
 
       <CardBody>
-        <Stack divider={<StackDivider />} spacing='4'>
-          <Carousel pictures={pictures}/>
+        <Stack divider={<StackDivider />} spacing="4">
+          <Carousel pictures={Images} />
           <Box textAlign="center">
-            <Heading size='xs' textTransform='uppercase'>
+            <Heading size="xs" textTransform="uppercase">
               Адрес
             </Heading>
-            <Text pt='2' fontSize='sm'>
+            <Text pt="2" fontSize="sm">
               {rest.adress}
             </Text>
           </Box>
-          {/* <Box textAlign="center">
-            <Heading size='xs' textTransform='uppercase'>
+          <Box textAlign="center">
+            <Heading size="xs" textTransform="uppercase">
               Контакты
             </Heading>
-            <Text pt='2' fontSize='sm'>
-            {rest.contact}
+            <Text pt="2" fontSize="sm">
+              {rest.phone}
             </Text>
-          </Box> */}
+          </Box>
           <Box textAlign="center">
-            <Heading size='xs' textTransform='uppercase'>
+            <Heading size="xs" textTransform="uppercase">
               Описание
             </Heading>
-            <Text pt='2' fontSize='sm'>
-            {rest.description} 
+            <Text pt="2" fontSize="sm">
+              {rest.description}
             </Text>
           </Box>
         </Stack>
       </CardBody>
-      
+
       <CardFooter display="flex" justifyContent="center" alignItems="center">
-        <ButtonGroup variant='outline' spacing='6'>
-          <Button colorScheme='green'>Одобрить</Button>
-          <Button colorScheme='orange'>Отклонить</Button>
+        <ButtonGroup variant="outline" spacing="6">
+          <Button colorScheme="green" onClick={acceptHandler}>
+            Одобрить
+          </Button>
+          <Button colorScheme="orange" onClick={declineHandler}>
+            Отклонить
+          </Button>
         </ButtonGroup>
       </CardFooter>
     </Card>
-  )
+  );
 }

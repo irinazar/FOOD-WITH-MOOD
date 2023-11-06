@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AbsoluteCenter, Box, Divider } from '@chakra-ui/react';
 import PendingCard from '../../UI/AdminUI/PendingCard';
-import { useAppSelector } from '../../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { getPendingRestaurantThunk } from '../../../features/redux/slices/adminSlice/adminThunk';
 
 export default function AdminPage(): JSX.Element {
+  const dispatch = useAppDispatch()
   const pendingRestaurants = useAppSelector((state) => state.admin.pendingRestaurants)
+  
+  useEffect(() => {
+    void dispatch(getPendingRestaurantThunk())
+  }, [])
   
   return (
     <div className="flex flex-col w-full">
@@ -14,7 +20,7 @@ export default function AdminPage(): JSX.Element {
           Заявки, ожидающие подтверждения
         </AbsoluteCenter>
       </Box>
-      <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-3 mt-4 mb-5 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-3 mx-7 mx-auto">
         {pendingRestaurants?.map((el) => (
           <PendingCard key={el.id} rest={el}/>
         ))}

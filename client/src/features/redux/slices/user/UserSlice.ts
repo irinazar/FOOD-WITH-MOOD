@@ -1,20 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { UserLoadingType } from '../../../../types/userType/userTypes';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   checkUserThunk,
   codeUserThunk,
   loginUserThunk,
   logoutUserThunk,
   signUpUserThunk,
-} from './UserThuncks';
+} from './UserThunks';
+import type {
+  AuthLoadingType,
+  AuthType,
+  CreateConfirmType,
+} from '../../../../types/authType/authTypes';
 
-type UserState = UserLoadingType;
+type UserState = AuthLoadingType;
 const initialState: UserState = { status: 'loading' };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialState as UserState,
-  reducers: {},
+  reducers: {
+    setUser(state, action: PayloadAction<AuthType>) {
+      return { status: 'logged', ...action.payload };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(checkUserThunk.pending, (state) => ({ status: 'loading' }));
     builder.addCase(checkUserThunk.fulfilled, (state, action) => ({
@@ -45,4 +54,5 @@ export const userSlice = createSlice({
   },
 });
 
+export const { setUser } = userSlice.actions;
 export default userSlice.reducer;

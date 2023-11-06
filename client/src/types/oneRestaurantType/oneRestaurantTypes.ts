@@ -34,6 +34,7 @@ export type OneRestaurantType = {
   averageRating?: RatingType;
   pictures: PictureType[];
   Images: PictureType[]
+
 };
 
 export type BookingType = {
