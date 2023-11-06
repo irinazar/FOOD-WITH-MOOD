@@ -9,6 +9,7 @@ module.exports = {
         {
           name: "Иван Петров",
           email: "ivan@example.com",
+          telephone: 89106066666,
           password: await bcrypt.hash("123", 10),
           avatar: "avatar1.jpg",
           active: true,
@@ -16,6 +17,8 @@ module.exports = {
         {
           name: "Анна Иванова",
           email: "anna@example.com",
+          telephone: 89106066666,
+
           password: await bcrypt.hash("123", 10),
           avatar: "avatar2.jpg",
           active: true,
@@ -23,6 +26,8 @@ module.exports = {
         {
           name: "Сергей Смирнов",
           email: "sergei@example.com",
+          telephone: 89106066666,
+
           password: await bcrypt.hash("123", 10),
           avatar: "avatar3.jpg",
           active: true,
@@ -30,6 +35,8 @@ module.exports = {
         {
           name: "Ольга Кузнецова",
           email: "olga@example.com",
+          telephone: 89106066666,
+
           password: await bcrypt.hash("123", 10),
           avatar: "avatar4.jpg",
           active: true,
@@ -37,6 +44,8 @@ module.exports = {
         {
           name: "Дмитрий Егоров",
           email: "dmitriy@example.com",
+          telephone: 89106066666,
+
           password: await bcrypt.hash("123", 10),
           avatar: "avatar5.jpg",
           active: true,
@@ -44,6 +53,8 @@ module.exports = {
         {
           name: "Елена Морозова",
           email: "elena@example.com",
+          telephone: 89106066666,
+
           password: await bcrypt.hash("123", 10),
           avatar: "avatar6.jpg",
           active: true,
@@ -51,6 +62,8 @@ module.exports = {
         {
           name: "Максим Новиков",
           email: "maxim@example.com",
+          telephone: 89106066666,
+
           password: await bcrypt.hash("123", 10),
           avatar: "avatar7.jpg",
           active: true,
@@ -58,6 +71,8 @@ module.exports = {
         {
           name: "Карина Белова",
           email: "karina@example.com",
+          telephone: 89106066666,
+
           password: await bcrypt.hash("123", 10),
           avatar: "avatar8.jpg",
           active: true,
@@ -65,6 +80,8 @@ module.exports = {
         {
           name: "Андрей Гребенков",
           email: "andrey@example.com",
+          telephone: 89106066666,
+
           password: await bcrypt.hash("123", 10),
           avatar: "avatar9.jpg",
           active: true,

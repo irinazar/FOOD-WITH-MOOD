@@ -26,6 +26,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'default-param-last': 'off',
     'no-void': 'off',
+    "no-plusplus": 0,
     'no-param-reassign': 'off',
     'react/require-default-props': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
