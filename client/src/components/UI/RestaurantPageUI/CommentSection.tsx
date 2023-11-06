@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { CommentType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
 import { addCommentThunk } from '../../../features/redux/slices/oneRestaurantSlice/oneRestaurantThunk';
+import { STATIC_URL } from '../../Pages/UserAccount/ui/UserInfo';
 
 type CommentProp = {
   comments: CommentType[];
@@ -54,7 +55,7 @@ export default function CommentSection({ comments }: CommentProp): JSX.Element {
                   <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                     <img
                       className="mr-2 w-10 h-10 rounded-full"
-                      src={`../../../public/img/users/${el.user.avatar}`}
+                      src={`${STATIC_URL}/img/users/${el.user.avatar}`}
                       alt={`${el.user.userName}`}
                     />
                     {el.user.userName}
