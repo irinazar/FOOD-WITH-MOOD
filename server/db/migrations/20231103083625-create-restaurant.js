@@ -18,14 +18,14 @@ module.exports = {
       adress: {
         type: Sequelize.STRING
       },
+      phone: {
+        type: Sequelize.STRING
+      },
       coordX: {
         type: Sequelize.FLOAT
       },
       coordY: {
         type: Sequelize.FLOAT
-      },
-      img: {
-        type: Sequelize.TEXT
       },
       status: {
         type: Sequelize.STRING
