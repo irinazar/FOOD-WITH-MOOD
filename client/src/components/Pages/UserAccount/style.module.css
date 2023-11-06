@@ -27,8 +27,8 @@
   z-index: 4;
   margin-top: 50px;
   box-shadow:
-    0px 5px 50px 0px rgb(108, 68, 252),
-    0px 0px 0px 7px rgba(107, 74, 255, 0.5);
+    0px 5px 50px 0px rgb(255, 114, 75),
+    0px 0px 0px 7px rgba(246, 242, 5, 0.5);
 }
 
 @media screen and (max-width: 576px) {
@@ -56,7 +56,7 @@
 .usercardinfo .profile-card__name {
   font-weight: 700;
   font-size: 24px;
-  color: #6944ff;
+  color: rgb(197, 97, 70);
   margin-bottom: 5px;
 }
 
@@ -135,4 +135,80 @@
 .comment-owner-container {
   display: flex;
   justify-content: center;
+}
+
+.containermini {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.restName {
+  text-align: center;
+  display: block;
+}
+
+/* ===================btn */
+
+.buttondel {
+  padding: 8px 8px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: #f0f0f0;
+  z-index: 1;
+}
+
+.buttondel::after,
+.buttondel::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -99999;
+  transition: all 0.4s;
+}
+
+.buttondel::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background: #4b4b53;
+  border-radius: 10px;
+}
+
+.buttondel::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: #ffffff15;
+  backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+.buttondel:hover::before {
+  transform: translate(5%, 20%);
+  width: 110%;
+  height: 110%;
+}
+
+.buttondel:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.buttondel:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
+}
+
+@media screen and (max-width: 576px) {
+  .buttondel {
+    height: 40px;
+    max-width: 300px;
+    font-size: 14px;
+  }
 }
