@@ -300,4 +300,22 @@ lkRouter.get("/mycomments/:id", async (req, res) => {
   }
 });
 
+lkRouter.post("/replycomment", async (req, res) => {
+  try {
+    const { commentId, body, restOwnerId } = req.body;
+    const newCommentReply = await CommentReply.create({
+      commentId: commentId,
+      body: body,
+      restOwnerId: restOwnerId,
+    });
+
+    if (newCommentReply) {
+      res.status(201).json(newCommentReply);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
 module.exports = lkRouter;

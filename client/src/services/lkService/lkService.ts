@@ -3,6 +3,7 @@ import type {
   CommentsType,
   CountryType,
   OwnerType,
+  ReplyType,
   SubmitRestaurantType,
   SubmitRestaurantType2,
   SubmitUserType2,
@@ -42,3 +43,6 @@ export const deleteServer = (id: number): Promise<void | number> =>
 
 export const getCommentsServer = (id: number): Promise<CommentResponseType[]> =>
   apiService.get<CommentResponseType[]>(`/lk/mycomments/${id}`).then((res) => res.data);
+
+export const newReplyComment = (data: ReplyType): Promise<ReplyType> =>
+  apiService.post<ReplyType>('/lk/replycomment', data).then((res) => res.data);

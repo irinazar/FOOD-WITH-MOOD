@@ -129,3 +129,10 @@ export type CommentResponseType = {
   CommentReplies: CommentRepliesType[];
   Restaurant: RestFormType;
 };
+
+export type ReplyType = {
+  id?: number;
+  commentId: number;
+  restOwnerId: number;
+  body: string;
+};

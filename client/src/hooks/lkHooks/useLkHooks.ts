@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../reduxHooks';
 import {
+  addNewReplyThunk,
   deleteThunk,
   getAllCountryThunk,
   getOwnerThunk,
@@ -34,6 +35,11 @@ const useLkHooks = (): {
   handleCountryChange: (e: React.FormEvent<SubmitUserTypeHTML>) => void;
   selectedCountryIds: number[];
   deleteHandler: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void;
+  handlerReplySubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    commentId: number,
+    OwnerId: number,
+  ) => void;
 } => {
   const dispatch = useAppDispatch();
 
@@ -102,13 +108,27 @@ const useLkHooks = (): {
     void dispatch(deleteThunk(id));
   };
 
-  //= =============================== map
+  const handlerReplySubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+    commentId: number,
+    restOwnerId: number,
+  ): void => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.currentTarget)) as { body: string };
+    const { body } = data;
+
+    const newdata = { body, commentId, restOwnerId };
+
+    void dispatch(addNewReplyThunk(newdata));
+    e.currentTarget.reset();
+  };
 
   return {
     handlerSubmit,
     handlerOwnerSubmit,
     handlerRestaurantSubmit,
     deleteHandler,
+    handlerReplySubmit,
   };
 };
 

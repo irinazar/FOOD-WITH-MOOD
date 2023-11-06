@@ -25,8 +25,6 @@ export default function OwnerAccount(): JSX.Element {
     (state) => state.lkReducer.comments,
   ) as CommentResponseType[];
 
-  console.log(restmycomments);
-
   return (
     <div className={style.container}>
       <RestorantInfo owner={owner} />

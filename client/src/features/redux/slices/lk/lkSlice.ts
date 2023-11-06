@@ -7,6 +7,7 @@ import type {
   UserLkType,
 } from '../../../../types/lkTypes/lkTypes';
 import {
+  addNewReplyThunk,
   deleteThunk,
   getAllCountryThunk,
   getMyComment,
@@ -66,6 +67,15 @@ export const lkSlice = createSlice({
     });
     builder.addCase(getMyComment.fulfilled, (state, action) => {
       state.comments = action.payload;
+    });
+    builder.addCase(addNewReplyThunk.fulfilled, (state, action) => {
+      if (state.comments) {
+        state.comments.map((el) =>
+          el.id === action.payload.commentId
+            ? el.CommentReplies.push(action.payload)
+            : el.CommentReplies,
+        );
+      }
     });
   },
 });
