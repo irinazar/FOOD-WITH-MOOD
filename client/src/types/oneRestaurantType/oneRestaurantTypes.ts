@@ -4,6 +4,7 @@ export type UserComments = {
 };
 
 export type CommentType = {
+  id: number
   restaurantId: number;
   body: string;
   user: UserComments;

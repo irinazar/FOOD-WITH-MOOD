@@ -37,3 +37,13 @@
 .arrow{
   color: rgba(163, 163, 163, 0.5)
 }
+
+.deleteComment {
+  background-color: gray; /* Серый фон */
+  color: black; /* Красный цвет текста */
+  font-weight: bold; /* Жирный текст */
+  border-radius: 10px; /* Закругленный бордер */
+  padding: 5px 10px; /* Внутренние отступы */
+  border: none; /* Убираем границу кнопки */
+  cursor: pointer; /* Изменяем курсор при наведении */
+}

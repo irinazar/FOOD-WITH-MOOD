@@ -41,6 +41,15 @@ export const addOneCommentService = (id: number, body: string): Promise<CommentT
     });
 };
 
+export const deleteOneCommentService = (restaurantId: number, commentId: number): Promise<CommentType> =>
+  apiService
+    .delete<CommentType>(`/restaurants/${restaurantId}/comments/${commentId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      console.error('Ошибка:', error);
+      throw error;
+    });
+
 export const addRatingService = (id: number, rating: number): Promise<RatingType> =>
   apiService
     .patch<RatingType>(`/restaurants/${id}/addRating`, { rating })
