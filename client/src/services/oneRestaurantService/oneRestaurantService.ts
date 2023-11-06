@@ -13,9 +13,10 @@ export const getOneRestaurantService = (
   oneRestaurant: OneRestaurantType;
   comments: CommentType[];
   pictures: PictureType[];
+  averageRating: number
 }> =>
   apiService
-    .get<{ oneRestaurant: OneRestaurantType; comments: CommentType[]; pictures: PictureType[] }>(
+    .get<{ oneRestaurant: OneRestaurantType; comments: CommentType[]; pictures: PictureType[], averageRating: number }>(
       `/restaurants/${id}`,
     )
     .then((response) => response.data)

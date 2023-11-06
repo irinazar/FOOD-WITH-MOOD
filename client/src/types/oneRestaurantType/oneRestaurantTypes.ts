@@ -15,11 +15,13 @@ export type PictureType = {
   image: string
 }
 
+
 export type OneRestaurantType = {
   id: number;
   title: string;
   description: string;
   adress: string;
+  phone: string;
   coordX: number;
   coordY: number;
   status: string;

@@ -9,9 +9,7 @@ type CommentProp = {
 
 export default function CommentSection({ comments }: CommentProp): JSX.Element {
   const [input, setInput] = useState({ body: '' });
-  const dispatch = useAppDispatch()
-  console.log(comments, 'AAAAAAAAAAAA');
-  
+  const dispatch = useAppDispatch();
 
   const changeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -24,11 +22,11 @@ export default function CommentSection({ comments }: CommentProp): JSX.Element {
             Отзывы:
           </h2>
         </div>
-        <form className="mb-6" >
+        <form className="mb-6">
           <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <textarea
               id="comment"
-              name='body'
+              name="body"
               value={input.body}
               onChange={changeHandler}
               rows={6}
@@ -42,7 +40,7 @@ export default function CommentSection({ comments }: CommentProp): JSX.Element {
             className="inline-flex items-center py-2.5 px-4 text-md font-medium text-center text-white bg-blue-600 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
             onClick={() => {
               void dispatch(addCommentThunk({ id: comments[0].restaurantId, body: input.body }));
-              setInput({ body: '' })
+              setInput({ body: '' });
             }}
           >
             Отправить

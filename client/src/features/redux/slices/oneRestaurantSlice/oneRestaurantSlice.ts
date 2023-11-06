@@ -12,7 +12,8 @@ const initialState: {
   comments: CommentType[];
   pictures: PictureType[];
   booking: BookingType[];
-} = { oneRestaurant: null, comments: [], pictures: [], booking: [] };
+  averageRating: number;
+} = { oneRestaurant: null, comments: [], pictures: [], booking: [], averageRating: 0 };
 
 const oneRestaurantSlice = createSlice({
   name: 'oneRestaurant',
@@ -24,6 +25,7 @@ const oneRestaurantSlice = createSlice({
       state.oneRestaurant = action.payload.oneRestaurant;
       state.comments = action.payload.comments;
       state.pictures = action.payload.pictures;
+      state.averageRating = action.payload.averageRating
     });
 
     builder.addCase(addCommentThunk.fulfilled, (state, action) => {
