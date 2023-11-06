@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
 const userRouter = require("./routes/userRouter");
+const authOwnerRouter = require("./routes/authOwnerRouter");
+const validateRooter = require("./routes/validateRouter");
 const FileStore = require("session-file-store")(session);
 
 const PORT = process.env.PORT || 3001;
@@ -29,7 +31,8 @@ app.use(
 );
 
 app.use("/api/user", userRouter);
-
+app.use("/api/authOwner", authOwnerRouter);
+app.use("/api/validate", validateRooter);
 
 app.listen(PORT, () => {
   console.log("Server start on port ", PORT);

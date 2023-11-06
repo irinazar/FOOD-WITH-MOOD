@@ -1,11 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type {
-  ConfirmType,
-  CreateConfirmType,
-  UserLoginType,
-  UserSignUpType,
-  UserType,
-} from '../../../../types/userType/userTypes';
 import {
   checkUserService,
   logoutUserService,
@@ -13,17 +6,23 @@ import {
   submitLoginService,
   submitSignupService,
 } from '../../../../services/userService/userService';
+import type {
+  AuthLoginType,
+  AuthSignUpType,
+  AuthType,
+  CreateConfirmType,
+} from '../../../../types/authType/authTypes';
 
-export const checkUserThunk = createAsyncThunk<UserType>('user/checkUserThunk', () =>
+export const checkUserThunk = createAsyncThunk<AuthType>('user/checkUserThunk', () =>
   checkUserService(),
 );
 
-export const loginUserThunk = createAsyncThunk<UserType, UserLoginType>(
+export const loginUserThunk = createAsyncThunk<AuthType, AuthLoginType>(
   'user/loginUserThunk',
   (formData) => submitLoginService(formData),
 );
 
-export const signUpUserThunk = createAsyncThunk<UserType, UserSignUpType>(
+export const signUpUserThunk = createAsyncThunk<AuthType, AuthSignUpType>(
   'user/signUpUserThunk',
   (formData) => submitSignupService(formData),
 );

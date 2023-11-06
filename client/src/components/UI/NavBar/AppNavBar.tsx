@@ -5,7 +5,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  IconButton,
   Button,
   Menu,
   MenuButton,
@@ -21,8 +20,11 @@ import { Link, NavLink } from 'react-router-dom';
 import style from './style.module.css';
 
 import ThemeSwitch from '../ThemeSwitch';
-import { useAppDispatch } from '../../../hooks/reduxHooks';
-import { logoutUserThunk } from '../../../features/redux/slices/user/UserThuncks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { logoutUserThunk } from '../../../features/redux/slices/user/UserThunks';
+
+import { logoutOwnerThunk } from '../../../features/redux/slices/authOwner/authOwnerThunks';
+import { setRole } from '../../../features/redux/slices/role/RoleSlice';
 
 type Props = {
   children: React.ReactNode;
@@ -33,6 +35,17 @@ const Links = ['Dashboard', 'Projects', 'Team'];
 export default function MyNavBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useAppDispatch();
+  const role = useAppSelector((state) => state.role.status);
+
+  const handleLogout = (): void => {
+    if (role === 'user') {
+      void dispatch(logoutUserThunk());
+    }
+    if (role === 'owner') {
+      void dispatch(logoutOwnerThunk());
+      void dispatch(setRole('user'));
+    }
+  };
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} mb={5}>
@@ -51,10 +64,7 @@ export default function MyNavBar(): JSX.Element {
             <NavLink to="/admin">Админ</NavLink>
             <NavLink to="/user/:id">ЛК пользователя</NavLink>
             <NavLink to="/owner/:id">ЛК ресторана</NavLink>
-            <NavLink to="/authUser/signup">Регистрация физ</NavLink>
-            <NavLink to="/authUser/login">Авторизация физ</NavLink>
-            <NavLink to="/">Регистрация юр</NavLink>
-            <NavLink to="/">Авторизация юр</NavLink>
+            <NavLink to="/login">Вход / Регистрация</NavLink>
           </HStack>
         </HStack>
         <Flex alignItems="center">
@@ -72,7 +82,7 @@ export default function MyNavBar(): JSX.Element {
             </MenuButton>
             <MenuList>
               <MenuItem>Мой профиль</MenuItem>
-              <MenuItem onClick={() => void dispatch(logoutUserThunk())}>Выйти</MenuItem>
+              <MenuItem onClick={() => handleLogout()}>Выйти</MenuItem>
               <MenuDivider />
             </MenuList>
           </Menu>

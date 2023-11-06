@@ -6,18 +6,18 @@ import MainPage from './components/Pages/MainPage/MainPage';
 import RestaurantPage from './components/Pages/RestaurantPage/RestaurantPage';
 import AdminPage from './components/Pages/AdminAccount/AdminAccount';
 import UserAccount from './components/Pages/UserAccount/UserAccount';
-import UserAuthPage from './components/Pages/Auth/UserAuthPage';
-import OwnerAuthPage from './components/Pages/Auth/OwnerAuthPage';
 import Layout from './components/Layout';
 import PrivateRoute from './components/hocs/PrivateRoute';
 import UserCodePage from './components/Pages/Auth/UserCodePage';
 import { useAppSelector } from './hooks/reduxHooks';
-import useUserCheck from './hooks/userHooks/useCheckUser';
-import UserLoginPage from './components/Pages/Auth/UserLoginPage';
+import AuthPage from './components/Pages/Auth/AuthPage';
+import LoginPage from './components/Pages/Auth/LoginPage';
+import useCheckAuth from './hooks/authHooks/useCheckAuth';
 
 function App(): JSX.Element {
-  useUserCheck();
+  useCheckAuth();
   const user = useAppSelector((store) => store.user);
+  const owner = useAppSelector((store) => store.authOwner);
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -50,34 +50,24 @@ function App(): JSX.Element {
           }
         />
         <Route
-          path="/authUser/login"
+          path="/login"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
-              <UserLoginPage />
+            <PrivateRoute
+              isAllowed={user.status === 'logged' || owner.status === 'logged'}
+              redirectTo="/"
+            >
+              <LoginPage />
             </PrivateRoute>
           }
         />
-        <Route
-          path="/authUser/signup"
-          element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/code">
-              <UserAuthPage />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/authOwner/:auth"
-          element={
-            // <PrivateRoute isAllowed redirectTo="/">
-            <OwnerAuthPage />
-            // </PrivateRoute>
-          }
-        />
+        <Route path="/signup" element={<AuthPage />} />
         <Route
           path="/code"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged'} redirectTo="/">
+            <PrivateRoute
+              isAllowed={user.status === 'logged' || owner.status === 'logged'}
+              redirectTo="/"
+            >
               <UserCodePage />
             </PrivateRoute>
           }
