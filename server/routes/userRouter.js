@@ -1,5 +1,6 @@
 // const userRouter = express.Router();
 
+// module.exports = userRouter;
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { User, Confirm } = require("../db/models");
@@ -49,7 +50,7 @@ userRouter.post("/code", async (req, res) => {
   });
 
   if (!codeEntry) {
-    return res.sendStatus(403); //
+    return res.sendStatus(403); 
   }
 
   const usernew = await User.findByPk(codeEntry.userId);

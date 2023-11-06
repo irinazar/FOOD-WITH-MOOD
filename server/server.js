@@ -4,6 +4,10 @@ const morgan = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
 const userRouter = require("./routes/userRouter");
+const restaurantRouter = require("./routes/restaurantRouter");
+const adminRouter = require("./routes/adminRouter");
+const countryRouter = require("./routes/countryRouter");
+
 const FileStore = require("session-file-store")(session);
 const lkRouter = require("./routes/lkRouter");
 
@@ -32,8 +36,18 @@ app.use(
   })
 );
 
+
 app.use("/api/user", userRouter);
 app.use("/api/lk", lkRouter);
+
+
+
+app.use('/api/restaurants', restaurantRouter)
+app.use('/api/admin', adminRouter)
+app.use('/api/country', countryRouter)
+
+
+
 
 app.listen(PORT, () => {
   console.log("Server start on port ", PORT);

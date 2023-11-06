@@ -17,6 +17,7 @@ module.exports = {
           },
           key: 'id',
         },
+        onDelete: 'CASCADE'
       },
       countryId: {
         type: Sequelize.INTEGER,
@@ -26,6 +27,7 @@ module.exports = {
           },
           key: 'id',
         },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

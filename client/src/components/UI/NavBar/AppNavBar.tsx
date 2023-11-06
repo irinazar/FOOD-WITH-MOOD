@@ -46,16 +46,15 @@ export default function MyNavBar(): JSX.Element {
 
           <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
             <NavLink to="/">Главная</NavLink>
-            <NavLink to="/countries/:id">Страны</NavLink>
+            <NavLink to="/countries/:id">Страна</NavLink>
             <NavLink to="/restaurants/:id">Ресторан</NavLink>
             <NavLink to="/admin">Админ</NavLink>
             <NavLink to="/user/:id">ЛК пользователя</NavLink>
             <NavLink to="/owner/:id">ЛК ресторана</NavLink>
             <NavLink to="/authUser/signup">Регистрация физ</NavLink>
             <NavLink to="/authUser/login">Авторизация физ</NavLink>
-            <NavLink to="/authUser/signup">Регистрация физ</NavLink>
-            <NavLink to="/authUser/login">Авторизация физ</NavLink>
-
+            <NavLink to="/">Регистрация юр</NavLink>
+            <NavLink to="/">Авторизация юр</NavLink>
           </HStack>
         </HStack>
         <Flex alignItems="center">
