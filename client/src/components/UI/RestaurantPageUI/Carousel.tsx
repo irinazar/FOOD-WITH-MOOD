@@ -23,7 +23,7 @@ type CarouselProps = {
   pictures: PictureType[];
 };
 
-export default function Carousel({ pictures }: CarouselProps): JSX.Element {
+ function Carousel({ pictures }: CarouselProps): JSX.Element {
   const [slider, setSlider] = React.useState<Slider | null>(null);
   const top = useBreakpointValue({ base: '90%', md: '50%' });
   const side = useBreakpointValue({ base: '30%', md: '10px' });
@@ -110,3 +110,5 @@ export default function Carousel({ pictures }: CarouselProps): JSX.Element {
     </Center>
   );
 }
+
+export default React.memo(Carousel);

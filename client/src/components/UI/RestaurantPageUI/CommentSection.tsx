@@ -12,7 +12,7 @@ type CommentProp = {
   comments: CommentType[];
 };
 
-export default function CommentSection({ comments }: CommentProp): JSX.Element {
+function CommentSection({ comments }: CommentProp): JSX.Element {
   const [input, setInput] = useState({ body: '' });
   const dispatch = useAppDispatch();
 
@@ -90,3 +90,5 @@ export default function CommentSection({ comments }: CommentProp): JSX.Element {
     </section>
   );
 }
+
+export default React.memo(CommentSection);
