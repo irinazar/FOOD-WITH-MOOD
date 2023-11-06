@@ -265,17 +265,53 @@ lkRouter.delete("/delmyrest/:id", async (req, res) => {
 lkRouter.get("/mycomments/:id", async (req, res) => {
   try {
     const { id } = req.params;
+
     const allmyrest = await Restaurant.findAll({
       where: { restOwnerId: id },
+    });
+    const restaurantIds = allmyrest.map((restaurant) => restaurant.id);
+
+    if (restaurantIds.length === 0) {
+      res.send([]);
+      return;
+    }
+
+    const allComments = await Comment.findAll({
+      where: {
+        restaurantId: restaurantIds,
+      },
       include: [
         {
-          model: Comment,
-          include: User,
+          model: User,
+        },
+        {
+          model: CommentReply,
+        },
+        {
+          model: Restaurant,
         },
       ],
     });
 
-    res.send(allmyrest);
+    res.send(allComments);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+lkRouter.post("/replycomment", async (req, res) => {
+  try {
+    const { commentId, body, restOwnerId } = req.body;
+    const newCommentReply = await CommentReply.create({
+      commentId: commentId,
+      body: body,
+      restOwnerId: restOwnerId,
+    });
+
+    if (newCommentReply) {
+      res.status(201).json(newCommentReply);
+    }
   } catch (error) {
     console.log(error);
     res.sendStatus(400);

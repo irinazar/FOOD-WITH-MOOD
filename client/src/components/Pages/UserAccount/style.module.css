@@ -130,10 +130,12 @@
 }
 .user-comment-container {
   justify-content: space-between;
+  padding: 30px;
 }
 
 .comment-owner-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -211,4 +213,9 @@
     max-width: 300px;
     font-size: 14px;
   }
+}
+
+.containercomment {
+  display: flex;
+  justify-content: space-between;
 }

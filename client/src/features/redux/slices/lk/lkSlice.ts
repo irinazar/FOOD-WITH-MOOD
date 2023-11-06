@@ -1,13 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type {
+  CommentResponseType,
   CountryType,
   OwnerType,
   SubmitRestaurantType,
   UserLkType,
 } from '../../../../types/lkTypes/lkTypes';
 import {
+  addNewReplyThunk,
   deleteThunk,
   getAllCountryThunk,
+  getMyComment,
   getOwnerThunk,
   getUserRestaurants,
   getUserThunk,
@@ -20,10 +23,12 @@ const initialState: {
   country: CountryType[];
   currentOwner: OwnerType | null;
   currentUserLk: UserLkType | null;
+  comments: CommentResponseType[] | null;
 } = {
   country: [],
   currentOwner: null,
   currentUserLk: null,
+  comments: null,
 };
 
 export const lkSlice = createSlice({
@@ -57,6 +62,18 @@ export const lkSlice = createSlice({
       if (state.currentOwner) {
         state.currentOwner.Restaurants = state.currentOwner.Restaurants.filter(
           (el) => Number(el.id) !== action.payload,
+        );
+      }
+    });
+    builder.addCase(getMyComment.fulfilled, (state, action) => {
+      state.comments = action.payload;
+    });
+    builder.addCase(addNewReplyThunk.fulfilled, (state, action) => {
+      if (state.comments) {
+        state.comments.map((el) =>
+          el.id === action.payload.commentId
+            ? el.CommentReplies.push(action.payload)
+            : el.CommentReplies,
         );
       }
     });

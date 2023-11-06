@@ -6,7 +6,7 @@ import style from '../UserAccount/style.module.css';
 import Comment from './ui/Comment';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { getMyComment, getOwnerThunk } from '../../../features/redux/slices/lk/lkThuncks';
-import type { OwnerType } from '../../../types/lkTypes/lkTypes';
+import type { CommentResponseType, OwnerType } from '../../../types/lkTypes/lkTypes';
 import OwnerCard from './ui/OwnerCard';
 
 export default function OwnerAccount(): JSX.Element {
@@ -21,7 +21,9 @@ export default function OwnerAccount(): JSX.Element {
 
   const owner = useAppSelector((state) => state.lkReducer.currentOwner) as OwnerType;
 
-  console.log(owner);
+  const restmycomments = useAppSelector(
+    (state) => state.lkReducer.comments,
+  ) as CommentResponseType[];
 
   return (
     <div className={style.container}>
@@ -43,7 +45,7 @@ export default function OwnerAccount(): JSX.Element {
         </AbsoluteCenter>
       </Box>
       <div className={style['comment-owner-container']}>
-        <Comment />
+        {restmycomments?.map((comment) => <Comment key={comment.id} comment={comment} />)}
       </div>
     </div>
   );
