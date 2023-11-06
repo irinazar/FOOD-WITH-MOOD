@@ -46,6 +46,9 @@ export default function MyNavBar(): JSX.Element {
       void dispatch(setRole('user'));
     }
   };
+  const user = useAppSelector((store) => store.user);
+
+  const owner = useAppSelector((store) => store.authOwner);
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} mb={5}>
@@ -62,8 +65,8 @@ export default function MyNavBar(): JSX.Element {
             <NavLink to="/countries/:id">Страна</NavLink>
             <NavLink to="/restaurants/:id">Ресторан</NavLink>
             <NavLink to="/admin">Админ</NavLink>
-            <NavLink to="/user/:id">ЛК пользователя</NavLink>
-            <NavLink to="/owner/:id">ЛК ресторана</NavLink>
+            <NavLink to={`/user/${user?.id}`}>ЛК пользователя</NavLink>
+            <NavLink to={`/owner/${owner?.id}`}>ЛК ресторана</NavLink>
             <NavLink to="/login">Вход / Регистрация</NavLink>
           </HStack>
         </HStack>
