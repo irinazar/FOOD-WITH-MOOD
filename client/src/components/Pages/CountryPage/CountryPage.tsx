@@ -37,7 +37,6 @@ export default function CountryPage(): JSX.Element {
           </Reveal>
         </div>
       </div>
-      
     </>
   );
 }
