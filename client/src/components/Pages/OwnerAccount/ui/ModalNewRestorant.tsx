@@ -30,7 +30,7 @@ type ModalPageProps = {
   ) => void;
   restOwnerId: number;
 };
-type Coordinates = {
+export type Coordinates = {
   lat: number;
   lng: number;
 };

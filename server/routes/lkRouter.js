@@ -4,8 +4,10 @@ const {
   Country,
   RestOwner,
   User,
+  Comment,
   Restaurant,
   Preference,
+  CommentReply,
 } = require("../db/models");
 const upload = require("../middlewares/multerLoad");
 const sharp = require("sharp");
@@ -97,6 +99,7 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
       const user = await User.findByPk(id, {
         include: Preference,
       });
+
 
       // const user = await User.findByPk(id, {
       //   include: [
@@ -241,6 +244,26 @@ lkRouter.delete("/delmyrest/:id", async (req, res) => {
     const rest = await Restaurant.findByPk(id);
     rest.destroy();
     res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+lkRouter.get("/mycomments/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const allmyrest = await Restaurant.findAll({
+      where: { restOwnerId: id },
+      include: [
+        {
+          model: Comment,
+          include: User,
+        },
+      ],
+    });
+
+    res.send(allmyrest);
   } catch (error) {
     console.log(error);
     res.sendStatus(400);

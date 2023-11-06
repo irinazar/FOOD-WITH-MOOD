@@ -5,7 +5,7 @@ import RestorantInfo from './ui/RestorantInfo';
 import style from '../UserAccount/style.module.css';
 import Comment from './ui/Comment';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
-import { getOwnerThunk } from '../../../features/redux/slices/lk/lkThuncks';
+import { getMyComment, getOwnerThunk } from '../../../features/redux/slices/lk/lkThuncks';
 import type { OwnerType } from '../../../types/lkTypes/lkTypes';
 import OwnerCard from './ui/OwnerCard';
 
@@ -16,6 +16,7 @@ export default function OwnerAccount(): JSX.Element {
 
   useEffect(() => {
     void dispatch(getOwnerThunk(Number(id)));
+    void dispatch(getMyComment(Number(id)));
   }, []);
 
   const owner = useAppSelector((state) => state.lkReducer.currentOwner) as OwnerType;

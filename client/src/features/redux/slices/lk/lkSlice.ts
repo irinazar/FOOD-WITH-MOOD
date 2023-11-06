@@ -44,7 +44,9 @@ export const lkSlice = createSlice({
       state.currentUserLk = action.payload;
     });
     builder.addCase(updateOwnerThunk.fulfilled, (state, action) => {
-      state.currentOwner = { ...state.currentOwner, ...action.payload };
+      if (state.currentOwner) {
+        state.currentOwner = { ...state.currentOwner, ...action.payload };
+      }
     });
     builder.addCase(newRestaurantThunk.fulfilled, (state, action) => {
       if (state.currentOwner) {

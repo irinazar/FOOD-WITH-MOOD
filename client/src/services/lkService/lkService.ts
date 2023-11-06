@@ -1,4 +1,5 @@
 import type {
+  CommentsType,
   CountryType,
   OwnerType,
   SubmitRestaurantType,
@@ -18,9 +19,10 @@ export const getUserServer = (id: number): Promise<UserLkType> =>
   apiService.get<UserLkType>(`/lk/user/${id}`).then((res) => res.data);
 
 export const editUserServer = (formData: SubmitUserType2): Promise<UserLkType> => {
-  const { id, ...otherData } = formData;
   console.log(formData);
-  return apiService.post<UserLkType>(`/lk/userupdate/${id}`, formData).then((res) => res.data);
+  return apiService
+    .post<UserLkType>(`/lk/userupdate/${formData.id}`, formData.formData)
+    .then((res) => res.data);
 };
 
 export const editOwnerServer = (formData: SubmitUserType2): Promise<UserLkType> => {
@@ -38,3 +40,6 @@ export const getUserRestaurantServer = (id: number): Promise<SubmitRestaurantTyp
 
 export const deleteServer = (id: number): Promise<void | number> =>
   apiService.delete<void>(`/lk/delmyrest/${id}`).then(() => id);
+
+export const getCommentsServer = (id: number): Promise<CommentsType[]> =>
+  apiService.get<CommentsType[]>(`/lk/mycomments/${id}`).then((res) => res.data);

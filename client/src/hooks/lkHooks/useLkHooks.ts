@@ -17,6 +17,7 @@ import type {
   SubmitUserType2,
   SubmitUserTypeHTML,
 } from '../../types/lkTypes/lkTypes';
+import type { Coordinates } from '../../components/Pages/OwnerAccount/ui/ModalNewRestorant';
 
 const useLkHooks = (): {
   handlerSubmit: (
@@ -28,7 +29,7 @@ const useLkHooks = (): {
   handlerRestaurantSubmit: (
     e: React.FormEvent<HTMLFormElement>,
     id: number,
-    mapCoordinates: { lat: number; lng: number },
+    mapCoordinates: Coordinates,
   ) => void;
   handleCountryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   selectedCountryIds: number[];
@@ -52,11 +53,10 @@ const useLkHooks = (): {
     formData.append('name', e.currentTarget.name.value);
     formData.append('email', e.currentTarget.email.value);
     formData.append('file', e.currentTarget.file.files[0]);
+    formData.append('id', id.toString());
     formData.append('countryId', selectedCountryIds.join(' '));
 
-    const data = { id, ...Object.fromEntries(formData) } as SubmitUserType2;
-
-    void dispatch(updateUserThunk(data));
+    void dispatch(updateUserThunk({ formData, id }));
     void dispatch(getUserRestaurants(Number(id))); //! !!!!!!!! не работает второй диспатч
   };
 

@@ -41,13 +41,18 @@ export type SubmitUserType = {
   file: File;
 };
 
-export type SubmitUserType2 = {
+export type FormDataType = {
   telephone: string;
   name: string;
   email: string;
   file: File;
   id: number;
   countryId: string;
+};
+
+export type SubmitUserType2 = {
+  id: number;
+  formData: FormData;
 };
 
 export type SubmitUserTypeHTML = {
@@ -94,4 +99,10 @@ export type SubmitRestaurantType2 = {
   coordY: number;
 
   file: File;
+};
+
+export type CommentsType = {
+  body: string;
+  userId: number;
+  restaurantId: number;
 };

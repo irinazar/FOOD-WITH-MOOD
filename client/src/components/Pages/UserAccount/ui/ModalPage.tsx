@@ -56,7 +56,10 @@ function ModalPage({ isOpen, onClose, overlay, id, handlerSubmit }: ModalPagePro
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       {overlay}
       <ModalContent>
-        <form onSubmit={(e) => handlerSubmit(e, id, selectedCountryIds)}>
+        <form
+          encType="multipart/form-data"
+          onSubmit={(e) => handlerSubmit(e, id, selectedCountryIds)}
+        >
           <ModalHeader>Редактировать профиль</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
