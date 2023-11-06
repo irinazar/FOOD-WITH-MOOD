@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { CountryType } from '../../../../types/categoryType/categoryTypes';
 import { allCountriesActionThunk } from './CountryThuncks';
+import type { RestType } from '../../../../types/restType/restType';
 
 
 const initialState: {
   countries: CountryType[];
-  restaurants: null | CountryType[];
+  restaurants: null | RestType[];
 } = {
   countries: [],
   restaurants: null,
