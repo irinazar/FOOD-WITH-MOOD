@@ -1,19 +1,16 @@
 const express = require("express");
-const { Restaurant } = require("../db/models");
+const { Restaurant, Image } = require("../db/models");
 
 const adminRouter = express.Router();
 
 adminRouter.get("/", async (req, res) => {
   try {
     const pendingRestaurants = await Restaurant.findAll({
-      where: { status: 'Pending' },
-      include: [ 
-        { model: Picture, attributes: ['img'] },
-      ],
-    })
+      where: { status: "Pending" },
+      include: [{ model: Image, attributes: ["image"] }],
+    });
 
     if (pendingRestaurants) {
-
       res.json(pendingRestaurants);
     } else {
       res.status(404).json({ error: "pending restaurants not found" });
@@ -24,17 +21,17 @@ adminRouter.get("/", async (req, res) => {
   }
 });
 
-adminRouter.patch('/accept', async (req, res) => {
-  const restaurantId = req.body.restaurantId; 
+adminRouter.patch("/accept/:id", async (req, res) => {
+  const { id } = req.params;
   try {
     const updatedRestaurant = await Restaurant.update(
-      { status: 'Accepted' },
+      { status: "Accepted" },
       {
-        where: { id: restaurantId },
+        where: { id },
       }
     );
 
-    if (updatedRestaurant[0] === 1) {
+    if (updatedRestaurant) {
       res.status(200).json(updatedRestaurant);
     } else {
       res.status(404).json({ error: "Restaurant not found" });
@@ -45,17 +42,17 @@ adminRouter.patch('/accept', async (req, res) => {
   }
 });
 
-adminRouter.patch('/decline', async (req, res) => {
-  const restaurantId = req.body.restaurantId; 
+adminRouter.patch("/decline/:id", async (req, res) => {
+  const { id } = req.params;
   try {
     const updatedRestaurant = await Restaurant.update(
-      { status: 'Declined' },
+      { status: "Declined" },
       {
-        where: { id: restaurantId },
+        where: { id },
       }
     );
 
-    if (updatedRestaurant[0] === 1) {
+    if (updatedRestaurant) {
       res.status(200).json(updatedRestaurant);
     } else {
       res.status(404).json({ error: "Restaurant not found" });
@@ -66,4 +63,4 @@ adminRouter.patch('/decline', async (req, res) => {
   }
 });
 
-module.exports = adminRouter
+module.exports = adminRouter;

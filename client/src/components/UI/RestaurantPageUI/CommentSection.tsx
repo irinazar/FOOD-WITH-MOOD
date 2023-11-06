@@ -15,6 +15,8 @@ export default function CommentSection({ comments }: CommentProp): JSX.Element {
   const changeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
       <div className="max-w-2xl mx-auto px-4">

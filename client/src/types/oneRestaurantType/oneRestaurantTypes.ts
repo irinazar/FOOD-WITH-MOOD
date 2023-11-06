@@ -32,7 +32,7 @@ export type OneRestaurantType = {
   countryId: number;
   restOwnerId: number;
   averageRating?: RatingType;
-  pictures: PictureType[];
+  Images: PictureType[];
 };
 
 export type BookingType = {
