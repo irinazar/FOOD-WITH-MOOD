@@ -16,7 +16,7 @@ export default function RestaurantPage(): JSX.Element {
 
   useEffect(() => {
     void dispatch(getOneRestaurantThunk(Number(id)))
-  }, [])
+  }, [oneRestaurant])
   return (
     <Box w="100%" p={4} color="black">
     {oneRestaurant && (
