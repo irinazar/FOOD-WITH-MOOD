@@ -14,6 +14,7 @@ import style from './style.module.css';
 import Rating from './Rating';
 import BookingModal from './BookingModal';
 import type { OneRestaurantType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
+import { useAppSelector } from '../../../hooks/reduxHooks';
 
 function OverlayTwo(): any {
   return <ModalOverlay bg="none" backdropFilter="auto" backdropInvert="80%" backdropBlur="2px" />;
@@ -26,6 +27,8 @@ type RestaurantCardProps = {
 export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = React.useState(<OverlayTwo />);
+
+  const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
   return (
     <Center>
       <Card className={style.restCard}>
@@ -35,13 +38,13 @@ export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): 
               {oneRestaurant.title}
             </Heading>
 
-            <Rating oneRestaurant={oneRestaurant} />
+            <Rating averageRating={averageRating} />
             <Text fontSize="m" className={style.textGray}>
               {oneRestaurant.adress}
             </Text>
-            {/* <Text fontSize="m" className={style.textGray}>
-            Контакты : +7 (495) 930-23-65
-          </Text> */}
+            <Text fontSize="m" className={style.textGray}>
+              Контакты : {oneRestaurant.phone}
+            </Text>
             <Text>{oneRestaurant.description}</Text>
           </Stack>
         </CardBody>
@@ -58,7 +61,6 @@ export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): 
           Забронировать
         </Button>
         <BookingModal isOpen={isOpen} onClose={onClose} overlay={overlay} />
-        
       </Card>
     </Center>
   );

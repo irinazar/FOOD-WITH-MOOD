@@ -7,6 +7,7 @@ module.exports = {
       "Users",
       [
         {
+
           name: "Антон",
           email: "anton@gmail.com",
           avatar: "Антон.png",
@@ -42,6 +43,7 @@ module.exports = {
           name: "Адам",
           email: "adam@gmail.com",
           avatar: "Адам.png",
+
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,

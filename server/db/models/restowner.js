@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   RestOwner.init(
     {
       name: DataTypes.STRING,
+      telephone: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       avatar: DataTypes.STRING,

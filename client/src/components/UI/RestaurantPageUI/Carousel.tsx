@@ -4,6 +4,7 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import Slider from 'react-slick';
 import style from './style.module.css';
 import type { PictureType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
+import { STATIC_URL } from '../../Pages/UserAccount/ui/UserInfo';
 
 // Settings for the slider
 const settings = {
@@ -98,7 +99,7 @@ export default function Carousel({ pictures }: CarouselProps): JSX.Element {
               backgroundSize="cover"
               backgroundImage={
                 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                picture.image.includes('http') ? picture.image : `../../../public/img/restaurants/${picture.image}`
+                picture.image.includes('http') ? picture.image : `${STATIC_URL}/img/restaurants/${picture.image}`
               }
             />
           ))}

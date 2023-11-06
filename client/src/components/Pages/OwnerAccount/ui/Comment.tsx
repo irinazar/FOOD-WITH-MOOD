@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, Box, Button, Divider, Flex, Text, Textarea } from '@chakra-ui/react';
 import style from '../../UserAccount/style.module.css';
 
-export default function Comment(): JSX.Element {
+function Comment(): JSX.Element {
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
 
   const toggleReplyForm = (): void => {
@@ -61,3 +61,4 @@ export default function Comment(): JSX.Element {
     </Box>
   );
 }
+export default React.memo(Comment);
