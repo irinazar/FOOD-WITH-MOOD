@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import style from './style.module.css';
 import type { CountryType } from '../../../../types/categoryType/categoryTypes';
 import { STATIC_URL } from '../../UserAccount/ui/UserInfo';
@@ -7,9 +7,9 @@ type GitCartProps = {
   country: CountryType;
 };
 
+
 export default function OneCategory({country}: GitCartProps):JSX.Element {
-  console.log('-----------',country.img)
-  console.log(`${STATIC_URL}/img/countries/${country.img}`)
+
   return (
 
 <a className={style.card} href={`/countries/${country.id}`}>
@@ -22,4 +22,5 @@ export default function OneCategory({country}: GitCartProps):JSX.Element {
         </div>
       </a>
   )
+
 }
