@@ -1,0 +1,51 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+.menuContainer{
+    display: flex;
+    justify-content: center; /* Горизонтальное центрирование по горизонтали */
+    align-items: center; /* Горизонтальное центрирование по вертикали */
+
+    margin: 0; /* Убираем отступы по умолчанию */
+    background: #1A1E23;
+}
+.menu {
+  display: flex; /* Используем flex для горизонтального размещения элементов */
+  list-style-type: none;
+}
+
+.menuEl {
+  padding: 6px;
+  margin: 0; /* Удаляем отступы между элементами списка */
+}
+
+.menuLink {
+  position: relative;
+  padding: 4px 10px; /* Устанавливаем отступы для ссылок */
+  font-family: Lato, sans-serif;
+  color: #ecf0f1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+.menuLink::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #3498db;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+}
+
+.menuLink:hover {
+  color: #95a5a6;
+}
+
+.menuLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}

@@ -7,9 +7,43 @@ module.exports = {
       "Users",
       [
         {
-          name: "John Doe",
-          email: "dbvkjrd",
-          avatar: "png",
+
+          name: "Антон",
+          email: "anton@gmail.com",
+          avatar: "Антон.png",
+          password:  await bcrypt.hash("123", 10),
+          isAdmin: false,
+          active: true,
+        },
+        {
+          name: "Саша",
+          email: "sasha@gmail.com",
+          avatar: "Саша.png",
+          password:  await bcrypt.hash("123", 10),
+          isAdmin: false,
+          active: true,
+        },
+        {
+          name: "Витя",
+          email: "victor@gmail.com",
+          avatar: "Витя.png",
+          password:  await bcrypt.hash("123", 10),
+          isAdmin: false,
+          active: true,
+        },
+        {
+          name: "Юля",
+          email: "julia@gmail.com",
+          avatar: "Юля.png",
+          password:  await bcrypt.hash("123", 10),
+          isAdmin: false,
+          active: true,
+        },
+        {
+          name: "Адам",
+          email: "adam@gmail.com",
+          avatar: "Адам.png",
+
           password:  await bcrypt.hash("123", 10),
           isAdmin: false,
           active: true,

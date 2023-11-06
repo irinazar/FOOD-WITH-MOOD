@@ -20,6 +20,7 @@ module.exports = {
           isEmail: true,
         },
       },
+      telephone:  Sequelize.STRING,
       password: {
         type: Sequelize.STRING,
         allowNull: null,

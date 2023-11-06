@@ -7,7 +7,7 @@ import RestaurantPage from './components/Pages/RestaurantPage/RestaurantPage';
 import AdminPage from './components/Pages/AdminAccount/AdminAccount';
 import UserAccount from './components/Pages/UserAccount/UserAccount';
 import Layout from './components/Layout';
-import PrivateRoute from './components/hocs/PrivateRoute';
+// import PrivateRoute from './components/hocs/PrivateRoute';
 import UserCodePage from './components/Pages/Auth/UserCodePage';
 import { useAppSelector } from './hooks/reduxHooks';
 import AuthPage from './components/Pages/Auth/AuthPage';
@@ -52,6 +52,7 @@ function App(): JSX.Element {
         <Route
           path="/login"
           element={
+
             <PrivateRoute
               isAllowed={user.status === 'logged' || owner.status === 'logged'}
               redirectTo="/"
@@ -68,8 +69,9 @@ function App(): JSX.Element {
               isAllowed={user.status === 'logged' || owner.status === 'logged'}
               redirectTo="/"
             >
+
               <UserCodePage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
       </Route>
