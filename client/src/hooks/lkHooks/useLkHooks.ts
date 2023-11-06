@@ -21,17 +21,17 @@ import type { Coordinates } from '../../components/Pages/OwnerAccount/ui/ModalNe
 
 const useLkHooks = (): {
   handlerSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
+    e: React.FormEvent<SubmitUserTypeHTML>,
     id: number,
     selectedCountryIds: string[],
   ) => void;
-  handlerOwnerSubmit: (e: React.FormEvent<HTMLFormElement>, id: number) => void;
+  handlerOwnerSubmit: (e: React.FormEvent<SubmitUserTypeHTML>, id: number) => void;
   handlerRestaurantSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
+    e: React.FormEvent<SubmitRestTypeHTML>,
     id: number,
     mapCoordinates: Coordinates,
   ) => void;
-  handleCountryChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCountryChange: (e: React.FormEvent<SubmitUserTypeHTML>) => void;
   selectedCountryIds: number[];
   deleteHandler: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void;
 } => {
@@ -68,7 +68,6 @@ const useLkHooks = (): {
     formData.append('name', e.currentTarget.name.value);
     formData.append('email', e.currentTarget.email.value);
     formData.append('file', e.currentTarget.file.files[0]);
-    console.log(e.currentTarget.file.files[0]);
 
     void dispatch(updateOwnerThunk({ formData, id }));
   };
@@ -94,8 +93,6 @@ const useLkHooks = (): {
     for (let i = 0; i < fileInput.files.length; i++) {
       formData.append('file', fileInput.files[i]);
     }
-
-    console.log(formData);
 
     void dispatch(newRestaurantThunk(formData));
   };

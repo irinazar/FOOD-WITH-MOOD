@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const lkRouter = require("express").Router();
 const {
+  Image,
   Country,
   RestOwner,
   User,
@@ -28,7 +29,10 @@ lkRouter.get("/owner/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const owner = await RestOwner.findByPk(id, {
-      include: Restaurant,
+      include: {
+        model: Restaurant,
+        include: Image,
+      },
     });
 
     res.send(owner);
@@ -163,8 +167,6 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
 });
 
 lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
-  console.log(req.body, "body=====================");
-  console.log(req.file, "fileeeeeeeeeee11111111111");
   try {
     const { id, title, adress, countryId, description, coordX, coordY } =
       req.body;
@@ -194,23 +196,30 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
     if (newRestaurant) {
       const newRestaurantId = newRestaurant.id;
       //! МУЛЬТЕР
-      if (req.file) {
+      if (req.files) {
         const images = [];
 
-        for (const file of req.file) {
+        for (const file of req.files) {
           const name = `${Date.now()}.webp`;
           const outputBuffer = await sharp(file.buffer).webp().toBuffer();
-          await fs.writeFile(`./public/img/${name}`, outputBuffer);
+          await fs.writeFile(`./public/img/restaurants/${name}`, outputBuffer);
 
-          images.push({ img: name, restId: newRestaurantId });
+          images.push({ image: name, restaurantId: newRestaurantId });
         }
 
-        await Picture.bulkCreate(images);
+        await Image.bulkCreate(images);
       }
+
+      const newRestaurantWithImages = await Restaurant.findByPk(
+        newRestaurantId,
+        {
+          include: Image,
+        }
+      );
 
       //! МУЛЬТЕР
 
-      res.status(201).json(newRestaurant);
+      res.status(201).json(newRestaurantWithImages);
     } else {
       return res.status(404);
     }
