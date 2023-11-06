@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type {
+  CommentResponseType,
   CountryType,
   OwnerType,
   SubmitRestaurantType,
@@ -8,6 +9,7 @@ import type {
 import {
   deleteThunk,
   getAllCountryThunk,
+  getMyComment,
   getOwnerThunk,
   getUserRestaurants,
   getUserThunk,
@@ -20,10 +22,12 @@ const initialState: {
   country: CountryType[];
   currentOwner: OwnerType | null;
   currentUserLk: UserLkType | null;
+  comments: CommentResponseType[] | null;
 } = {
   country: [],
   currentOwner: null,
   currentUserLk: null,
+  comments: null,
 };
 
 export const lkSlice = createSlice({
@@ -59,6 +63,9 @@ export const lkSlice = createSlice({
           (el) => Number(el.id) !== action.payload,
         );
       }
+    });
+    builder.addCase(getMyComment.fulfilled, (state, action) => {
+      state.comments = action.payload;
     });
   },
 });

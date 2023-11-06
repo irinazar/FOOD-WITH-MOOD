@@ -7,6 +7,7 @@ import type {
   SubmitRestaurantType2,
   SubmitRestaurantType,
   CommentsType,
+  CommentResponseType,
 } from '../../../../types/lkTypes/lkTypes';
 import {
   deleteServer,
@@ -57,6 +58,6 @@ export const deleteThunk = createAsyncThunk<number, number>('deleterest', async 
   deleteServer(id).then(() => id),
 );
 
-export const getMyComment = createAsyncThunk<CommentsType[], number>('allcomment', async (id) =>
+export const getMyComment = createAsyncThunk<CommentResponseType[], number>('allcomment', async (id) =>
   getCommentsServer(id).then((data) => data),
 );

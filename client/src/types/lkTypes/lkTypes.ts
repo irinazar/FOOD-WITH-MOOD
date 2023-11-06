@@ -112,8 +112,20 @@ export type SubmitRestaurantType2 = {
   FormData: FormData;
 };
 
-export type CommentsType = {
+export type CommentRepliesType = {
+  id: number;
+  body: string;
+  commentId: number;
+  restOwnerId: number;
+};
+
+export type CommentResponseType = {
+  id: number;
   body: string;
   userId: number;
   restaurantId: number;
+  createdAt: string;
+  User: UserLkType;
+  CommentReplies: CommentRepliesType[];
+  Restaurant: RestFormType;
 };

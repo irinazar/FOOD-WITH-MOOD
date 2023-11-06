@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Avatar, Box, Button, Divider, Flex, Text, Textarea } from '@chakra-ui/react';
 import style from '../../UserAccount/style.module.css';
+import type { CommentResponseType } from '../../../../types/lkTypes/lkTypes';
 
-function Comment(): JSX.Element {
+type CommentProps = {
+  comment: CommentResponseType;
+};
+
+function Comment({ comment }: CommentProps): JSX.Element {
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
 
   const toggleReplyForm = (): void => {
@@ -20,25 +25,18 @@ function Comment(): JSX.Element {
     >
       <Flex align="center" justify="space-between">
         <Flex className={style['user-comment-container']} align="center">
-          <Avatar size="sm" ml="0" />
           <Text fontWeight="bold" fontSize="sm" ml="4">
-            {' '}
-            Имя
+            {comment.User.name}
           </Text>
           <Text color="gray.500" fontSize="sm" ml="4">
-            {' '}
-            Дата
+            {comment.createdAt.slice(0, 10)}
           </Text>
         </Flex>
         <Text fontSize="sm" fontWeight="bold">
-          Ресторан
+          {comment?.Restaurant?.title}
         </Text>
       </Flex>
-      <Text mt="2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quaerat facere quasi
-        architecto vitae, eum facilis fuga? Voluptatibus consequuntur expedita cupiditate voluptatem
-        quam! Unde animi excepturi a molestiae eligendi omnis?
-      </Text>
+      <Text mt="2">{comment.body}</Text>
       <Button
         className={style.btn}
         size="sm"
