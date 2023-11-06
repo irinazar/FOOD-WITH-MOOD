@@ -33,7 +33,7 @@ export default function Carousel({ pictures }: CarouselProps): JSX.Element {
       <Box
         className={style.shadow}
         position="relative"
-        height="600px"
+        height="800px"
         width="80%"
         overflow="hidden"
       >
