@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
+import Rating from '../../UI/RestaurantPageUI/Rating';
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
@@ -19,9 +20,6 @@ export default function CountryPage(): JSX.Element {
   const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
-
-
-
 
 
   useEffect(() => {
@@ -101,7 +99,10 @@ export default function CountryPage(): JSX.Element {
             <p>{el.description}</p>
           </OnTheLeft>
           <br />
-          <FavoriteButton />
+          <FavoriteButton
+                restID={el.id}
+                isLiked={el.Favourites.map((fav) => fav.userId).includes(checkid())}
+              />
           {el.Ratings ? ( 
             <Rating
               averageRating={

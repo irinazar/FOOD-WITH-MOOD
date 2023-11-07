@@ -33,16 +33,13 @@ export type OneRestaurantType = {
   status: string;
   countryId: number;
   restOwnerId: number;
-  Ratings?: RatingType;
   pictures: PictureType[];
   Images: PictureType[];
-
   Ratings: RatingType[];
 };
 
 export type BookingRestType = {
   title: string;
-
 };
 
 export type BookingResponse = {
@@ -69,4 +66,5 @@ export type BookingInputType = {
   bookerName: string;
   bookerPhone: string;
   date: string;
+  userId: number;
 };
