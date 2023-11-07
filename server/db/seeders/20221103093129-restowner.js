@@ -7,6 +7,14 @@ module.exports = {
       "RestOwners",
       [
         {
+          name: "Георгий Бабаян",
+          email: "elbrus@example.com",
+          telephone: 89106066666,
+          password: await bcrypt.hash("123", 10),
+          avatar: "Гоша.jpeg",
+          active: true,
+        },
+        {
           name: "Иван Петров",
           email: "ivan@example.com",
           telephone: 89106066666,

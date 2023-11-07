@@ -37,14 +37,7 @@ const oneRestaurantSlice = createSlice({
     });
 
     builder.addCase(addCommentThunk.fulfilled, (state, action) => {
-      // state.comments.push(action.payload);
-      if ( state.comments) {
-        state.comments.map((el) => 
-        el.id === action.payload.id ?
-        state.comments.push(action.payload):
-        state.comments
-        )
-      }
+      state.comments.unshift(action.payload);
     });
 
     builder.addCase(deleteCommentThunk.fulfilled, (state, action) => {

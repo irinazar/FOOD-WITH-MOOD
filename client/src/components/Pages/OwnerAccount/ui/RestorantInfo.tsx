@@ -17,8 +17,8 @@ function OverlayTwo(): any {
 type RestorantInfoProps = {
   owner: OwnerType;
 };
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
-export const STATIC_URL = import.meta.env.VITE_STATIC_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL as unknown as { VITE_BASE_URL: string };
+export const STATIC_URL = import.meta.env.VITE_STATIC_URL as unknown as { VITE_STATIC_URL: string };
 
 function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -71,7 +71,7 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
             onOpen();
           }}
         >
-          Оставить заявку на ваше заведение
+          Оставить заявку на заведение
         </button>
       </div>
       {selectedModal === 'edit' && (

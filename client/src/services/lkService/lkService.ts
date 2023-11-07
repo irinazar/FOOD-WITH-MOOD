@@ -35,7 +35,7 @@ export const editOwnerServer = (formData: SubmitUserType2): Promise<UserLkType> 
 export const newRestaurantServer = (
   formData: SubmitRestaurantType2,
 ): Promise<SubmitRestaurantType> =>
-  apiService.post<SubmitRestaurantType>('/lk/newrestaurant', formData).then((res) => res.data);
+  apiService.post<SubmitRestaurantType>('/lk/newrestaurant', formData).then((res) => res.data)
 
 export const getUserRestaurantServer = (id: number): Promise<SubmitRestaurantType[]> =>
   apiService.post<SubmitRestaurantType[]>(`/lk/getmyrest/${id}`, id).then((res) => res.data);

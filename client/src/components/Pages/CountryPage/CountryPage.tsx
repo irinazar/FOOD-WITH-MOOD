@@ -8,7 +8,11 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
+
 import MoreButton from '../../UI/MoreButton/MoreButton';
+
+import Rating from '../../UI/RestaurantPageUI/Rating';
+
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
@@ -21,7 +25,6 @@ export default function CountryPage(): JSX.Element {
   const ymapRef = useRef(null);
   console.log(restiks);
 
-  console.log(averageRating);
 
   useEffect(() => {
     void dispatch(oneCountryActionThunk(Number(id)));
@@ -87,6 +90,7 @@ export default function CountryPage(): JSX.Element {
         </Reveal>
       </div>
 
+
       {oneCountry?.Restaurants?.map((el, index) => (
         <div className={style.miniCardContainer}>
           <div className={style.miniCard}>
@@ -103,6 +107,16 @@ export default function CountryPage(): JSX.Element {
                 restID={el.id}
                 isLiked={el.Favourites.map((fav) => fav.userId).includes(checkid())}
               />
+               {el.Ratings ? ( 
+            <Rating
+              averageRating={
+                el.Ratings.map((rating) => rating.rating).reduce((a, b) => a + b, 0) /
+                el.Ratings.length
+              }
+            />
+          ) : (
+            <p>No ratings available</p>
+          )}
                  <MoreButton   restID={el.id} />
               {/* <Rating averageRating={el.Ratings[0].rating} /> */}
             </div>
@@ -111,6 +125,7 @@ export default function CountryPage(): JSX.Element {
                 <img src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`} alt="" />
               </div>
             </Reveal>
+
           </div>
         </div>
         

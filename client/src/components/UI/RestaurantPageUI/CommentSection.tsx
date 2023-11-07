@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import type { CommentType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
@@ -22,6 +23,9 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
   const changeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+console.log(comments);
+
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
@@ -84,13 +88,13 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
                 )}
               </footer>
               <p className="text-gray-500 dark:text-gray-400">{el.body}</p>
-              <br />
-              <article className="p-2 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900" />
+              
+              <article className="p-2  text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900" />
             </article>
-            {el?.commentReply.map((reply) => (
+            {el?.commentReply?.map((reply) => (
               <article
                 key={uuidv4()}
-                className="p-2 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900"
+                // className="p-2 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900"
               >
                 <div className="flex items-center mt-4 space-x-4">
                   <button
@@ -116,7 +120,7 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
                   </button>
                 </div>
                 <article className="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900">
-                  <p className="text-gray-500 dark:text-gray-400">{reply.body}</p>
+                  <p className="text-gray-500 dark:text-gray-400">{reply}</p>
                 </article>
               </article>
             ))}
