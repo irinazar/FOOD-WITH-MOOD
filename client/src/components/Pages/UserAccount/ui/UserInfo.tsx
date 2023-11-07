@@ -21,10 +21,19 @@ function UserInfo({ userlk }: UserInfoProps): JSX.Element {
   const [overlay, setOverlay] = useState(<OverlayTwo />);
   const { handlerSubmit } = useLkHooks();
 
+  console.log(userlk);
+
   return (
     <div className={style.usercardinfo}>
       <div className={style['profile-card__img']}>
-        <img src={`${STATIC_URL}/img/${userlk?.avatar}`} alt=" " />
+        <img
+          src={
+            userlk?.avatar
+              ? `${STATIC_URL}/img/users/${userlk.avatar}`
+              : `${STATIC_URL}/img/users/nullavatar.png`
+          }
+          alt=" "
+        />
       </div>
       <div className={style['profile-card__cnt']}>
         <div className={style['profile-card__name']}>{userlk?.name}</div>
