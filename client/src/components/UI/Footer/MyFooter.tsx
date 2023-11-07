@@ -37,7 +37,9 @@ export default function MyFooter(): JSX.Element {
             </ul>
           </div>
         </div>
+        <br />
         <hr />
+        <br />
       </div>
       <div className="container">
         <div className="row" >

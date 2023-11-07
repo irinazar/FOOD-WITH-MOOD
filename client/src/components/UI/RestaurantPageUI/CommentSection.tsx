@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import type { CommentType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
-import { useAppDispatch } from '../../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   addCommentThunk,
   deleteCommentThunk,
@@ -16,6 +16,8 @@ type CommentProp = {
 function CommentSection({ comments }: CommentProp): JSX.Element {
   const [input, setInput] = useState({ body: '' });
   const dispatch = useAppDispatch();
+
+  const userWithStatus = useAppSelector((store) => store.lkReducer.currentUserLk);
 
   const changeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -67,20 +69,19 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
                     {el.user?.userName}
                   </p>
                 </div>
-                {/* {user.admin && ( */}
-                <button
-                  type="button"
-                  className={style.deleteComment}
-                  onClick={() =>
-                    void dispatch(
-                      deleteCommentThunk({ restaurantId: el.restaurantId, commentId: el.id }),
-                    )
-                  }
-                >
-                  Удалить
-                </button>
-
-                {/* )} */}
+                {userWithStatus?.isAdmin === true && (
+                  <button
+                    type="button"
+                    className={style.deleteComment}
+                    onClick={() =>
+                      void dispatch(
+                        deleteCommentThunk({ restaurantId: el.restaurantId, commentId: el.id }),
+                      )
+                    }
+                  >
+                    Удалить
+                  </button>
+                )}
               </footer>
               <p className="text-gray-500 dark:text-gray-400">{el.body}</p>
               <br />
