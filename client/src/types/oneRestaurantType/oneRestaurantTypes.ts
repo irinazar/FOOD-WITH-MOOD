@@ -38,12 +38,28 @@ export type OneRestaurantType = {
 
 };
 
-export type BookingType = {
+export type BookingRestType = {
+  title: string
+}
+
+export type BookingResponse = {
+  id: number;
   userId: number;
   restaurantId: number;
   bookerName: string;
   bookerPhone: string;
   date: string;
+  bookings: BookingType[];
+  Restaurant: BookingRestType;
+}
+export type BookingType = {
+  id: number;
+  userId: number;
+  restaurantId: number;
+  bookerName: string;
+  bookerPhone: string;
+  date: string;
+  Restaurant: BookingRestType;
 };
 
 export type BookingInputType = {

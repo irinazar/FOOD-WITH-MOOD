@@ -1,6 +1,5 @@
 import type {
   CommentResponseType,
-  CommentsType,
   CountryType,
   OwnerType,
   ReplyType,
@@ -9,6 +8,7 @@ import type {
   SubmitUserType2,
   UserLkType,
 } from '../../types/lkTypes/lkTypes';
+import type { BookingResponse } from '../../types/oneRestaurantType/oneRestaurantTypes';
 import apiService from '../index';
 
 export const getAllCountry = (): Promise<CountryType[]> =>
@@ -46,3 +46,9 @@ export const getCommentsServer = (id: number): Promise<CommentResponseType[]> =>
 
 export const newReplyComment = (data: ReplyType): Promise<ReplyType> =>
   apiService.post<ReplyType>('/lk/replycomment', data).then((res) => res.data);
+
+  export const getBookingsServer = (id: number): Promise<BookingResponse[]> =>
+  apiService.get<BookingResponse[]>(`/lk/${id}/booking`).then((res) => res.data);
+
+export const deleteBookingServer = (id: number): Promise<{message: string}> =>
+apiService.delete<{message: string}>(`/lk/${id}/booking`).then(({data}) => data);

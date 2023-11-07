@@ -131,8 +131,8 @@ restaurantRouter.post("/:id/booking", async (req, res) => {
   const { bookerName, bookerPhone, date } = req.body;
   if (!(bookerName && bookerPhone && date)) return res.sendStatus(400);
   const [booking, created] = await Booking.findOrCreate({
-    where: { userId: req.session.id, restaurantId: req.params.id, date },
-    // where: { userId: 5, restaurantId: req.params.id, date },
+    // where: { userId: req.session.id, restaurantId: req.params.id, date },
+    where: { userId: 5, restaurantId: req.params.id, date },
     defaults: {
       bookerName,
       bookerPhone,
