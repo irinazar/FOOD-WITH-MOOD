@@ -27,8 +27,6 @@ function UserAccount(): JSX.Element {
 
   const myfav = useAppSelector((state) => state.lkReducer.favorite);
 
-  console.log(myfav, '=================');
-
   useEffect(() => {
     void dispatch(getUserThunk(Number(id)));
   }, []);
@@ -46,6 +44,8 @@ function UserAccount(): JSX.Element {
   const userRest = useAppSelector(
     (state) => state.restREducer.restaurant,
   ) as SubmitRestaurantType[];
+
+  console.log(userRest, '=================');
 
   return (
     <div className={style.container}>
@@ -73,7 +73,7 @@ function UserAccount(): JSX.Element {
               />
               <Rating />
             </div>
-            <Image src={`${STATIC_URL}/img/restaurants/${userlk?.avatar}`} alt=" " alt="" />
+            <Image src={`${STATIC_URL}/img/restaurants/${el.Images[0]?.image}`} alt=" " alt="" />
           </Box>
         ))}
       </Flex>
@@ -100,10 +100,7 @@ function UserAccount(): JSX.Element {
               />
               <Rating />
             </div>
-            <Image
-              src="https://toohotel.com/wp-content/uploads/2022/09/TOO_restaurant_Panoramique_vue_Paris_Seine_Tour_Eiffel_2.jpg"
-              alt=""
-            />
+            <Image src={`${STATIC_URL}/img/restaurants/${el?.Images[0]?.image}`} alt=" " alt="" />
           </Box>
         ))}
       </Flex>

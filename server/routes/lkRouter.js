@@ -242,6 +242,7 @@ lkRouter.post("/getmyrest/:id", async (req, res) => {
           [Op.in]: countryIds,
         },
       },
+      include: Image, 
     });
     res.json(restaurants);
   } catch (error) {
@@ -338,7 +339,6 @@ lkRouter.post("/favorite", async (req, res) => {
       res.status(200).json({ del: true, rest: { id: restaurantId } });
       return;
     } else {
-     
       const rest = await Restaurant.findByPk(restaurantId, {
         include: [
           {
@@ -352,7 +352,7 @@ lkRouter.post("/favorite", async (req, res) => {
 
       // console.log(rest, "newwwwwwwww");
 
-      res.status(200).json({rest});
+      res.status(200).json({ rest });
     }
   } catch (error) {
     console.log(error);
