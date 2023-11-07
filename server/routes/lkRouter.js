@@ -393,6 +393,8 @@ lkRouter.get("/myfav/:id", async (req, res) => {
     console.log(error);
     res.sendStatus(400);
 
+  }})
+
 lkRouter.get("/:id/booking", async (req, res) => {
   const ownerId = req.params.id;
 
