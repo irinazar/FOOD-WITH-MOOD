@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
+import MoreButton from '../../UI/MoreButton/MoreButton';
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
@@ -102,6 +103,7 @@ export default function CountryPage(): JSX.Element {
                 restID={el.id}
                 isLiked={el.Favourites.map((fav) => fav.userId).includes(checkid())}
               />
+                 <MoreButton   restID={el.id} />
               {/* <Rating averageRating={el.Ratings[0].rating} /> */}
             </div>
             <Reveal>

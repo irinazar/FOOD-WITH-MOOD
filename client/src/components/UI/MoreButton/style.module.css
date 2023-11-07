@@ -1,0 +1,52 @@
+.wrapper{
+   padding-top: 3vh;
+  }
+  
+  .moreA{
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #333;
+    border: 2px solid #333;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+  }
+  
+  .moreA .moreSpan{
+    position: relative;
+    z-index: 2;
+  }
+  
+  .moreA:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #ff5c82;
+    transition: all .35s;
+  }
+  
+  .moreA:hover{
+    color: #fff;
+  }
+  
+  .moreA:hover:after{
+    width: 100%;
+  }
+
+  .moreA:hover .moreSpan {
+    color: #fff;
+  }
+  
+  .moreA:hover:after {
+    width: 100%;
+  }
+  
