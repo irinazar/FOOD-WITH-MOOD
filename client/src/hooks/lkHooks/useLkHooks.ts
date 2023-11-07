@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from '../reduxHooks';
 import {
@@ -42,6 +43,7 @@ const useLkHooks = (): {
   setIsFavorited: React.Dispatch<React.SetStateAction<boolean>>;
 } => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   useEffect(() => {
     void dispatch(getAllCountryThunk());
@@ -91,6 +93,24 @@ const useLkHooks = (): {
       const formData = new FormData();
 
       const fileInput = e.currentTarget.file as HTMLInputElement;
+
+      if (
+        !e.currentTarget.title.value ||
+        !e.currentTarget.adress.value ||
+        !e.currentTarget.countryId.value ||
+        !e.currentTarget.phone.value ||
+        !mapCoordinates.lat ||
+        !mapCoordinates.lng
+      ) {
+        toast({
+          title: 'Ошибка',
+          description: 'Пожалуйста, заполните все обязательные поля',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
 
       formData.append('title', e.currentTarget.title.value);
       formData.append('id', id.toString());
