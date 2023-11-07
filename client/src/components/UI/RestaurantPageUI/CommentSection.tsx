@@ -55,7 +55,7 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
             Отправить
           </button>
         </form>
-        {comments.map((el) => (
+        {comments?.map((el) => (
           <>
             <article className="p-2 text-base bg-white rounded-lg dark:bg-gray-900">
               <footer className="flex justify-between items-center mb-2">
@@ -87,7 +87,7 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
               <br />
               <article className="p-2 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900" />
             </article>
-            {el.commentReply.map((reply) => (
+            {el?.commentReply.map((reply) => (
               <article
                 key={uuidv4()}
                 className="p-2 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900"
