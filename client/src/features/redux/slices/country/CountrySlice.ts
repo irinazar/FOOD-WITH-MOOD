@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { CountryType, OneCountryType } from '../../../../types/categoryType/categoryTypes';
-import { allCountriesActionThunk, oneCountryActionThunk } from './CountryThuncks';
+import { allCountriesActionThunk, deleteOneCountryActionThunk, oneCountryActionThunk } from './CountryThuncks';
 
 
 
@@ -17,6 +17,9 @@ const countrySlice = createSlice({
   name: 'counties',
   initialState,
   reducers: {
+    clearAllRestaurants(state) {
+      state.oneCountry= null
+    }
 
   },
   extraReducers: (builder) => {
@@ -27,9 +30,11 @@ const countrySlice = createSlice({
     builder.addCase(oneCountryActionThunk.fulfilled, (state, action) => {
       state.oneCountry = action.payload;
     });
+ 
 
   },
   
 });
 
 export default countrySlice.reducer;
+export const {clearAllRestaurants} = countrySlice.actions;  

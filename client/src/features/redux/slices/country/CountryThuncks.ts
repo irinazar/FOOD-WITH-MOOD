@@ -17,3 +17,10 @@ export const oneCountryActionThunk = createAsyncThunk<OneCountryType, number>(
     return response;
   },
 );
+
+export const deleteOneCountryActionThunk = createAsyncThunk<OneCountryType, number>(
+  'delete',
+  async () => {
+    console.log('Запрос на удаление страны с ID');
+  },
+);
