@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addBookingService, addOneCommentService, addRatingService, getOneRestaurantService } from '../../../../services/oneRestaurantService/oneRestaurantService';
+import { addBookingService, addOneCommentService, addRatingService, deleteOneCommentService, getOneRestaurantService } from '../../../../services/oneRestaurantService/oneRestaurantService';
 import type { BookingInputType, BookingType, CommentType, OneRestaurantType, PictureType, RatingType } from '../../../../types/oneRestaurantType/oneRestaurantTypes';
 
 
@@ -10,6 +10,12 @@ export const getOneRestaurantThunk = createAsyncThunk<{oneRestaurant: OneRestaur
 export const addCommentThunk = createAsyncThunk<CommentType, { id: number; body: string }>(
   'restaurant/addComment',
   async ({ id, body }) => addOneCommentService(id, body).then((data) => data)
+);
+
+export const deleteCommentThunk = createAsyncThunk<CommentType, { restaurantId: number, commentId: number }>(
+  'restaurant/deleteComment',
+  async ({ restaurantId, commentId }) => 
+    deleteOneCommentService(restaurantId, commentId).then((data) => data)
 );
 
 export const addRatingThunk = createAsyncThunk<RatingType, { id: number; rating: number }>(

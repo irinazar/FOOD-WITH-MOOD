@@ -2,7 +2,9 @@ export type AuthType = {
   id: number;
   name: string;
   email: string;
+
   isOwner?: boolean;
+
 };
 
 export type AuthSignUpType = Omit<AuthType, 'id'> & { password: string };

@@ -10,6 +10,7 @@ const {
   Preference,
   Favourite,
   CommentReply,
+  Booking,
 } = require("../db/models");
 const upload = require("../middlewares/multerLoad");
 const sharp = require("sharp");
@@ -328,6 +329,7 @@ lkRouter.post("/replycomment", async (req, res) => {
   }
 });
 
+
 lkRouter.post("/favorite", async (req, res) => {
   console.log(req.body);
   try {
@@ -390,6 +392,54 @@ lkRouter.get("/myfav/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
+
+lkRouter.get("/:id/booking", async (req, res) => {
+  const ownerId = req.params.id;
+
+  try {
+    const restaurants = await Restaurant.findAll({
+      where: { restOwnerId: ownerId },
+    });
+
+    if (restaurants.length === 0) {
+      return res.status(404).json({ error: "Рестораны не найдены" });
+    }
+
+    const restaurantIds = restaurants.map((restaurant) => restaurant.id);
+
+    const bookings = await Booking.findAll({
+      where: { restaurantId: restaurantIds },
+      include: [
+        {
+          model: Restaurant,
+          attributes: ["title"],
+        },
+      ]
+    });
+    res.status(200).json({ bookings });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+lkRouter.delete("/:id/booking", async (req, res) => {
+  const bookingId = req.params.id;
+
+  try {
+    const booking = await Booking.findByPk(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    await booking.destroy()
+
+    res.status(204).json({message: 'Booking deleted'});
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+
   }
 });
 

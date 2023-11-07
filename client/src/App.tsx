@@ -17,7 +17,7 @@ import useCheckAuth from './hooks/authHooks/useCheckAuth';
 function App(): JSX.Element {
   useCheckAuth();
   const user = useAppSelector((store) => store.user);
-
+  const userWithStatus = useAppSelector((store) => store.lkReducer.currentUserLk);
   const owner = useAppSelector((store) => store.authOwner);
 
   return (
@@ -29,10 +29,9 @@ function App(): JSX.Element {
         <Route
           path="/admin"
           element={
-            // <PrivateRoute isAllowed redirectTo="/">
-
+            <PrivateRoute isAllowed={user.status === 'logged' && userWithStatus?.isAdmin === true} redirectTo="/">
             <AdminPage />
-            // </PrivateRoute>
+             </PrivateRoute>
           }
         />
         <Route
@@ -44,7 +43,9 @@ function App(): JSX.Element {
           }
         />
         <Route
+
           path="/owner/:id"
+
           element={
             // <PrivateRoute isAllowed redirectTo="/">
             <OwnerAccount />

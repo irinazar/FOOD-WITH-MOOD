@@ -31,10 +31,12 @@ restaurantRouter.get("/:id", async (req, res) => {
           attributes: ["name", "avatar"],
         },
       ],
+      order: [["createdAt", "DESC"]],
     });
 
     const comments = allComments.map((comment) => {
       return {
+        id: comment.id,
         restaurantId: comment.restaurantId,
         body: comment.body,
         user: comment.User
@@ -77,7 +79,8 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
   }
   try {
     const newComment = await Comment.create({
-      userId: req.session.userId,
+      // userId: req.session.userId,
+      userId: 3,
       restaurantId: id,
       body,
     });
@@ -91,6 +94,7 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
 restaurantRouter.patch("/:id/addRating", async (req, res) => {
   const { id } = req.params;
   const { rating } = req.body;
+
 
   if (Number.isNaN(+id) || !rating || rating < 1 || rating > 5) {
     res.status(400).json({ message: "Invalid rating value" });
@@ -127,7 +131,8 @@ restaurantRouter.post("/:id/booking", async (req, res) => {
   const { bookerName, bookerPhone, date } = req.body;
   if (!(bookerName && bookerPhone && date)) return res.sendStatus(400);
   const [booking, created] = await Booking.findOrCreate({
-    where: { userId: req.session.id, restaurantId: req.params.id, date },
+    // where: { userId: req.session.id, restaurantId: req.params.id, date },
+    where: { userId: 5, restaurantId: req.params.id, date },
     defaults: {
       bookerName,
       bookerPhone,
@@ -135,6 +140,36 @@ restaurantRouter.post("/:id/booking", async (req, res) => {
   });
   if (!created) return res.sendStatus(403);
   return res.json(booking);
+});
+
+restaurantRouter.delete("/:id/comments/:commentId", async (req, res) => {
+  const { id, commentId } = req.params;
+console.log(id, commentId, 'AAAAAAAAAAAAAAAAAAAAAAAAAA');
+  if (Number.isNaN(+id) || Number.isNaN(+commentId)) {
+    res.status(400).json({ message: "Invalid IDs" });
+    return;
+  }
+
+  try {
+    const restaurant = await Restaurant.findByPk(id);
+    if (!restaurant) {
+      res.status(404).json({ error: "Restaurant not found" });
+      return;
+    }
+
+    const deletedComment = await Comment.destroy({
+      where: { id: commentId, restaurantId: id },
+    });
+
+    if (deletedComment) {
+      res.json(deletedComment);
+    } else {
+      res.status(404).json({ error: "Comment not found" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 });
 
 module.exports = restaurantRouter;
