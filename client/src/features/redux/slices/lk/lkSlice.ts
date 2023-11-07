@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import type {
   CommentResponseType,
   CountryType,
+  FavoriteResponse,
+  FavoriteType,
   OwnerType,
   SubmitRestaurantType,
   UserLkType,
@@ -9,26 +11,42 @@ import type {
 import {
   addNewReplyThunk,
   deleteThunk,
+  favoriteThunk,
   getAllCountryThunk,
+  getBookingsThunk,
   getMyComment,
   getOwnerThunk,
   getUserRestaurants,
   getUserThunk,
+  myFavoriteThunk,
   newRestaurantThunk,
   updateOwnerThunk,
   updateUserThunk,
 } from './lkThuncks';
+import type { BookingResponse } from '../../../../types/oneRestaurantType/oneRestaurantTypes';
 
 const initialState: {
   country: CountryType[];
   currentOwner: OwnerType | null;
   currentUserLk: UserLkType | null;
   comments: CommentResponseType[] | null;
+
+  favorite: FavoriteType[] | null;
+
+  bookings: {
+    bookings: BookingResponse[];
+  };
 } = {
   country: [],
   currentOwner: null,
   currentUserLk: null,
   comments: null,
+
+  favorite: null,
+
+  bookings: {
+    bookings: [],
+  },
 };
 
 export const lkSlice = createSlice({
@@ -76,6 +94,21 @@ export const lkSlice = createSlice({
             : el.CommentReplies,
         );
       }
+    });
+
+    builder.addCase(myFavoriteThunk.fulfilled, (state, action) => {
+      state.favorite = action.payload;
+    });
+    builder.addCase(favoriteThunk.fulfilled, (state, action) => {
+      if (action.payload.del) {
+        state.favorite = state.favorite?.filter((el) => el.id !== action.payload.rest.id);
+      } else {
+        state.favorite?.push(action.payload.rest);
+      }
+    });
+
+    builder.addCase(getBookingsThunk.fulfilled, (state, action) => {
+      state.bookings = action.payload;
     });
   },
 });

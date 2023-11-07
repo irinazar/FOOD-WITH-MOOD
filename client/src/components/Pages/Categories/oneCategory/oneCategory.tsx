@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
+
 import style from './style.module.css';
 import type { CountryType } from '../../../../types/categoryType/categoryTypes';
 import { STATIC_URL } from '../../UserAccount/ui/UserInfo';
@@ -15,6 +17,7 @@ export default function OneCategory({ country }: GitCartProps): JSX.Element {
   };
 
   return (
+
     <Link to={`/countries/${country.id}`} className={style.card} onClick={handleLinkClick}>
       <div className={style.cardBackground} style={{ backgroundImage: `url(${STATIC_URL}/img/countries/${country.img})` }} />
       <div className={style.cardContent}>
@@ -23,5 +26,6 @@ export default function OneCategory({ country }: GitCartProps): JSX.Element {
       </div>
     </Link>
   );
+
 }
 
