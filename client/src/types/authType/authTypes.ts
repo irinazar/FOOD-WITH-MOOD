@@ -19,6 +19,6 @@ export type AuthLoadingType =
   | (AuthType & { status: 'logged' })
   | { status: 'loading' }
   | { status: 'guest' }
-  | { status: 'logged' };
+ 
 
 export type AuthRole = 'user' | 'owner';

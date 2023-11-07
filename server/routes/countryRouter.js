@@ -1,4 +1,4 @@
-const { Country, Restaurant, Image } = require("../db/models");
+const { Country, Restaurant, Image, Favourite, Rating } = require("../db/models");
 
 const countryRouter = require("express").Router();
 
@@ -18,13 +18,12 @@ countryRouter.route("/:id").get(async (req, res) => {
       include: [
         {
           model: Restaurant,
-          include: Image,
+          include: [Image, Favourite,Rating],
         },
       ],
-      
     });
-    console.log(category);
-    res.json( category );
+    console.log(category.Rating);
+    res.json(category);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });
