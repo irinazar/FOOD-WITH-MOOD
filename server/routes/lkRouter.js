@@ -170,9 +170,18 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
 
 lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
   try {
-    const { id, title, adress, countryId, description, coordX, coordY } =
-      req.body;
+    const {
+      id,
+      title,
+      adress,
+      countryId,
+      description,
+      coordX,
+      coordY,
+      phone,
+    } = req.body;
     if (
+      !phone ||
       !id ||
       !title ||
       !adress ||
@@ -185,6 +194,7 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
     }
 
     const newRestaurant = await Restaurant.create({
+      phone,
       title,
       adress,
       countryId,

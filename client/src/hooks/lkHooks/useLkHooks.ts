@@ -96,6 +96,8 @@ const useLkHooks = (): {
       formData.append('id', id.toString());
       formData.append('adress', e.currentTarget.adress.value);
       formData.append('countryId', e.currentTarget.countryId.value);
+      formData.append('phone', e.currentTarget.phone.value);
+
       formData.append('description', e.currentTarget.description.value);
       formData.append('coordX', mapCoordinates.lat);
       formData.append('coordY', mapCoordinates.lng);

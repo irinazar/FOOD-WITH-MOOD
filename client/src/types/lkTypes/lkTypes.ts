@@ -84,6 +84,7 @@ export type SubmitRestTypeHTML = {
 export type SubmitRestaurantType = {
   title: string;
   id?: string;
+  phone: number;
   adress: string;
   countryId: string;
   description: string;
