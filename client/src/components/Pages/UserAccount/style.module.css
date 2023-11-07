@@ -215,11 +215,6 @@
   }
 }
 
-.containercomment {
-  display: flex;
-  justify-content: space-between;
-}
-
 .containercardrest {
   min-width: 250px;
   display: flex;
@@ -243,4 +238,15 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.containercomment {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.commentstylemy {
+  padding: 10px;
+  align-self: baseline;
 }
