@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   checkUserThunk,
-  codeUserThunk,
+  // codeUserThunk,
   loginUserThunk,
   logoutUserThunk,
   signUpUserThunk,
@@ -36,9 +36,9 @@ export const userSlice = createSlice({
     builder.addCase(signUpUserThunk.rejected, (state, action) => ({
       status: 'guest',
     }));
-    builder.addCase(codeUserThunk.fulfilled, (state, action) => ({
-      status: 'logged',
-    }));
+    // builder.addCase(codeUserThunk.fulfilled, (state, action) => ({
+    //   status: 'logged',
+    // }));
     builder.addCase(loginUserThunk.fulfilled, (state, action) => ({
       ...action.payload,
       status: 'logged',

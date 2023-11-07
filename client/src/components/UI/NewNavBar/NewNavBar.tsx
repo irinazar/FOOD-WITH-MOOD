@@ -8,18 +8,22 @@ import { logoutUserThunk } from '../../../features/redux/slices/user/UserThunks'
 
 import { logoutOwnerThunk } from '../../../features/redux/slices/authOwner/authOwnerThunks';
 import { setRole } from '../../../features/redux/slices/role/RoleSlice';
-
-// type Props = {
-//   children: React.ReactNode;
-// };
-// const Links = ['Dashboard', 'Projects', 'Team'];
+import { setUser } from '../../../features/redux/slices/user/UserSlice';
+import { setOwner } from '../../../features/redux/slices/authOwner/authOwnerSlice';
 
 export default function NewNavBar(): JSX.Element {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector((state) => state.user);
-  const owner = useAppSelector((state) => state.authOwner);
+  const user = useAppSelector((state) => state.user) as {
+    id: number;
+    status: string;
+    isAdmin: boolean;
+  };
+  const owner = useAppSelector((state) => state.authOwner) as {
+    id: number;
+    status: string;
+    isAdmin: boolean;
+  };
 
   const handleLogout = (): void => {
     void dispatch(logoutUserThunk());
@@ -58,14 +62,14 @@ export default function NewNavBar(): JSX.Element {
         </li>
         <li className={style.menuEl}>
           {user.status === 'logged' && !user.isAdmin && (
-            <NavLink className={style.menuLink} to="/user/:id">
+            <NavLink className={style.menuLink} to={`/user/${user?.id}`}>
               ЛК пользователя
             </NavLink>
           )}
         </li>
         <li className={style.menuEl}>
           {owner.status === 'logged' && !user.isAdmin && (
-            <NavLink className={style.menuLink} to="/owner/:id">
+            <NavLink className={style.menuLink} to={`/owner/${owner?.id}`}>
               ЛК ресторана
             </NavLink>
           )}
