@@ -43,6 +43,7 @@ export default function AuthPage(): JSX.Element {
         duration: 3000,
         isClosable: true,
       });
+      return;
     }
     if (!formData.name || !formData.email || !formData.password) {
       toast({

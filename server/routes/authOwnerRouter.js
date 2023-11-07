@@ -26,7 +26,6 @@ function verifyToken(req, res, next) {
       return res.sendStatus(401);
     }
     next();
-    //логика по возобновлению доступа (рефреш)???
   });
 }
 
@@ -60,63 +59,6 @@ authOwnerRouter.post("/signup", async (req, res) => {
   return res.sendStatus(201);
 });
 
-// authOwnerRouter.post("/code", async (req, res) => {
-//   const { randomString } = req.body;
-//   console.log("randomString", randomString);
-//   if (!randomString) return res.sendStatus(400);
-
-//   const codeEntry = await Confirm.findOne({
-//     where: {
-//       randomString: randomString,
-//     },
-//   });
-
-//   if (!codeEntry) {
-//     return res.sendStatus(403);
-//   }
-//   if (!codeEntry.userId) {
-//     const ownerNew = await RestOwner.findByPk(codeEntry.restOwnerId);
-//     ownerNew.active = true;
-//     await ownerNew.save();
-//     req.session.user = {
-//       name: ownerNew.name,
-//       id: ownerNew.id,
-//     };
-//     await codeEntry.destroy();
-//     const token = jwt.sign(
-//       { userName: ownerNew.name, restOwnerId: ownerNew.id },
-//       jwtSecretKey,
-//       {
-//         expiresIn: "1h",
-//       }
-//     );
-//     res.cookie("token", token, { httpOnly: true });
-//   } else {
-//     const usernew = await User.findByPk(codeEntry.userId);
-//     usernew.active = true;
-//     await usernew.save();
-//     req.session.user = {
-//       name: usernew.name,
-//       id: usernew.id,
-//     };
-//     await codeEntry.destroy();
-//     const token = jwt.sign(
-//       { userName: usernew.name, userId: usernew.id },
-//       jwtSecretKey,
-//       {
-//         expiresIn: "1h",
-//       }
-//     );
-//     res.cookie("token", token, { httpOnly: true });
-//   }
-
-//   // Установка токена в куки
-//   // res.cookie("token", token, { httpOnly: true });
-
-//   //уточнить только ссесия создается
-//   return res.status(200).json({ token });
-// });
-
 authOwnerRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
@@ -131,6 +73,7 @@ authOwnerRouter.post("/login", async (req, res) => {
       const sessionUser = JSON.parse(JSON.stringify(user));
       delete sessionUser.password;
       req.session.user = sessionUser;
+      req.session.user.isOwner = true;
       return res.json(sessionUser);
     } catch (e) {
       console.log(e);

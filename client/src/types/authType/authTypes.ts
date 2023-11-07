@@ -4,6 +4,7 @@ export type AuthType = {
   email: string;
 
   isOwner?: boolean;
+  isAdmin?: boolean; // ????
 
 };
 

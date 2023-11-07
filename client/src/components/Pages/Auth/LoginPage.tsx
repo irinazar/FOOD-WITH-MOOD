@@ -18,12 +18,9 @@ import {
 import style from './style.module.css';
 import { loginUserThunk } from '../../../features/redux/slices/user/UserThunks';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
-
 import { loginOwnerThunk } from '../../../features/redux/slices/authOwner/authOwnerThunks';
 
 export default function LoginPage(): JSX.Element {
-  // const role = useAppSelector((state) => state.role.status);
-
   const dispatch = useAppDispatch();
   const toast = useToast();
 
