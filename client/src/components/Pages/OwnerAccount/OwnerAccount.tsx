@@ -22,6 +22,7 @@ export default function OwnerAccount(): JSX.Element {
   const restmycomments = useAppSelector(
     (state) => state.lkReducer.comments,
   ) as CommentResponseType[];
+  const owner = useAppSelector((state) => state.lkReducer.currentOwner) as OwnerType;
 
   useEffect(() => {
     void dispatch(getOwnerThunk(Number(id)));
@@ -30,9 +31,8 @@ export default function OwnerAccount(): JSX.Element {
 
   useEffect(() => {
     void dispatch(getMyComment(Number(id)));
-  }, []);
+  }, [owner]);
 
-  const owner = useAppSelector((state) => state.lkReducer.currentOwner) as OwnerType;
   const bookings = useAppSelector((state) => state.lkReducer.bookings);
 
   const ownerBookings = bookings?.bookings || [];
