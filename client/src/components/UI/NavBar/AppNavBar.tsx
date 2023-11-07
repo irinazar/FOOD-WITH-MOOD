@@ -46,9 +46,9 @@ export default function MyNavBar(): JSX.Element {
       void dispatch(setRole('user'));
     }
   };
-  const user = useAppSelector((store) => store.user);
+  const user = useAppSelector((store) => store.user) as { id: number };
 
-  const owner = useAppSelector((store) => store.authOwner);
+  const owner = useAppSelector((store) => store.authOwner) as { id: number };
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} mb={5}>

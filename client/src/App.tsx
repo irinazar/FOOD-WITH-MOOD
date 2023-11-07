@@ -35,7 +35,7 @@ function App(): JSX.Element {
           }
         />
         <Route
-          path={`/user/${user?.id}`}
+          path="/user/:id"
           element={
             // <PrivateRoute isAllowed redirectTo="/">
             <UserAccount />
@@ -43,8 +43,9 @@ function App(): JSX.Element {
           }
         />
         <Route
-          // path={`/owner/${owner?.id}`}
-          path={`/owner/:id`}
+
+          path="/owner/:id"
+
           element={
             // <PrivateRoute isAllowed redirectTo="/">
             <OwnerAccount />

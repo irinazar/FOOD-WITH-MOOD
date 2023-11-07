@@ -8,7 +8,6 @@ export default function FavoriteButton(): JSX.Element {
     setIsFavorited(!isFavorited);
   };
 
-  // Используйте переменную isFavorited для управления классом в JSX
   return (
     <div className={style.container}>
       <button onClick={handleFavoriteClick} className={`${style.favorite} ${isFavorited ? style.favorited : ''}`} />

@@ -136,3 +136,29 @@ export type ReplyType = {
   restOwnerId: number;
   body: string;
 };
+
+export type FavouritesType = {
+  id: number;
+  userId: number;
+  restaurantId: number;
+};
+
+export type FavoriteType = {
+  id: number;
+  title: string;
+  description: string;
+  adress: string;
+  phone: string;
+  coordX: number;
+  coordY: number;
+  status: string;
+  countryId: number;
+  restOwnerId: number;
+  Favourites: FavouritesType[];
+  Images: ImagesType[];
+};
+
+export type FavoriteResponse = {
+  del?: boolean;
+  rest: FavoriteType;
+};

@@ -8,6 +8,7 @@ const {
   Comment,
   Restaurant,
   Preference,
+  Favourite,
   CommentReply,
   Booking,
 } = require("../db/models");
@@ -242,7 +243,16 @@ lkRouter.post("/getmyrest/:id", async (req, res) => {
           [Op.in]: countryIds,
         },
       },
+      include: [
+        {
+          model: Image, 
+        },
+        {
+          model: Favourite, 
+        },
+      ],
     });
+
     res.json(restaurants);
   } catch (error) {
     console.log(error);
@@ -319,6 +329,70 @@ lkRouter.post("/replycomment", async (req, res) => {
   }
 });
 
+
+lkRouter.post("/favorite", async (req, res) => {
+  console.log(req.body);
+  try {
+    const { userId, restaurantId } = req.body;
+
+    const [favorite, created] = await Favourite.findOrCreate({
+      where: {
+        restaurantId,
+        userId,
+      },
+    });
+
+    if (!created) {
+      await favorite.destroy();
+
+      // console.log(rest, "oldddddddd");
+      res.status(200).json({ del: true, rest: { id: restaurantId } });
+      return;
+    } else {
+      const rest = await Restaurant.findByPk(restaurantId, {
+        include: [
+          {
+            model: Favourite,
+          },
+          {
+            model: Image,
+          },
+        ],
+      });
+
+      // console.log(rest, "newwwwwwwww");
+
+      res.status(200).json({ rest });
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+lkRouter.get("/myfav/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const myFavoriteRestaurants = await Restaurant.findAll({
+      include: [
+        {
+          model: Favourite,
+          where: {
+            userId: id,
+          },
+        },
+        {
+          model: Image,
+        },
+      ],
+    });
+
+    res.status(200).json(myFavoriteRestaurants);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+
 lkRouter.get("/:id/booking", async (req, res) => {
   const ownerId = req.params.id;
 
@@ -365,6 +439,7 @@ lkRouter.delete("/:id/booking", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
+
   }
 });
 

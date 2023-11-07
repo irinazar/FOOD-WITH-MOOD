@@ -8,12 +8,19 @@ import type {
   SubmitRestaurantType,
   CommentResponseType,
   ReplyType,
+  FavoriteType,
+  FavoriteResponse,
 } from '../../../../types/lkTypes/lkTypes';
 import {
+
+  allmyFavService,
+
   deleteBookingServer,
+
   deleteServer,
   editOwnerServer,
   editUserServer,
+  favoriteService,
   getAllCountry,
   getBookingsServer,
   getCommentsServer,
@@ -72,9 +79,21 @@ export const addNewReplyThunk = createAsyncThunk<ReplyType, ReplyType>(
   async (data) => newReplyComment(data).then((res) => res),
 );
 
+
+export const favoriteThunk = createAsyncThunk<FavoriteResponse, FavoriteType>(
+  'favorite',
+  async (data) => favoriteService(data).then((res) => res),
+);
+
+export const myFavoriteThunk = createAsyncThunk<FavoriteResponse[], number>(
+  'allmyfav',
+  async (data) => allmyFavService(data).then((res) => res),
+);
+
 export const getBookingsThunk = createAsyncThunk<BookingResponse[], number>(
   'getbookings',
   async(id) => getBookingsServer(id).then((data) => data)
 )
 
 export const deleteBookingThunk = createAsyncThunk('deletebooking', async(id: number) => deleteBookingServer(id).then((data) => data.message))
+
