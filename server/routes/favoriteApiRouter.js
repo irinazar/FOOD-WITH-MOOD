@@ -1,6 +1,7 @@
 const { Favourite } = require("../db/models");
 const favoriteRouter = require("express").Router();
 
+
 favoriteRouter.post('/:id', async (req, res) => {
     try {
       const { id } = req.params;
@@ -13,30 +14,30 @@ favoriteRouter.post('/:id', async (req, res) => {
       });
   
       if (existingFavorite) {
-        return res.status(400).json({ message: "Запись уже существует в избранном" });
+        // Удаляем запись из таблицы Favourite
+        await existingFavorite.destroy();
+        return res.sendStatus(200);
       }
+      
+      // Создаем новую запись в таблице Favourite
       await Favourite.create({
         userId,
         restaurantId: id,
         status:true
       });
       
-  
       res.sendStatus(200);
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: "Произошла ошибка при добавлении в избранное" });
     }
   });
-  
-  favoriteRouter.delete('/:id', async (req, res) => {
-    try {
-     await Favourite.destroy({ where: {
-        restaurantId: req.params.id,
-        userId: req.session?.user?.id } });
-      res.sendStatus(200);
-    } catch (err) {
-      console.log(err);
-    }})
+
+
+
+
+
+
+
 
 module.exports =  favoriteRouter;
