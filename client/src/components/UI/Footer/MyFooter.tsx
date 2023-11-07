@@ -43,7 +43,7 @@ export default function MyFooter(): JSX.Element {
         <div className="row" >
           <div className="col-md- col-sm-6 col-xs-12">
             <p className={style.copyrightText}>
-              Copyright &copy; © Food In Mood, 2023 г. Все права защищены.
+              Copyright &copy; Food In Mood, 2023 г. Все права защищены.
             </p>
           </div>
 
