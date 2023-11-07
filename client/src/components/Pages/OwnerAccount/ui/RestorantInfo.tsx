@@ -25,13 +25,14 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
   const [overlay, setOverlay] = React.useState(<OverlayTwo />);
   const [selectedModal, setSelectedModal] = useState<string | null>(null);
   const { handlerOwnerSubmit, handlerRestaurantSubmit } = useLkHooks();
+
   return (
     <div className={style.usercardinfo}>
       <div className={style['profile-card__img']}>
         <img
           src={
             owner?.avatar
-              ? `${STATIC_URL}/img/${owner?.avatar}`
+              ? `${STATIC_URL}/img/users/${owner?.avatar}`
               : `${STATIC_URL}/img/users/nullavatar.png`
           }
           alt=""

@@ -122,6 +122,7 @@ function ModalNewRestorant({
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Загрузите фото</FormLabel>
+              <FormLabel>Максимум 3 фото</FormLabel>
               <Input type="file" id="file-upload" name="file" accept="image/*" multiple />
             </FormControl>
           </ModalBody>
