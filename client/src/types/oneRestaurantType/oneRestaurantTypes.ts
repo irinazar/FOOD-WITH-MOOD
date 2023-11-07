@@ -34,7 +34,8 @@ export type OneRestaurantType = {
   restOwnerId: number;
   averageRating?: RatingType;
   pictures: PictureType[];
-  Images: PictureType[]
+  Images: PictureType[];
+  Ratings: RatingType[]; 
 
 };
 
