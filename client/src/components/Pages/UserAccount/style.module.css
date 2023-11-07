@@ -221,13 +221,15 @@
 }
 
 .containercardrest {
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
 }
 
 .containerimg {
-  min-height: 200px;
+  overflow: hidden;
+  min-height: 250px;
   min-width: 200px;
 
   padding: 50%;

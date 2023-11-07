@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AbsoluteCenter, Box, Divider, Flex, Text, Image } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import UserInfo from './ui/UserInfo';
 import style from './style.module.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
@@ -69,13 +69,13 @@ function UserAccount(): JSX.Element {
             p="2"
             m="2"
           >
-            <a
+            <Link
               className={style.restName}
               style={{ textDecoration: 'underline' }}
-              href={`/countries/${el?.id}`}
+              to={`/countries/${el?.id}`}
             >
               <strong>{el.title}</strong>
-            </a>
+            </Link>
             <Text marginTop="5px" textAlign="center">
               <strong> {el?.phone}</strong>
             </Text>
@@ -116,13 +116,13 @@ function UserAccount(): JSX.Element {
             p="4"
             m="4"
           >
-            <a
+            <Link
               className={style.restName}
               style={{ textDecoration: 'underline' }}
-              href={`/countries/${el?.id}`}
+              to={`/countries/${el?.id}`}
             >
               <strong>{el?.title}</strong>
-            </a>
+            </Link>
             <Text marginTop="5px" textAlign="center">
               <strong> {el?.phone}</strong>
             </Text>
