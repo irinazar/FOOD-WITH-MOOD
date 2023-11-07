@@ -1,12 +1,16 @@
 import type {
-  CommentsType,
+  CommentResponseType,
   CountryType,
+  FavoriteResponse,
+  FavoriteType,
   OwnerType,
+  ReplyType,
   SubmitRestaurantType,
   SubmitRestaurantType2,
   SubmitUserType2,
   UserLkType,
 } from '../../types/lkTypes/lkTypes';
+import type { BookingResponse } from '../../types/oneRestaurantType/oneRestaurantTypes';
 import apiService from '../index';
 
 export const getAllCountry = (): Promise<CountryType[]> =>
@@ -39,5 +43,22 @@ export const getUserRestaurantServer = (id: number): Promise<SubmitRestaurantTyp
 export const deleteServer = (id: number): Promise<void | number> =>
   apiService.delete<void>(`/lk/delmyrest/${id}`).then(() => id);
 
-export const getCommentsServer = (id: number): Promise<CommentsType[]> =>
-  apiService.get<CommentsType[]>(`/lk/mycomments/${id}`).then((res) => res.data);
+export const getCommentsServer = (id: number): Promise<CommentResponseType[]> =>
+  apiService.get<CommentResponseType[]>(`/lk/mycomments/${id}`).then((res) => res.data);
+
+export const newReplyComment = (data: ReplyType): Promise<ReplyType> =>
+  apiService.post<ReplyType>('/lk/replycomment', data).then((res) => res.data);
+
+
+export const favoriteService = (data: FavoriteType): Promise<FavoriteResponse> =>
+  apiService.post<FavoriteResponse>('/lk/favorite', data).then((res) => res.data);
+
+export const allmyFavService = (id: number): Promise<FavoriteResponse[]> =>
+  apiService.get<FavoriteResponse[]>(`/lk/myfav/${id}`).then((res) => res.data);
+
+  export const getBookingsServer = (id: number): Promise<BookingResponse[]> =>
+  apiService.get<BookingResponse[]>(`/lk/${id}/booking`).then((res) => res.data);
+
+export const deleteBookingServer = (id: number): Promise<{message: string}> =>
+apiService.delete<{message: string}>(`/lk/${id}/booking`).then(({data}) => data);
+

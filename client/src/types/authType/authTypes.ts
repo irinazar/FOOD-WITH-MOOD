@@ -2,8 +2,10 @@ export type AuthType = {
   id: number;
   name: string;
   email: string;
+
   isOwner?: boolean;
   isAdmin?: boolean; // ????
+
 };
 
 export type AuthSignUpType = Omit<AuthType, 'id'> & { password: string };
@@ -16,6 +18,7 @@ export type ConfirmType = {
 export type CreateConfirmType = Omit<ConfirmType, 'id'>;
 
 export type AuthLoadingType =
+  
   | (AuthType & { status: 'logged' })
   | { status: 'loading' }
   | { status: 'guest' }

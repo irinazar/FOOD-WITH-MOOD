@@ -42,6 +42,7 @@ userRouter.post("/signup", async (req, res) => {
       name,
       password: await bcrypt.hash(password, 10),
       active: false,
+    
     },
   });
 

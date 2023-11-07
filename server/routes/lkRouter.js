@@ -8,7 +8,9 @@ const {
   Comment,
   Restaurant,
   Preference,
+  Favourite,
   CommentReply,
+  Booking,
 } = require("../db/models");
 const upload = require("../middlewares/multerLoad");
 const sharp = require("sharp");
@@ -241,7 +243,16 @@ lkRouter.post("/getmyrest/:id", async (req, res) => {
           [Op.in]: countryIds,
         },
       },
+      include: [
+        {
+          model: Image, 
+        },
+        {
+          model: Favourite, 
+        },
+      ],
     });
+
     res.json(restaurants);
   } catch (error) {
     console.log(error);
@@ -265,20 +276,170 @@ lkRouter.delete("/delmyrest/:id", async (req, res) => {
 lkRouter.get("/mycomments/:id", async (req, res) => {
   try {
     const { id } = req.params;
+
     const allmyrest = await Restaurant.findAll({
       where: { restOwnerId: id },
+    });
+    const restaurantIds = allmyrest.map((restaurant) => restaurant.id);
+
+    if (restaurantIds.length === 0) {
+      res.send([]);
+      return;
+    }
+
+    const allComments = await Comment.findAll({
+      where: {
+        restaurantId: restaurantIds,
+      },
       include: [
         {
-          model: Comment,
-          include: User,
+          model: User,
+        },
+        {
+          model: CommentReply,
+        },
+        {
+          model: Restaurant,
         },
       ],
     });
 
-    res.send(allmyrest);
+    res.send(allComments);
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
+  }
+});
+
+lkRouter.post("/replycomment", async (req, res) => {
+  try {
+    const { commentId, body, restOwnerId } = req.body;
+    const newCommentReply = await CommentReply.create({
+      commentId: commentId,
+      body: body,
+      restOwnerId: restOwnerId,
+    });
+
+    if (newCommentReply) {
+      res.status(201).json(newCommentReply);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+
+lkRouter.post("/favorite", async (req, res) => {
+  console.log(req.body);
+  try {
+    const { userId, restaurantId } = req.body;
+
+    const [favorite, created] = await Favourite.findOrCreate({
+      where: {
+        restaurantId,
+        userId,
+      },
+    });
+
+    if (!created) {
+      await favorite.destroy();
+
+      // console.log(rest, "oldddddddd");
+      res.status(200).json({ del: true, rest: { id: restaurantId } });
+      return;
+    } else {
+      const rest = await Restaurant.findByPk(restaurantId, {
+        include: [
+          {
+            model: Favourite,
+          },
+          {
+            model: Image,
+          },
+        ],
+      });
+
+      // console.log(rest, "newwwwwwwww");
+
+      res.status(200).json({ rest });
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+lkRouter.get("/myfav/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const myFavoriteRestaurants = await Restaurant.findAll({
+      include: [
+        {
+          model: Favourite,
+          where: {
+            userId: id,
+          },
+        },
+        {
+          model: Image,
+        },
+      ],
+    });
+
+    res.status(200).json(myFavoriteRestaurants);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+
+lkRouter.get("/:id/booking", async (req, res) => {
+  const ownerId = req.params.id;
+
+  try {
+    const restaurants = await Restaurant.findAll({
+      where: { restOwnerId: ownerId },
+    });
+
+    if (restaurants.length === 0) {
+      return res.status(404).json({ error: "Рестораны не найдены" });
+    }
+
+    const restaurantIds = restaurants.map((restaurant) => restaurant.id);
+
+    const bookings = await Booking.findAll({
+      where: { restaurantId: restaurantIds },
+      include: [
+        {
+          model: Restaurant,
+          attributes: ["title"],
+        },
+      ]
+    });
+    res.status(200).json({ bookings });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+lkRouter.delete("/:id/booking", async (req, res) => {
+  const bookingId = req.params.id;
+
+  try {
+    const booking = await Booking.findByPk(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    await booking.destroy()
+
+    res.status(204).json({message: 'Booking deleted'});
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+
   }
 });
 

@@ -6,19 +6,31 @@ import type {
   SubmitUserType2,
   SubmitRestaurantType2,
   SubmitRestaurantType,
-  CommentsType,
+  CommentResponseType,
+  ReplyType,
+  FavoriteType,
+  FavoriteResponse,
 } from '../../../../types/lkTypes/lkTypes';
 import {
+
+  allmyFavService,
+
+  deleteBookingServer,
+
   deleteServer,
   editOwnerServer,
   editUserServer,
+  favoriteService,
   getAllCountry,
+  getBookingsServer,
   getCommentsServer,
   getOwnerServer,
   getUserRestaurantServer,
   getUserServer,
+  newReplyComment,
   newRestaurantServer,
 } from '../../../../services/lkService/lkService';
+import type { BookingResponse } from '../../../../types/oneRestaurantType/oneRestaurantTypes';
 
 export const getAllCountryThunk = createAsyncThunk<CountryType[]>('allcountry', async () =>
   getAllCountry().then((data) => data),
@@ -57,6 +69,31 @@ export const deleteThunk = createAsyncThunk<number, number>('deleterest', async 
   deleteServer(id).then(() => id),
 );
 
-export const getMyComment = createAsyncThunk<CommentsType[], number>('allcomment', async (id) =>
-  getCommentsServer(id).then((data) => data),
+export const getMyComment = createAsyncThunk<CommentResponseType[], number>(
+  'allcomment',
+  async (id) => getCommentsServer(id).then((data) => data),
 );
+
+export const addNewReplyThunk = createAsyncThunk<ReplyType, ReplyType>(
+  'addnewreply',
+  async (data) => newReplyComment(data).then((res) => res),
+);
+
+
+export const favoriteThunk = createAsyncThunk<FavoriteResponse, FavoriteType>(
+  'favorite',
+  async (data) => favoriteService(data).then((res) => res),
+);
+
+export const myFavoriteThunk = createAsyncThunk<FavoriteResponse[], number>(
+  'allmyfav',
+  async (data) => allmyFavService(data).then((res) => res),
+);
+
+export const getBookingsThunk = createAsyncThunk<BookingResponse[], number>(
+  'getbookings',
+  async(id) => getBookingsServer(id).then((data) => data)
+)
+
+export const deleteBookingThunk = createAsyncThunk('deletebooking', async(id: number) => deleteBookingServer(id).then((data) => data.message))
+

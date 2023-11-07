@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       bookerPhone: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       date: {
         type: Sequelize.STRING

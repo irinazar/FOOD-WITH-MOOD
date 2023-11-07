@@ -53,6 +53,9 @@ export default function MyNavBar(): JSX.Element {
     void dispatch(logoutOwnerThunk());
     void dispatch(setRole('user'));
   };
+  const user = useAppSelector((store) => store.user) as { id: number };
+
+  const owner = useAppSelector((store) => store.authOwner) as { id: number };
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} mb={5}>
@@ -70,10 +73,10 @@ export default function MyNavBar(): JSX.Element {
             <NavLink to="/restaurants/:id">Ресторан</NavLink>
             {user.status === 'logged' && user.isAdmin && <NavLink to="/admin">Админ</NavLink>}
             {user.status === 'logged' && !user.isAdmin && (
-              <NavLink to="/user/:id">ЛК пользователя</NavLink>
+              <NavLink to={`/user/${user?.id}`}>ЛК пользователя</NavLink>
             )}
             {owner.status === 'logged' && !user.isAdmin && (
-              <NavLink to="/owner/:id">ЛК ресторана</NavLink>
+              <NavLink to={`/owner/${owner?.id}`}>ЛК ресторана</NavLink>
             )}
             {user.status === 'guest' && owner.status === 'guest' && (
               <NavLink to="/login">Вход / Регистрация</NavLink>

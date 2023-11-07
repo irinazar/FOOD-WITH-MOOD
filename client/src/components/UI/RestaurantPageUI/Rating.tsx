@@ -10,7 +10,7 @@ type RestaurantCardProps = {
   averageRating: number;
 };
 
-export default function Rating({ averageRating }: RestaurantCardProps): JSX.Element {
+function Rating({ averageRating }: RestaurantCardProps): JSX.Element {
   const { id } = useParams();
   const idParam = Number(id);
   const dispatch = useAppDispatch();
@@ -36,3 +36,5 @@ export default function Rating({ averageRating }: RestaurantCardProps): JSX.Elem
     </Center>
   );
 }
+
+export default React.memo(Rating);

@@ -112,8 +112,53 @@ export type SubmitRestaurantType2 = {
   FormData: FormData;
 };
 
-export type CommentsType = {
+export type CommentRepliesType = {
+  id: number;
+  body: string;
+  commentId: number;
+  restOwnerId: number;
+};
+
+export type CommentResponseType = {
+  id: number;
   body: string;
   userId: number;
   restaurantId: number;
+  createdAt: string;
+  User: UserLkType;
+  CommentReplies: CommentRepliesType[];
+  Restaurant: RestFormType;
+};
+
+export type ReplyType = {
+  id?: number;
+  commentId: number;
+  restOwnerId: number;
+  body: string;
+};
+
+export type FavouritesType = {
+  id: number;
+  userId: number;
+  restaurantId: number;
+};
+
+export type FavoriteType = {
+  id: number;
+  title: string;
+  description: string;
+  adress: string;
+  phone: string;
+  coordX: number;
+  coordY: number;
+  status: string;
+  countryId: number;
+  restOwnerId: number;
+  Favourites: FavouritesType[];
+  Images: ImagesType[];
+};
+
+export type FavoriteResponse = {
+  del?: boolean;
+  rest: FavoriteType;
 };

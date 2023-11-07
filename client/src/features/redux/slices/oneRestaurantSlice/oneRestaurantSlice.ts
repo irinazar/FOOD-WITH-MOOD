@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addBookingThunk, addCommentThunk, addRatingThunk, getOneRestaurantThunk } from './oneRestaurantThunk';
+import {
+  addBookingThunk,
+  addCommentThunk,
+  addRatingThunk,
+  deleteCommentThunk,
+  getOneRestaurantThunk,
+} from './oneRestaurantThunk';
 import type {
   BookingType,
   CommentType,
@@ -14,8 +20,8 @@ const initialState: {
   pictures: PictureType[];
   booking: BookingType[];
   averageRating: number;
-  ratings: RatingType[]
-} = { oneRestaurant: null, comments: [], pictures: [], booking: [], averageRating: 0, ratings: []};
+  ratings: RatingType[];
+} = { oneRestaurant: null, comments: [], pictures: [], booking: [], averageRating: 0, ratings: [] };
 
 const oneRestaurantSlice = createSlice({
   name: 'oneRestaurant',
@@ -27,11 +33,26 @@ const oneRestaurantSlice = createSlice({
       state.oneRestaurant = action.payload.oneRestaurant;
       state.comments = action.payload.comments;
       state.pictures = action.payload.pictures;
-      state.averageRating = action.payload.averageRating
+      state.averageRating = action.payload.averageRating;
     });
 
     builder.addCase(addCommentThunk.fulfilled, (state, action) => {
-      state.comments.push(action.payload);
+      // state.comments.push(action.payload);
+      if ( state.comments) {
+        state.comments.map((el) => 
+        el.id === action.payload.id ?
+        state.comments.push(action.payload):
+        state.comments
+        )
+      }
+    });
+
+    builder.addCase(deleteCommentThunk.fulfilled, (state, action) => {
+      const commentIndex = state.comments.findIndex((comment) => comment.id === action.payload.id);
+
+      if (commentIndex !== -1) {
+        state.comments.splice(commentIndex, 1);
+      }
     });
 
     builder.addCase(addRatingThunk.fulfilled, (state, action) => {
