@@ -3,6 +3,7 @@ import { useAppDispatch } from '../reduxHooks';
 import {
   addNewReplyThunk,
   deleteThunk,
+  favoriteThunk,
   getAllCountryThunk,
   getOwnerThunk,
   getUserRestaurants,
@@ -40,6 +41,13 @@ const useLkHooks = (): {
     commentId: number,
     OwnerId: number,
   ) => void;
+  handleFavoriteClick: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    userId: number,
+    restaurantId: number,
+  ) => void;
+  isFavorited: boolean;
+  setIsFavorited: React.Dispatch<React.SetStateAction<boolean>>;
 } => {
   const dispatch = useAppDispatch();
 
@@ -123,12 +131,30 @@ const useLkHooks = (): {
     e.currentTarget.reset();
   };
 
+  const [isFavorited, setIsFavorited] = useState<boolean>(false);
+
+  const handleFavoriteClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    userId: number,
+    restaurantId: number,
+  ): void => {
+    setIsFavorited(!isFavorited);
+
+    const data = { userId, restaurantId };
+    console.log(restaurantId);
+
+    void dispatch(favoriteThunk(data));
+  };
+
   return {
     handlerSubmit,
     handlerOwnerSubmit,
     handlerRestaurantSubmit,
     deleteHandler,
     handlerReplySubmit,
+    handleFavoriteClick,
+    isFavorited,
+    setIsFavorited,
   };
 };
 
