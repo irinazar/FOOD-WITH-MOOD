@@ -93,7 +93,10 @@ function ModalNewRestorant({
               <FormLabel>Название Заведения</FormLabel>
               <Input name="title" placeholder="Название" />
             </FormControl>
-
+            <FormControl>
+              <FormLabel>Телефон</FormLabel>
+              <Input name="phone" placeholder="Телефон" />
+            </FormControl>
             <FormControl mt={4}>
               <FormLabel>Адрес Заведения</FormLabel>
               <Input name="adress" placeholder="Адрес" />
@@ -119,6 +122,7 @@ function ModalNewRestorant({
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Загрузите фото</FormLabel>
+              <FormLabel>Максимум 3 фото</FormLabel>
               <Input type="file" id="file-upload" name="file" accept="image/*" multiple />
             </FormControl>
           </ModalBody>

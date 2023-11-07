@@ -8,7 +8,9 @@ const {
   Comment,
   Restaurant,
   Preference,
+  Favourite,
   CommentReply,
+  Booking,
 } = require("../db/models");
 const upload = require("../middlewares/multerLoad");
 const sharp = require("sharp");
@@ -81,7 +83,7 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
       if (req.file) {
         const name = `${Date.now()}.webp`;
         const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
-        await fs.writeFile(`./public/img/${name}`, outputBuffer);
+        await fs.writeFile(`./public/img/users/${name}`, outputBuffer);
         updatedFields.avatar = name;
       }
 
@@ -103,15 +105,6 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
       const user = await User.findByPk(id, {
         include: Preference,
       });
-
-      // const user = await User.findByPk(id, {
-      //   include: [
-      //     {
-      //       model: Preference,
-      //       include: [Country],
-      //     },
-      //   ],
-      // });
 
       res.send(user);
     } else {
@@ -148,7 +141,7 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
       if (req.file) {
         const name = `${Date.now()}.webp`;
         const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
-        await fs.writeFile(`./public/img/${name}`, outputBuffer);
+        await fs.writeFile(`./public/img/users/${name}`, outputBuffer);
         updatedFields.avatar = name;
       }
 
@@ -168,9 +161,10 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
 
 lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
   try {
-    const { id, title, adress, countryId, description, coordX, coordY } =
+    const { id, title, adress, countryId, description, coordX, coordY, phone } =
       req.body;
     if (
+      !phone ||
       !id ||
       !title ||
       !adress ||
@@ -183,6 +177,7 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
     }
 
     const newRestaurant = await Restaurant.create({
+      phone,
       title,
       adress,
       countryId,
@@ -241,7 +236,16 @@ lkRouter.post("/getmyrest/:id", async (req, res) => {
           [Op.in]: countryIds,
         },
       },
+      include: [
+        {
+          model: Image,
+        },
+        {
+          model: Favourite,
+        },
+      ],
     });
+
     res.json(restaurants);
   } catch (error) {
     console.log(error);
@@ -315,6 +319,121 @@ lkRouter.post("/replycomment", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
+  }
+});
+
+lkRouter.post("/favorite", async (req, res) => {
+  console.log(req.body);
+  try {
+    const { userId, restaurantId } = req.body;
+
+    const [favorite, created] = await Favourite.findOrCreate({
+      where: {
+        restaurantId,
+        userId,
+      },
+    });
+
+    if (!created) {
+      await favorite.destroy();
+
+      // console.log(rest, "oldddddddd");
+      res.status(200).json({ del: true, rest: { id: restaurantId } });
+      return;
+    } else {
+      const rest = await Restaurant.findByPk(restaurantId, {
+        include: [
+          {
+            model: Favourite,
+          },
+          {
+            model: Image,
+          },
+        ],
+      });
+
+      // console.log(rest, "newwwwwwwww");
+
+      res.status(200).json({ rest });
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+lkRouter.get("/myfav/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const myFavoriteRestaurants = await Restaurant.findAll({
+      include: [
+        {
+          model: Favourite,
+          where: {
+            userId: id,
+          },
+        },
+        {
+          model: Image,
+        },
+      ],
+    });
+
+    res.status(200).json(myFavoriteRestaurants);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+
+lkRouter.get("/:id/booking", async (req, res) => {
+  const ownerId = req.params.id;
+
+  try {
+    const restaurants = await Restaurant.findAll({
+      where: { restOwnerId: ownerId },
+    });
+
+    if (restaurants.length === 0) {
+      return res.status(404).json({ error: "Рестораны не найдены" });
+    }
+
+    const restaurantIds = restaurants.map((restaurant) => restaurant.id);
+
+    const bookings = await Booking.findAll({
+      where: { restaurantId: restaurantIds },
+      include: [
+        {
+          model: Restaurant,
+          attributes: ["title"],
+        },
+      ],
+    });
+    res.status(200).json({ bookings });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+lkRouter.delete("/:id/booking", async (req, res) => {
+  const bookingId = req.params.id;
+
+  try {
+    const booking = await Booking.findByPk(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    await booking.destroy();
+
+    res.status(204).json({ message: "Booking deleted" });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
   }
 });
 

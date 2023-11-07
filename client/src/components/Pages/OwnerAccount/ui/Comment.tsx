@@ -52,10 +52,16 @@ function Comment({ comment }: CommentProps): JSX.Element {
         Ответить
       </Button>
       <div className={style.containercomment}>
-        <div>Ответ</div>
+        <div>
+          <strong>Ответ </strong>
+        </div>
         {comment?.CommentReplies.map((reply) => (
-          <div key={reply.id} style={{ maxWidth: '400px', textAlign: 'right' }}>
-            {reply.body}
+          <div
+            className={style.commentstylemy}
+            key={reply.id}
+            style={{ maxWidth: '400px', textAlign: 'right' }}
+          >
+            <strong>{reply.body}</strong>
           </div>
         ))}
       </div>

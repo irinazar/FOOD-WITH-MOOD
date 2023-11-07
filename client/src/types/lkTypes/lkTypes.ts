@@ -84,6 +84,7 @@ export type SubmitRestTypeHTML = {
 export type SubmitRestaurantType = {
   title: string;
   id?: string;
+  phone: number;
   adress: string;
   countryId: string;
   description: string;
@@ -135,4 +136,35 @@ export type ReplyType = {
   commentId: number;
   restOwnerId: number;
   body: string;
+};
+
+export type FavouritesType = {
+  id: number;
+  userId: number;
+  restaurantId: number;
+};
+
+export type FavoriteType = {
+  id: number;
+  title: string;
+  description: string;
+  adress: string;
+  phone: string;
+  coordX: number;
+  coordY: number;
+  status: string;
+  countryId: number;
+  restOwnerId: number;
+  Favourites: FavouritesType[];
+  Images: ImagesType[];
+};
+
+export type FavoriteResponse = {
+  del?: boolean;
+  rest: FavoriteType;
+};
+
+export type UserIdRestId = {
+  userId: number;
+  restaurantId: number;
 };

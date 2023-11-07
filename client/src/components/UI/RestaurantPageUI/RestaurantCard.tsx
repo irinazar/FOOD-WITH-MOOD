@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
   Button,
   Card,
@@ -24,11 +24,17 @@ type RestaurantCardProps = {
   oneRestaurant: OneRestaurantType;
 };
 
-export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): JSX.Element {
+ function RestaurantCard({ oneRestaurant }: RestaurantCardProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = React.useState(<OverlayTwo />);
 
   const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
+const memoAverageRating = useMemo(() => averageRating, [averageRating]);
+
+  const handleBookingClick = useCallback(() => {
+    setOverlay(<OverlayTwo />);
+    onOpen();
+  }, [setOverlay, onOpen]);
   return (
     <Center>
       <Card className={style.restCard}>
@@ -38,7 +44,7 @@ export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): 
               {oneRestaurant.title}
             </Heading>
 
-            <Rating averageRating={averageRating} />
+            <Rating averageRating={memoAverageRating} />
             <Text fontSize="m" className={style.textGray}>
               {oneRestaurant.adress}
             </Text>
@@ -53,10 +59,7 @@ export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): 
           colorScheme="blackAlpha"
           variant="outline"
           _hover={{ bg: 'rgba(196, 77, 86, 0.6)' }}
-          onClick={() => {
-            setOverlay(<OverlayTwo />);
-            onOpen();
-          }}
+          onClick={handleBookingClick}
         >
           Забронировать
         </Button>
@@ -65,3 +68,5 @@ export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): 
     </Center>
   );
 }
+
+export default React.memo(RestaurantCard);
