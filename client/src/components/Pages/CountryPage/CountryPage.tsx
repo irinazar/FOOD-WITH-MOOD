@@ -1,32 +1,89 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import style from './style.module.css';
 import FavoriteButton from '../../UI/FavoriteButton/FavoriteButton';
-import Rating from '../../UI/RestaurantPageUI/Rating';
 import { Reveal } from '../../UI/Animations/Reveal';
 import { OnTheLeft } from '../../UI/Animations/OnLeft';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
+import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const oneCountry = useAppSelector((state) => state.countries.oneCountry);
-  
-  console.log('----------------------',oneCountry?.Restaurants)
-  useEffect(() => {
 
+  const user = useAppSelector((state) => state.user);
+  // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
+  const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
+  const restiks = oneCountry?.Restaurants;
+  const ymapRef = useRef(null);
+
+
+
+
+
+  useEffect(() => {
     void dispatch(oneCountryActionThunk(Number(id)));
+
+    // return -> destroy map
+    return () => {
+      dispatch(clearAllRestaurants());
+    };
   }, []);
 
+  const checkid = (): number | null => {
+    if (user.status === 'logged') {
+      return user.id;
+    }
+    return null;
+  };
+
+  const loadMap = () => {
+    console.log(ymaps);
+    if (ymaps) {
+      ymaps.ready(() => {
+        ymapRef.current = new ymaps.Map('map', {
+          center: [55.751574, 37.573856],
+          zoom: 11,
+        });
+        const myMap = ymapRef.current;
+        if (!restiks?.length) return;
+        restiks?.forEach((restik) => {
+          const placemark = new ymaps.Placemark([restik.coordX, restik.coordY], {
+            balloonContentHeader: `<a style="color: black" href ='post/house/${restik.id}'> ${restik.title}</a>`,
+
+            balloonContentBody: restik.description,
+
+            iconLayout: 'default#image',
+            iconImageHref: '/img/geo.png',
+            iconImageSize: [25, 25],
+            iconImageOffset: [-5, -38],
+            hintContent: restik.title,
+          });
+
+          // Добавляем метку на карту
+          myMap.geoObjects.add(placemark);
+        });
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (restiks?.length && !ymapRef.current) loadMap();
+    console.log(ymapRef);
+  }, [restiks]);
+
   return (
-    < >
+    <>
+
+
       <div className={style.cuisine}>
         <Reveal>
           <>
             <h1>{oneCountry?.name}</h1>
-            <p style={{fontSize:'25px'}}>{oneCountry?.description}</p>
+            <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
           </>
         </Reveal>
       </div>
@@ -68,6 +125,8 @@ export default function CountryPage(): JSX.Element {
     </div>
   ))
 }
+          <div className="map" id="map" style={{ width: '100%', height: '400px' }} />
+
     </>
   );
 }

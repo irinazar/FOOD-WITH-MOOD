@@ -33,14 +33,16 @@ export type OneRestaurantType = {
   status: string;
   countryId: number;
   restOwnerId: number;
-  averageRating?: RatingType;
+  Ratings?: RatingType;
   pictures: PictureType[];
   Images: PictureType[];
+
   Ratings: RatingType[];
 };
 
 export type BookingRestType = {
   title: string;
+
 };
 
 export type BookingResponse = {
