@@ -12,7 +12,7 @@ export default function PrivateRoute({
   isAllowed,
   redirectTo,
 }: PrivateRouterPropsType): JSX.Element {
-  if (isAllowed) {
+  if (!isAllowed) {
     return <Navigate to={redirectTo} />;
   }
   return children || <Outlet />;

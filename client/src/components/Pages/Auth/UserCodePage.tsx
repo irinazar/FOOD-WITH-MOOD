@@ -10,6 +10,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import type { AuthType, CreateConfirmType } from '../../../types/authType/authTypes';
 import { setOwner } from '../../../features/redux/slices/authOwner/authOwnerSlice';
@@ -21,6 +22,7 @@ export default function UserCodePage(): JSX.Element {
 
   const submitCodeHandler: React.FormEventHandler<HTMLFormElement> = (e): void => {
     e.preventDefault();
+
     const formData = Object.fromEntries(new FormData(e.currentTarget)) as CreateConfirmType;
 
     axios
@@ -29,8 +31,11 @@ export default function UserCodePage(): JSX.Element {
       })
       .then((response) => {
         if (response.data.isOwner) {
+          
           void dispatch(setOwner(response.data));
         } else {
+        
+
           void dispatch(setUser(response.data));
         }
       })

@@ -45,7 +45,7 @@ authOwnerRouter.post("/signup", async (req, res) => {
   });
 
   if (!created) {
-    console.log("Code entry not found for randomString:", randomString);
+    // console.log("Code entry not found for randomString:", randomString);
     return res.sendStatus(403);
   }
 
@@ -76,7 +76,7 @@ authOwnerRouter.post("/login", async (req, res) => {
       req.session.user.isOwner = true;
       return res.json(sessionUser);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return res.sendStatus(500);
     }
   }

@@ -27,7 +27,6 @@ export default function AuthPage(): JSX.Element {
   const toast = useToast();
 
   const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
-    console.log();
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.currentTarget)) as {
       name: string;

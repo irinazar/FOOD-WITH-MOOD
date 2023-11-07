@@ -6,11 +6,14 @@ import RestorantInfo from './ui/RestorantInfo';
 import style from '../UserAccount/style.module.css';
 import Comment from './ui/Comment';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
-import { getBookingsThunk, getMyComment, getOwnerThunk } from '../../../features/redux/slices/lk/lkThuncks';
+import {
+  getBookingsThunk,
+  getMyComment,
+  getOwnerThunk,
+} from '../../../features/redux/slices/lk/lkThuncks';
 import type { CommentResponseType, OwnerType } from '../../../types/lkTypes/lkTypes';
 import OwnerCard from './ui/OwnerCard';
 import Bookings from './ui/Bookings';
-
 
 export default function OwnerAccount(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -20,17 +23,16 @@ export default function OwnerAccount(): JSX.Element {
   useEffect(() => {
     void dispatch(getOwnerThunk(Number(id)));
     void dispatch(getMyComment(Number(id)));
-    void dispatch(getBookingsThunk(Number(id)) )
+    void dispatch(getBookingsThunk(Number(id)));
   }, []);
 
   const owner = useAppSelector((state) => state.lkReducer.currentOwner) as OwnerType;
-  const bookings = useAppSelector((state) => state.lkReducer.bookings)
+  const bookings = useAppSelector((state) => state.lkReducer.bookings);
   const restmycomments = useAppSelector(
     (state) => state.lkReducer.comments,
   ) as CommentResponseType[];
-  
-  const ownerBookings = (bookings?.bookings || []);
-  
+
+  const ownerBookings = bookings?.bookings || [];
 
   return (
     <div className={style.container}>

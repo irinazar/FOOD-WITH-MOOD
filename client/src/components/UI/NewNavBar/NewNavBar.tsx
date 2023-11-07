@@ -28,7 +28,7 @@ export default function NewNavBar(): JSX.Element {
   const handleLogout = (): void => {
     void dispatch(logoutUserThunk());
     void dispatch(logoutOwnerThunk());
-    void dispatch(setRole('user'));
+    // void dispatch(setRole('user'));
   };
   return (
     <div className={style.menuContainer}>
@@ -41,16 +41,6 @@ export default function NewNavBar(): JSX.Element {
         <li className={style.menuEl}>
           <NavLink className={style.menuLink} to="/">
             Главная
-          </NavLink>
-        </li>
-        <li className={style.menuEl}>
-          <NavLink className={style.menuLink} to="/countries/:id">
-            Страна
-          </NavLink>
-        </li>
-        <li className={style.menuEl}>
-          <NavLink className={style.menuLink} to="/restaurants/:id">
-            Ресторан
           </NavLink>
         </li>
         <li className={style.menuEl}>
