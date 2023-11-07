@@ -1,3 +1,4 @@
+
 import { createSlice } from '@reduxjs/toolkit';
 import type {
   CommentResponseType,
@@ -10,6 +11,7 @@ import {
   addNewReplyThunk,
   deleteThunk,
   getAllCountryThunk,
+  getBookingsThunk,
   getMyComment,
   getOwnerThunk,
   getUserRestaurants,
@@ -18,17 +20,24 @@ import {
   updateOwnerThunk,
   updateUserThunk,
 } from './lkThuncks';
+import type { BookingResponse } from '../../../../types/oneRestaurantType/oneRestaurantTypes';
 
 const initialState: {
   country: CountryType[];
   currentOwner: OwnerType | null;
   currentUserLk: UserLkType | null;
   comments: CommentResponseType[] | null;
+  bookings: {
+    bookings: BookingResponse[]
+  }
 } = {
   country: [],
   currentOwner: null,
   currentUserLk: null,
   comments: null,
+  bookings: {
+    bookings: []
+  }
 };
 
 export const lkSlice = createSlice({
@@ -77,5 +86,9 @@ export const lkSlice = createSlice({
         );
       }
     });
+
+    builder.addCase(getBookingsThunk.fulfilled, (state, action) => {
+      state.bookings = action.payload
+    })
   },
 });

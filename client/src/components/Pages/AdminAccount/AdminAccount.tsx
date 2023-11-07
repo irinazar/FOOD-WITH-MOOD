@@ -10,7 +10,7 @@ export default function AdminPage(): JSX.Element {
   
   useEffect(() => {
     void dispatch(getPendingRestaurantThunk())
-  }, [pendingRestaurants])
+  }, [])
   
   return (
     <div className="flex flex-col w-full">
