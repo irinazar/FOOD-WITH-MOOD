@@ -2,9 +2,8 @@ export type AuthType = {
   id: number;
   name: string;
   email: string;
-
   isOwner?: boolean;
-  isAdmin?: boolean; // ????
+  isAdmin?: boolean; 
 
 };
 

@@ -7,7 +7,7 @@ const jwtSecretKey = "your-secret-key"; // секретный ключ
 
 validateRooter.post("/", async (req, res) => {
   const { randomString } = req.body;
-  console.log("randomString", randomString);
+  // console.log("randomString", randomString);
   if (!randomString) return res.sendStatus(400);
 
   const codeEntry = await Confirm.findOne({
@@ -37,7 +37,7 @@ validateRooter.post("/", async (req, res) => {
       }
     );
     res.cookie("token", token, { httpOnly: true });
-    return res.status(200).json({ token });
+    return res.status(200).json({ token, isOwner: true });
   } else {
     const userNew = await User.findByPk(codeEntry.userId);
     userNew.active = true;

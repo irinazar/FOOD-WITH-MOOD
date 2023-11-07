@@ -16,9 +16,16 @@ import useCheckAuth from './hooks/authHooks/useCheckAuth';
 
 function App(): JSX.Element {
   useCheckAuth();
-  const user = useAppSelector((store) => store.user);
+  const user = useAppSelector((store) => store.user) as {
+    id: number;
+    status: string;
+    isAdmin: boolean;
+  };
   const userWithStatus = useAppSelector((store) => store.lkReducer.currentUserLk);
-  const owner = useAppSelector((store) => store.authOwner);
+  const owner = useAppSelector((store) => store.authOwner) as {
+    id: number;
+    status: string;
+  };
 
   return (
     <Routes>
@@ -29,34 +36,43 @@ function App(): JSX.Element {
         <Route
           path="/admin"
           element={
-            <PrivateRoute isAllowed={user.status === 'logged' && userWithStatus?.isAdmin === true} redirectTo="/">
-            <AdminPage />
-             </PrivateRoute>
+            <PrivateRoute
+              isAllowed={user.status === 'logged' && userWithStatus?.isAdmin === true}
+              redirectTo="/"
+            >
+              <AdminPage />
+            </PrivateRoute>
           }
         />
         <Route
           path="/user/:id"
           element={
-            // <PrivateRoute isAllowed redirectTo="/">
-            <UserAccount />
-            // </PrivateRoute>
+            <PrivateRoute
+              // isAllowed
+              isAllowed={user.status === 'logged' && userWithStatus?.isAdmin !== true}
+              redirectTo={`/user/${user?.id}`}
+            >
+              <UserAccount />
+            </PrivateRoute>
           }
         />
         <Route
-
           path="/owner/:id"
-
           element={
-            // <PrivateRoute isAllowed redirectTo="/">
-            <OwnerAccount />
-            // </PrivateRoute>
+            <PrivateRoute
+              isAllowed
+              // isAllowed={owner.status === 'logged'}
+              redirectTo={`/owner/${owner?.id}`}
+            >
+              <OwnerAccount />
+            </PrivateRoute>
           }
         />
         <Route
           path="/login"
           element={
             <PrivateRoute
-              isAllowed={user.status === 'logged' || owner.status === 'logged'}
+              isAllowed={user.status !== 'logged' && owner.status !== 'logged'}
               redirectTo="/"
             >
               <LoginPage />
@@ -68,7 +84,7 @@ function App(): JSX.Element {
           path="/code"
           element={
             <PrivateRoute
-              isAllowed={user.status === 'logged' || owner.status === 'logged'}
+              isAllowed={user.status !== 'logged' && owner.status !== 'logged'}
               redirectTo="/"
             >
               <UserCodePage />
