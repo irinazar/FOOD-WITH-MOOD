@@ -35,16 +35,23 @@ const Links = ['Dashboard', 'Projects', 'Team'];
 export default function MyNavBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useAppDispatch();
-  const role = useAppSelector((state) => state.role.status);
+  // const role = useAppSelector((state) => state.role.status);
+  const user = useAppSelector((state) => state.user);
+  const owner = useAppSelector((state) => state.authOwner);
+  // console.log('owner', owner);
+  // console.log('user', user);
 
   const handleLogout = (): void => {
-    if (role === 'user') {
-      void dispatch(logoutUserThunk());
-    }
-    if (role === 'owner') {
-      void dispatch(logoutOwnerThunk());
-      void dispatch(setRole('user'));
-    }
+    // if (role === 'user') {
+    //   void dispatch(logoutUserThunk());
+    // }
+    // if (role === 'owner') {
+    //   void dispatch(logoutOwnerThunk());
+    //   void dispatch(setRole('user'));
+    // }
+    void dispatch(logoutUserThunk());
+    void dispatch(logoutOwnerThunk());
+    void dispatch(setRole('user'));
   };
   const user = useAppSelector((store) => store.user) as { id: number };
 
@@ -64,10 +71,16 @@ export default function MyNavBar(): JSX.Element {
             <NavLink to="/">Главная</NavLink>
             <NavLink to="/countries/:id">Страна</NavLink>
             <NavLink to="/restaurants/:id">Ресторан</NavLink>
-            <NavLink to="/admin">Админ</NavLink>
-            <NavLink to={`/user/${user?.id}`}>ЛК пользователя</NavLink>
-            <NavLink to={`/owner/${owner?.id}`}>ЛК ресторана</NavLink>
-            <NavLink to="/login">Вход / Регистрация</NavLink>
+            {user.status === 'logged' && user.isAdmin && <NavLink to="/admin">Админ</NavLink>}
+            {user.status === 'logged' && !user.isAdmin && (
+              <NavLink to={`/user/${user?.id}`}>ЛК пользователя</NavLink>
+            )}
+            {owner.status === 'logged' && !user.isAdmin && (
+              <NavLink to={`/owner/${owner?.id}`}>ЛК ресторана</NavLink>
+            )}
+            {user.status === 'guest' && owner.status === 'guest' && (
+              <NavLink to="/login">Вход / Регистрация</NavLink>
+            )}
           </HStack>
         </HStack>
         <Flex alignItems="center">
@@ -85,7 +98,9 @@ export default function MyNavBar(): JSX.Element {
             </MenuButton>
             <MenuList>
               <MenuItem>Мой профиль</MenuItem>
-              <MenuItem onClick={() => handleLogout()}>Выйти</MenuItem>
+              {(user.status === 'logged' || owner.status === 'logged') && (
+                <MenuItem onClick={() => handleLogout()}>Выйти</MenuItem>
+              )}
               <MenuDivider />
             </MenuList>
           </Menu>

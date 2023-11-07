@@ -24,7 +24,7 @@ type RestaurantCardProps = {
   oneRestaurant: OneRestaurantType;
 };
 
-export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): JSX.Element {
+ function RestaurantCard({ oneRestaurant }: RestaurantCardProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = React.useState(<OverlayTwo />);
 
@@ -65,3 +65,5 @@ export default function RestaurantCard({ oneRestaurant }: RestaurantCardProps): 
     </Center>
   );
 }
+
+export default React.memo(RestaurantCard);

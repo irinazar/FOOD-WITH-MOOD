@@ -13,14 +13,14 @@ export default function AdminPage(): JSX.Element {
   }, [])
   
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full ml-20 mr-20">
       <Box position="relative" padding="10">
         <Divider />
         <AbsoluteCenter  bg='gray.100' px="4" fontSize="xl" fontWeight="bold">
           Заявки, ожидающие подтверждения
         </AbsoluteCenter>
       </Box>
-      <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-3 mx-7 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-10 mx-7 mx-auto ">
         {pendingRestaurants?.map((el) => (
           <PendingCard key={el.id} rest={el}/>
         ))}

@@ -8,12 +8,14 @@ const useCheckAuth = (): void => {
   const role = useAppSelector((state) => state.role.status);
 
   useEffect(() => {
-    if (role === 'user') {
-      void dispatch(checkUserThunk());
-    }
-    if (role === 'owner') {
-      void dispatch(checkOwnerThunk());
-    }
+    // if (role === 'user') {
+    //   void dispatch(checkUserThunk());
+    // }
+    // if (role === 'owner') {
+    //   void dispatch(checkOwnerThunk());
+    // }
+    void dispatch(checkUserThunk());
+    void dispatch(checkOwnerThunk());
   }, []);
 };
 
