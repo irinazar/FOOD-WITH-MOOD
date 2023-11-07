@@ -79,8 +79,8 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
   }
   try {
     const newComment = await Comment.create({
-      // userId: req.session.userId,
-      userId: 3,
+      userId: req.session.userId,
+      // userId: 3,
       restaurantId: id,
       body,
     });
@@ -128,18 +128,25 @@ restaurantRouter.patch("/:id/addRating", async (req, res) => {
 });
 
 restaurantRouter.post("/:id/booking", async (req, res) => {
-  const { bookerName, bookerPhone, date } = req.body;
-  if (!(bookerName && bookerPhone && date)) return res.sendStatus(400);
-  const [booking, created] = await Booking.findOrCreate({
-    // where: { userId: req.session.id, restaurantId: req.params.id, date },
-    where: { userId: 5, restaurantId: req.params.id, date },
-    defaults: {
-      bookerName,
-      bookerPhone,
-    },
-  });
-  if (!created) return res.sendStatus(403);
-  return res.json(booking);
+  try {
+    const { bookerName, bookerPhone, date } = req.body;
+    if (!(bookerName && bookerPhone && date)) return res.sendStatus(400);
+    
+    const [booking, created] = await Booking.findOrCreate({
+      where: { userId: req.session.id, restaurantId: req.params.id, date },
+
+      defaults: {
+        bookerName,
+        bookerPhone,
+      },
+    });
+    
+    if (!created) return res.sendStatus(403);
+    return res.json(booking);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 });
 
 restaurantRouter.delete("/:id/comments/:commentId", async (req, res) => {
