@@ -6,8 +6,8 @@ import ModalPage from './ModalPage';
 import type { UserLkType } from '../../../../types/lkTypes/lkTypes';
 import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
-export const STATIC_URL = import.meta.env.VITE_STATIC_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL as unknown as { VITE_BASE_URL: string };
+export const STATIC_URL = import.meta.env.VITE_STATIC_URL as unknown as { VITE_STATIC_URL: string };
 
 function OverlayTwo(): any {
   return <ModalOverlay bg="none" backdropFilter="auto" backdropInvert="80%" backdropBlur="2px" />;
