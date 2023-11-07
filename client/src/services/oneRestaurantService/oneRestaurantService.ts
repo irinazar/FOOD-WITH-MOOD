@@ -61,7 +61,7 @@ export const addRatingService = (id: number, rating: number): Promise<RatingType
 
 export const addBookingService = (id: number, formData: BookingInputType): Promise<BookingType> =>
   apiService
-    .post<BookingType>(`/restaurants/${id}/booking`, formData)
+    .post<BookingType>(`/restaurants/${id}/booking`, Object.fromEntries(formData))
     .then((res) => res.data)
     .catch((error) => {
       console.error('Ошибка:', error);

@@ -50,7 +50,7 @@ restaurantRouter.get("/:id", async (req, res) => {
               avatar: comment.User.avatar,
             }
           : null,
-          commentReply: comment.CommentReplies.map((reply) => reply.body)
+        commentReply: comment.CommentReplies.map((reply) => reply.body)
       };
     });
     const pictures = await Image.findAll({
@@ -84,12 +84,35 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
     return;
   }
   try {
-    const newComment = await Comment.create({
+    const createNewComment = await Comment.create({
       userId: req.session.userId,
-      // userId: 3,
       restaurantId: id,
       body,
     });
+
+    const newComment = await Comment.findOne({
+      where: { restaurantId: id },
+      include: [
+        {
+          model: User,
+          attributes: ["name", "avatar"],
+        },
+        {
+          model: CommentReply, 
+          attributes: ["body"],
+        },
+      ],
+    });
+    newComment.user = newComment.User
+      ? {
+          userName: newComment.User.name,
+          avatar: newComment.User.avatar,
+        }
+      : null;
+    
+    newComment.commentReply = newComment.CommentReplies.map((reply) => reply.body);
+    
+
     res.json(newComment);
   } catch (error) {
     console.log(error);
@@ -135,11 +158,11 @@ restaurantRouter.patch("/:id/addRating", async (req, res) => {
 
 restaurantRouter.post("/:id/booking", async (req, res) => {
   try {
-    const { bookerName, bookerPhone, date } = req.body;
-    if (!(bookerName && bookerPhone && date)) return res.sendStatus(400);
+    const { bookerName, bookerPhone, date, userId } = req.body;
+    if (!(bookerName && bookerPhone && date && userId)) return res.sendStatus(400);
     
     const [booking, created] = await Booking.findOrCreate({
-      where: { userId: req.session.id, restaurantId: req.params.id, date },
+      where: { userId, restaurantId: req.params.id, date },
 
       defaults: {
         bookerName,
