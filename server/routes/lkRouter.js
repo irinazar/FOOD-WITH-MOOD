@@ -164,16 +164,16 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
     const { id, title, adress, countryId, description, coordX, coordY, phone } =
       req.body;
     if (
-      !phone ||
-      !id ||
-      !title ||
-      !adress ||
-      !countryId ||
-      !description ||
-      !coordX ||
+      !phone &&
+      !id &&
+      !title &&
+      !adress &&
+      !countryId &&
+      !description &&
+      !coordX &&
       !coordY
     ) {
-      res.sendStatus(606);
+      res.sendStatus(400);
     }
 
     const newRestaurant = await Restaurant.create({

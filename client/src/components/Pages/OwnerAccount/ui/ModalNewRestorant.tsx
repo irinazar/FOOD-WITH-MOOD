@@ -84,7 +84,7 @@ function ModalNewRestorant({
       <ModalContent>
         <form
           encType="multipart/form-data"
-          onSubmit={(e) => handlerRestaurantSubmit(e, restOwnerId, mapCoordinates)}
+          onSubmit={(e) => handlerRestaurantSubmit(e, restOwnerId, mapCoordinates )}
         >
           <ModalHeader>Заполните данные о вашем заведении</ModalHeader>
           <ModalCloseButton />
