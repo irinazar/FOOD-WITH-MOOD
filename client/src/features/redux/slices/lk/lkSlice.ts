@@ -3,6 +3,7 @@ import type {
   CommentResponseType,
   CountryType,
   FavoriteResponse,
+  FavoriteType,
   OwnerType,
   SubmitRestaurantType,
   UserLkType,
@@ -27,7 +28,7 @@ const initialState: {
   currentOwner: OwnerType | null;
   currentUserLk: UserLkType | null;
   comments: CommentResponseType[] | null;
-  favorite: FavoriteResponse[] | null;
+  favorite: FavoriteType[] | null;
 } = {
   country: [],
   currentOwner: null,

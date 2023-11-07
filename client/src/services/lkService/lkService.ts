@@ -1,14 +1,13 @@
 import type {
   CommentResponseType,
-  CommentsType,
   CountryType,
   FavoriteResponse,
-  FavoriteType,
   OwnerType,
   ReplyType,
   SubmitRestaurantType,
   SubmitRestaurantType2,
   SubmitUserType2,
+  UserIdRestId,
   UserLkType,
 } from '../../types/lkTypes/lkTypes';
 import apiService from '../index';
@@ -49,7 +48,7 @@ export const getCommentsServer = (id: number): Promise<CommentResponseType[]> =>
 export const newReplyComment = (data: ReplyType): Promise<ReplyType> =>
   apiService.post<ReplyType>('/lk/replycomment', data).then((res) => res.data);
 
-export const favoriteService = (data: FavoriteType): Promise<FavoriteResponse> =>
+export const favoriteService = (data: UserIdRestId): Promise<FavoriteResponse> =>
   apiService.post<FavoriteResponse>('/lk/favorite', data).then((res) => res.data);
 
 export const allmyFavService = (id: number): Promise<FavoriteResponse[]> =>
