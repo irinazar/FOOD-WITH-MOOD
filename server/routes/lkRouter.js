@@ -245,10 +245,10 @@ lkRouter.post("/getmyrest/:id", async (req, res) => {
       },
       include: [
         {
-          model: Image, 
+          model: Image,
         },
         {
-          model: Favourite, 
+          model: Favourite,
         },
       ],
     });
@@ -329,7 +329,6 @@ lkRouter.post("/replycomment", async (req, res) => {
   }
 });
 
-
 lkRouter.post("/favorite", async (req, res) => {
   console.log(req.body);
   try {
@@ -392,6 +391,8 @@ lkRouter.get("/myfav/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
+  }
+});
 
   }})
 
@@ -416,7 +417,7 @@ lkRouter.get("/:id/booking", async (req, res) => {
           model: Restaurant,
           attributes: ["title"],
         },
-      ]
+      ],
     });
     res.status(200).json({ bookings });
   } catch (error) {
@@ -435,13 +436,12 @@ lkRouter.delete("/:id/booking", async (req, res) => {
       return res.status(404).json({ error: "Booking not found" });
     }
 
-    await booking.destroy()
+    await booking.destroy();
 
-    res.status(204).json({message: 'Booking deleted'});
+    res.status(204).json({ message: "Booking deleted" });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
-
   }
 });
 
