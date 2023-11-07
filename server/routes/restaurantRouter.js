@@ -122,7 +122,7 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
 
 restaurantRouter.patch("/:id/addRating", async (req, res) => {
   const { id } = req.params;
-  const { rating } = req.body;
+  const { rating, userId } = req.body;
 
 
   if (Number.isNaN(+id) || !rating || rating < 1 || rating > 5) {
@@ -140,7 +140,7 @@ restaurantRouter.patch("/:id/addRating", async (req, res) => {
     const [newRating, created] = await Rating.findOrCreate({
       where: {
         restaurantId: id,
-        userId: req.session.id,
+        userId,
       },
       defaults: {
         rating,

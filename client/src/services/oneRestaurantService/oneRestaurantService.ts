@@ -50,9 +50,9 @@ export const deleteOneCommentService = (restaurantId: number, commentId: number)
       throw error;
     });
 
-export const addRatingService = (id: number, rating: number): Promise<RatingType> =>
+export const addRatingService = (id: number, rating: number, userId: number): Promise<RatingType> =>
   apiService
-    .patch<RatingType>(`/restaurants/${id}/addRating`, { rating })
+    .patch<RatingType>(`/restaurants/${id}/addRating`, { rating, userId })
     .then((response) => response.data)
     .catch((error) => {
       console.error('Ошибка:', error);

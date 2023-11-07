@@ -3,7 +3,7 @@ import { Center, HStack } from '@chakra-ui/react';
 import { FaRegStar } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { addRatingThunk } from '../../../features/redux/slices/oneRestaurantSlice/oneRestaurantThunk';
 
 type RestaurantCardProps = {
@@ -11,12 +11,13 @@ type RestaurantCardProps = {
 };
 
 function Rating({ averageRating }: RestaurantCardProps): JSX.Element {
+  const userId = useAppSelector((state) => state.user.id) as number
   const { id } = useParams();
   const idParam = Number(id);
   const dispatch = useAppDispatch();
 
   const handleRatingClick = useCallback((rating: number) => {
-   void dispatch(addRatingThunk({ id: idParam, rating }));
+   void dispatch(addRatingThunk({ id: idParam, rating, userId }));
   }, [dispatch, idParam]);
 
   return (
