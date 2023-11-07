@@ -24,7 +24,14 @@ function UserInfo({ userlk }: UserInfoProps): JSX.Element {
   return (
     <div className={style.usercardinfo}>
       <div className={style['profile-card__img']}>
-        <img src={`${STATIC_URL}/img/${userlk?.avatar}`} alt=" " />
+        <img
+          src={
+            userlk?.avatar
+              ? `${STATIC_URL}/img/${userlk.avatar}`
+              : `${STATIC_URL}/img/users/nullavatar.png`
+          }
+          alt=" "
+        />
       </div>
       <div className={style['profile-card__cnt']}>
         <div className={style['profile-card__name']}>{userlk?.name}</div>
