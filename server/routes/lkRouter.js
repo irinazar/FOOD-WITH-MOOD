@@ -242,8 +242,16 @@ lkRouter.post("/getmyrest/:id", async (req, res) => {
           [Op.in]: countryIds,
         },
       },
-      include: Image, 
+      include: [
+        {
+          model: Image, 
+        },
+        {
+          model: Favourite, 
+        },
+      ],
     });
+
     res.json(restaurants);
   } catch (error) {
     console.log(error);

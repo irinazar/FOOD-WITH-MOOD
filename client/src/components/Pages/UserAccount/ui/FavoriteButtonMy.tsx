@@ -13,7 +13,7 @@ type FavoriteButtonProps = {
 };
 
 function FavoriteButtonMy({
-  isFavorited,
+  rest,
   idUser,
   idRest,
   handleFavoriteClick,
@@ -22,7 +22,9 @@ function FavoriteButtonMy({
     <div className={style.container}>
       <button
         onClick={(e) => handleFavoriteClick(e, idUser, idRest)}
-        className={`${style.favorite} ${isFavorited ? style.favorited : ''}`}
+        className={`${style.favorite} ${
+          rest.Favourites.length > 0 ? style.favorited : style.favorite
+        }`}
       />
     </div>
   );

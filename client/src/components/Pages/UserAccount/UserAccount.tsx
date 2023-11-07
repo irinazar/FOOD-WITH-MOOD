@@ -26,6 +26,7 @@ function UserAccount(): JSX.Element {
   const myrest = useAppSelector((state) => state.restREducer.restaurant); //! !!! че это
 
   const myfav = useAppSelector((state) => state.lkReducer.favorite);
+  const userlk = useAppSelector((state) => state.lkReducer.currentUserLk) as UserLkType;
 
   useEffect(() => {
     void dispatch(getUserThunk(Number(id)));
@@ -33,19 +34,15 @@ function UserAccount(): JSX.Element {
 
   useEffect(() => {
     void dispatch(getUserRestaurants(Number(id)));
-  }, []);
+  }, [myfav, userlk]);
 
   useEffect(() => {
     void dispatch(myFavoriteThunk(Number(id)));
   }, []);
 
-  const userlk = useAppSelector((state) => state.lkReducer.currentUserLk) as UserLkType;
-
   const userRest = useAppSelector(
     (state) => state.restREducer.restaurant,
   ) as SubmitRestaurantType[];
-
-  console.log(userRest, '=================');
 
   return (
     <div className={style.container}>
@@ -58,7 +55,7 @@ function UserAccount(): JSX.Element {
       </Box>
       <Flex flexWrap="wrap" justifyContent="center">
         {myfav?.map((el) => (
-          <Box key={el?.id} maxW="500px" borderWidth="1px" p="4" m="4">
+          <Box key={el?.id} maxW="300px" borderWidth="1px" p="2" m="2">
             <a className={style.restName} href={`/countries/${el?.id}`}>
               <strong>{el.title}</strong>
             </a>
@@ -70,13 +67,15 @@ function UserAccount(): JSX.Element {
                 handleFavoriteClick={handleFavoriteClick}
                 idUser={userlk?.id}
                 idRest={el?.id}
+                rest={el}
               />
               <Rating />
             </div>
-            <Image src={`${STATIC_URL}/img/restaurants/${el.Images[0]?.image}`} alt=" " alt="" />
+            <Image src={`${STATIC_URL}/img/restaurants/${el.Images[0]?.image}`} alt="" alt="" />
           </Box>
         ))}
       </Flex>
+
       <Box position="relative" padding="10">
         <Divider />
         <AbsoluteCenter bg="gray.100" px="4" fontSize="xl" fontWeight="bold">
@@ -97,6 +96,7 @@ function UserAccount(): JSX.Element {
                 handleFavoriteClick={handleFavoriteClick}
                 idUser={userlk?.id}
                 idRest={el?.id}
+                rest={el}
               />
               <Rating />
             </div>
