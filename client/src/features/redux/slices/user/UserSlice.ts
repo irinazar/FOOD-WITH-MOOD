@@ -7,11 +7,7 @@ import {
   logoutUserThunk,
   signUpUserThunk,
 } from './UserThunks';
-import type {
-  AuthLoadingType,
-  AuthType,
-  CreateConfirmType,
-} from '../../../../types/authType/authTypes';
+import type { AuthLoadingType, AuthType } from '../../../../types/authType/authTypes';
 
 type UserState = AuthLoadingType;
 const initialState: UserState = { status: 'loading' };
