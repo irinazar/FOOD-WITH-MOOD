@@ -42,7 +42,6 @@ userRouter.post("/signup", async (req, res) => {
       name,
       password: await bcrypt.hash(password, 10),
       active: false,
-    
     },
   });
 
@@ -69,45 +68,6 @@ userRouter.post("/signup", async (req, res) => {
   return res.status(201).json({ token });
 });
 
-// userRouter.post("/code", async (req, res) => {
-//   const { randomString } = req.body;
-//   if (!randomString) return res.sendStatus(400);
-
-//   const codeEntry = await Confirm.findOne({
-//     where: {
-//       randomString: randomString,
-//     },
-//   });
-
-//   if (!codeEntry) {
-//     return res.sendStatus(403);
-//   }
-
-//   const usernew = await User.findByPk(codeEntry.userId);
-//   usernew.active = true;
-//   await usernew.save();
-//   req.session.user = {
-//     name: usernew.name,
-//     id: usernew.id,
-//   };
-
-//   await codeEntry.destroy();
-
-//   const token = jwt.sign(
-//     { userName: usernew.name, userId: usernew.id },
-//     jwtSecretKey,
-//     {
-//       expiresIn: "1h",
-//     }
-//   );
-
-//   // Установка токена в куки
-//   res.cookie("token", token, { httpOnly: true });
-
-//   //уточнить только ссесия создается
-//   return res.status(200).json({ token });
-// });
-
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
@@ -124,7 +84,7 @@ userRouter.post("/login", async (req, res) => {
       req.session.user = sessionUser;
       return res.json(sessionUser);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return res.sendStatus(500);
     }
   }

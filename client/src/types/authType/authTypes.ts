@@ -2,9 +2,8 @@ export type AuthType = {
   id: number;
   name: string;
   email: string;
-
   isOwner?: boolean;
-  isAdmin?: boolean; // ????
+  isAdmin?: boolean; 
 
 };
 
@@ -22,6 +21,6 @@ export type AuthLoadingType =
   | (AuthType & { status: 'logged' })
   | { status: 'loading' }
   | { status: 'guest' }
-  | { status: 'logged' };
+
 
 export type AuthRole = 'user' | 'owner';

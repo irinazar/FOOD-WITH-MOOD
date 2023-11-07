@@ -34,23 +34,19 @@ export const authOwnerSlice = createSlice({
       status: 'guest',
     }));
     builder.addCase(signUpOwnerThunk.fulfilled, (state, action) => ({
-      ...action.payload,
+      ...action.meta.arg,
       status: 'loading',
     }));
     builder.addCase(signUpOwnerThunk.rejected, (state, action) => ({
       status: 'guest',
     }));
-    builder.addCase(codeOwnerThunk.fulfilled, (state, action) => ({
+    // builder.addCase(codeOwnerThunk.fulfilled, (state, action) => ({
+    //   status: 'logged',
+    // }));
+    builder.addCase(loginOwnerThunk.fulfilled, (state, action) => ({
+      ...action.payload,
       status: 'logged',
     }));
-    builder.addCase(loginOwnerThunk.fulfilled, (state, action) => {
-      console.log(action.payload, '000000');
-
-      return {
-        ...action.payload,
-        status: 'logged',
-      };
-    });
     builder.addCase(loginOwnerThunk.rejected, (state, action) => ({
       status: 'guest',
     }));

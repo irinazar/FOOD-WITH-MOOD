@@ -14,7 +14,7 @@ export default function MainPage(): JSX.Element {
           <source src={`${STATIC_URL}/video/Food.mp4`}  type="video/mp4" />
         </video>
         <div className={style.content}>
-          <h1 style={{ fontFamily: 'Roboto' }}>Food with Mood</h1>
+        <h1 className={style.brandname}>FOOD with MOOD</h1>
         </div>
       </div>
       <div className={style.shadow}>sdv</div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Center, HStack } from '@chakra-ui/react';
 import { FaRegStar } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,6 +15,10 @@ function Rating({ averageRating }: RestaurantCardProps): JSX.Element {
   const idParam = Number(id);
   const dispatch = useAppDispatch();
 
+  const handleRatingClick = useCallback((rating: number) => {
+   void dispatch(addRatingThunk({ id: idParam, rating }));
+  }, [dispatch, idParam]);
+
   return (
     <Center>
       {averageRating && (
@@ -27,7 +31,7 @@ function Rating({ averageRating }: RestaurantCardProps): JSX.Element {
                 style={{
                   color: i < averageRating ? '#ffc107' : '#e4e5e9',
                 }}
-                onClick={() => dispatch(addRatingThunk({ id: idParam, rating: i + 1 }))}
+                onClick={() => handleRatingClick(i + 1)}
                 className="cursor-pointer text-xl"
               />
             ))}

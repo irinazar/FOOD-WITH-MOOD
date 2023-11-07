@@ -9,14 +9,14 @@ export default function MyFooter(): JSX.Element {
       <div className={style.container}>
         <div className="row">
           <div className="col-sm-12 col-md-6">
-            <h6>Food In Mood</h6>
+            <h6>Food with Mood</h6>
             <p className={style.textJustify}>
               Это ваш личный путеводитель в мире национальных кухонь. Независимо от того, являетесь
               ли вы местным жителем или туристом, Food in Mood поможет вам найти лучшие рестораны,
               полностью погрузив вас в атмосферу и аутентичные блюда разных стран.
             </p>
           </div>
-
+          <br />
           <div className="col-xs-6 col-md-3">
             <ul className={style.footerLinks}>
               <li>
@@ -37,10 +37,12 @@ export default function MyFooter(): JSX.Element {
             </ul>
           </div>
         </div>
+        <br />
         <hr />
+        <br />
       </div>
       <div className="container">
-        <div className="row" >
+        <div className="row">
           <div className="col-md- col-sm-6 col-xs-12">
             <p className={style.copyrightText}>
               Copyright &copy; Food In Mood, 2023 г. Все права защищены.
