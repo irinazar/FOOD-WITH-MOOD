@@ -83,7 +83,7 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
       if (req.file) {
         const name = `${Date.now()}.webp`;
         const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
-        await fs.writeFile(`./public/img/${name}`, outputBuffer);
+        await fs.writeFile(`./public/img/users/${name}`, outputBuffer);
         updatedFields.avatar = name;
       }
 
@@ -105,15 +105,6 @@ lkRouter.post("/userupdate/:id", upload.single("file"), async (req, res) => {
       const user = await User.findByPk(id, {
         include: Preference,
       });
-
-      // const user = await User.findByPk(id, {
-      //   include: [
-      //     {
-      //       model: Preference,
-      //       include: [Country],
-      //     },
-      //   ],
-      // });
 
       res.send(user);
     } else {
@@ -150,7 +141,7 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
       if (req.file) {
         const name = `${Date.now()}.webp`;
         const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
-        await fs.writeFile(`./public/img/${name}`, outputBuffer);
+        await fs.writeFile(`./public/img/users/${name}`, outputBuffer);
         updatedFields.avatar = name;
       }
 
@@ -170,9 +161,10 @@ lkRouter.post("/ownerupdate/:id", upload.single("file"), async (req, res) => {
 
 lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
   try {
-    const { id, title, adress, countryId, description, coordX, coordY } =
+    const { id, title, adress, countryId, description, coordX, coordY, phone } =
       req.body;
     if (
+      !phone ||
       !id ||
       !title ||
       !adress ||
@@ -185,6 +177,7 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
     }
 
     const newRestaurant = await Restaurant.create({
+      phone,
       title,
       adress,
       countryId,

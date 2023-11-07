@@ -19,6 +19,8 @@ function FavoriteButtonMy({
   idRest,
   handleFavoriteClick,
 }: FavoriteButtonProps): JSX.Element {
+  console.log(rest.Favourites.length, 'btn');
+
   return (
     <div className={style.container}>
       <button

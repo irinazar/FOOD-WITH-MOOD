@@ -14,6 +14,7 @@ const countryRouter = require("./routes/countryRouter");
 
 const FileStore = require("session-file-store")(session);
 const lkRouter = require("./routes/lkRouter");
+const  favoriteRouter  = require("./routes/favoriteApiRouter");
 
 const PORT = process.env.PORT || 3001;
 
@@ -49,6 +50,7 @@ app.use("/api/lk", lkRouter);
 app.use("/api/restaurants", restaurantRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/country", countryRouter);
+app.use("/api/favorite", favoriteRouter);
 
 app.listen(PORT, () => {
   console.log("Server start on port ", PORT);

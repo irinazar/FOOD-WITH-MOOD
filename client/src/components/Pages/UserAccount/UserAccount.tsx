@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AbsoluteCenter, Box, Divider, Flex, Text, Image } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import UserInfo from './ui/UserInfo';
 import style from './style.module.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
@@ -61,22 +61,41 @@ function UserAccount(): JSX.Element {
       </Box>
       <Flex flexWrap="wrap" justifyContent="center">
         {myfav?.map((el) => (
-          <Box key={el?.id} maxW="300px" borderWidth="1px" p="2" m="2">
-            <a className={style.restName} href={`/countries/${el?.id}`}>
+          <Box
+            className={style.containercardrest}
+            key={el?.id}
+            maxW="300px"
+            borderWidth="1px"
+            p="2"
+            m="2"
+          >
+            <Link
+              className={style.restName}
+              style={{ textDecoration: 'underline' }}
+              to={`/countries/${el?.id}`}
+            >
               <strong>{el.title}</strong>
-            </a>
-            <Text>{el?.adress}</Text>
-            <Text>{el?.description}</Text>
-            <div className={style.containermini}>
-              <FavoriteButtonMy
-                handleFavoriteClick={handleFavoriteClick}
-                idUser={userlk?.id}
-                idRest={el?.id}
-                rest={el}
-              />
-              <Rating />
+            </Link>
+            <Text marginTop="5px" textAlign="center">
+              <strong> {el?.phone}</strong>
+            </Text>
+            <Text marginTop="5px" textAlign="center">
+              <strong> {el?.adress} </strong>
+            </Text>
+
+            <div style={{ marginTop: 'auto' }}>
+              <div className={style.containermini}>
+                <FavoriteButtonMy
+                  handleFavoriteClick={handleFavoriteClick}
+                  idUser={userlk?.id}
+                  idRest={el?.id}
+                  rest={el}
+                />
+              </div>
+              <div className={style.containerimg}>
+                <Image src={`${STATIC_URL}/img/restaurants/${el.Images[0]?.image}`} alt="img" />
+              </div>
             </div>
-            <Image src={`${STATIC_URL}/img/restaurants/${el.Images[0]?.image}`} alt="img" />
           </Box>
         ))}
       </Flex>
@@ -89,23 +108,46 @@ function UserAccount(): JSX.Element {
       </Box>
       <Flex flexWrap="wrap" justifyContent="center">
         {userRest?.map((el) => (
-          <Box key={el.id} maxW="500px" borderWidth="1px" p="4" m="4">
-            <a className={style.restName} href={`/countries/${el?.id}`}>
+          <Box
+            className={style.containercardrest}
+            key={el.id}
+            maxW="500px"
+            borderWidth="1px"
+            p="4"
+            m="4"
+          >
+            <Link
+              className={style.restName}
+              style={{ textDecoration: 'underline' }}
+              to={`/countries/${el?.id}`}
+            >
               <strong>{el?.title}</strong>
-            </a>
-            <Text>{el?.adress}</Text>
-            <Text>{el?.description}</Text>
-            <div className={style.containermini}>
-              <FavoriteButtonMy
-                isFavorited={isFavorited}
-                handleFavoriteClick={handleFavoriteClick}
-                idUser={userlk?.id}
-                idRest={el?.id}
-                rest={el}
-              />
-              <Rating />
+            </Link>
+            <Text marginTop="5px" textAlign="center">
+              <strong> {el?.phone}</strong>
+            </Text>
+            <Text marginTop="5px" textAlign="center">
+              <strong> {el?.adress} </strong>
+            </Text>
+
+            <Text style={{ flex: '0 0 auto' }} marginTop="5px">
+              {el?.description}
+            </Text>
+
+            <div style={{ marginTop: 'auto' }}>
+              <div className={style.containermini}>
+                <FavoriteButtonMy
+                  isFavorited={isFavorited}
+                  handleFavoriteClick={handleFavoriteClick}
+                  idUser={userlk?.id}
+                  idRest={el?.id}
+                  rest={el}
+                />
+              </div>
+              <div className={style.containerimg}>
+                <Image src={`${STATIC_URL}/img/restaurants/${el?.Images[0]?.image}`} alt="img" />
+              </div>
             </div>
-            <Image src={`${STATIC_URL}/img/restaurants/${el?.Images[0]?.image}`} alt="img" />
           </Box>
         ))}
       </Flex>

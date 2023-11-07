@@ -7,6 +7,7 @@ const {
   User,
   Booking,
   Image,
+  CommentReply
 } = require("../db/models");
 
 const restaurantRouter = express.Router();
@@ -30,6 +31,10 @@ restaurantRouter.get("/:id", async (req, res) => {
           model: User,
           attributes: ["name", "avatar"],
         },
+        {
+          model: CommentReply, 
+          attributes: ["body"],
+        },
       ],
       order: [["createdAt", "DESC"]],
     });
@@ -45,6 +50,7 @@ restaurantRouter.get("/:id", async (req, res) => {
               avatar: comment.User.avatar,
             }
           : null,
+          commentReply: comment.CommentReplies.map((reply) => reply.body)
       };
     });
     const pictures = await Image.findAll({
