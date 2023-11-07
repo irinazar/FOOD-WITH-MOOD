@@ -39,8 +39,7 @@ export default function PendingCard({ rest }: PendingCardProps): JSX.Element {
   };
 
   return (
-    <>
-    {show ? (
+  show ? (
     <Card>
       <CardHeader textAlign="center">
         <Heading size="md">{rest.title}</Heading>
@@ -87,7 +86,6 @@ export default function PendingCard({ rest }: PendingCardProps): JSX.Element {
         </ButtonGroup>
       </CardFooter>
     </Card>
-    ) : null};
-    </> 
-  );
+  ) : <> </>
+  )
 }
