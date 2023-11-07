@@ -1,9 +1,9 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 import type {
   CommentResponseType,
   CountryType,
   FavoriteResponse,
+  FavoriteType,
   OwnerType,
   SubmitRestaurantType,
   UserLkType,
@@ -31,12 +31,11 @@ const initialState: {
   currentUserLk: UserLkType | null;
   comments: CommentResponseType[] | null;
 
-  favorite: FavoriteResponse[] | null;
+  favorite: FavoriteType[] | null;
 
   bookings: {
-    bookings: BookingResponse[]
-  }
-
+    bookings: BookingResponse[];
+  };
 } = {
   country: [],
   currentOwner: null,
@@ -46,9 +45,8 @@ const initialState: {
   favorite: null,
 
   bookings: {
-    bookings: []
-  }
-
+    bookings: [],
+  },
 };
 
 export const lkSlice = createSlice({
@@ -109,10 +107,8 @@ export const lkSlice = createSlice({
       }
     });
 
-
     builder.addCase(getBookingsThunk.fulfilled, (state, action) => {
-      state.bookings = action.payload
-    })
-
+      state.bookings = action.payload;
+    });
   },
 });

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import style from '../../../UI/FavoriteButton/style.module.css';
+import type { FavoriteType } from '../../../../types/lkTypes/lkTypes';
 
 type FavoriteButtonProps = {
+  rest: FavoriteType;
   idUser: number;
   idRest: number;
   handleFavoriteClick: (
@@ -9,7 +11,6 @@ type FavoriteButtonProps = {
     idUser: number,
     idRest: number,
   ) => void;
-  isFavorited: boolean;
 };
 
 function FavoriteButtonMy({
@@ -21,6 +22,7 @@ function FavoriteButtonMy({
   return (
     <div className={style.container}>
       <button
+        type="button"
         onClick={(e) => handleFavoriteClick(e, idUser, idRest)}
         className={`${style.favorite} ${
           rest.Favourites.length > 0 ? style.favorited : style.favorite

@@ -9,7 +9,11 @@ import {
   getUserThunk,
   myFavoriteThunk,
 } from '../../../features/redux/slices/lk/lkThuncks';
-import type { SubmitRestaurantType, UserLkType } from '../../../types/lkTypes/lkTypes';
+import type {
+  FavoriteType,
+  SubmitRestaurantType,
+  UserLkType,
+} from '../../../types/lkTypes/lkTypes';
 import FavoriteButton from '../../UI/FavoriteButton/FavoriteButton';
 import Rating from '../../UI/RestaurantPageUI/Rating';
 import useLkHooks from '../../../hooks/lkHooks/useLkHooks';
@@ -25,8 +29,10 @@ function UserAccount(): JSX.Element {
 
   const myrest = useAppSelector((state) => state.restREducer.restaurant); //! !!! че это
 
-  const myfav = useAppSelector((state) => state.lkReducer.favorite);
+  const myfav = useAppSelector((state) => state.lkReducer.favorite) as FavoriteType[];
   const userlk = useAppSelector((state) => state.lkReducer.currentUserLk) as UserLkType;
+
+  console.log(myfav);
 
   useEffect(() => {
     void dispatch(getUserThunk(Number(id)));
@@ -63,7 +69,6 @@ function UserAccount(): JSX.Element {
             <Text>{el?.description}</Text>
             <div className={style.containermini}>
               <FavoriteButtonMy
-                isFavorited={isFavorited}
                 handleFavoriteClick={handleFavoriteClick}
                 idUser={userlk?.id}
                 idRest={el?.id}
@@ -71,7 +76,7 @@ function UserAccount(): JSX.Element {
               />
               <Rating />
             </div>
-            <Image src={`${STATIC_URL}/img/restaurants/${el.Images[0]?.image}`} alt="" alt="" />
+            <Image src={`${STATIC_URL}/img/restaurants/${el.Images[0]?.image}`} alt="img" />
           </Box>
         ))}
       </Flex>
@@ -100,7 +105,7 @@ function UserAccount(): JSX.Element {
               />
               <Rating />
             </div>
-            <Image src={`${STATIC_URL}/img/restaurants/${el?.Images[0]?.image}`} alt=" " alt="" />
+            <Image src={`${STATIC_URL}/img/restaurants/${el?.Images[0]?.image}`} alt="img" />
           </Box>
         ))}
       </Flex>

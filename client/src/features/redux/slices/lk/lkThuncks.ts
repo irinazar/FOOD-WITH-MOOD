@@ -8,8 +8,8 @@ import type {
   SubmitRestaurantType,
   CommentResponseType,
   ReplyType,
-  FavoriteType,
   FavoriteResponse,
+  UserIdRestId,
 } from '../../../../types/lkTypes/lkTypes';
 import {
 
@@ -79,8 +79,7 @@ export const addNewReplyThunk = createAsyncThunk<ReplyType, ReplyType>(
   async (data) => newReplyComment(data).then((res) => res),
 );
 
-
-export const favoriteThunk = createAsyncThunk<FavoriteResponse, FavoriteType>(
+export const favoriteThunk = createAsyncThunk<FavoriteResponse, UserIdRestId>(
   'favorite',
   async (data) => favoriteService(data).then((res) => res),
 );

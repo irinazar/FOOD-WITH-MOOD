@@ -162,3 +162,8 @@ export type FavoriteResponse = {
   del?: boolean;
   rest: FavoriteType;
 };
+
+export type UserIdRestId = {
+  userId: number;
+  restaurantId: number;
+};
