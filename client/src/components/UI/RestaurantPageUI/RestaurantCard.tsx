@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
   Button,
   Card,
@@ -29,6 +29,12 @@ type RestaurantCardProps = {
   const [overlay, setOverlay] = React.useState(<OverlayTwo />);
 
   const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
+const memoAverageRating = useMemo(() => averageRating, [averageRating]);
+
+  const handleBookingClick = useCallback(() => {
+    setOverlay(<OverlayTwo />);
+    onOpen();
+  }, [setOverlay, onOpen]);
   return (
     <Center>
       <Card className={style.restCard}>
@@ -38,7 +44,7 @@ type RestaurantCardProps = {
               {oneRestaurant.title}
             </Heading>
 
-            <Rating averageRating={averageRating} />
+            <Rating averageRating={memoAverageRating} />
             <Text fontSize="m" className={style.textGray}>
               {oneRestaurant.adress}
             </Text>
@@ -53,10 +59,7 @@ type RestaurantCardProps = {
           colorScheme="blackAlpha"
           variant="outline"
           _hover={{ bg: 'rgba(196, 77, 86, 0.6)' }}
-          onClick={() => {
-            setOverlay(<OverlayTwo />);
-            onOpen();
-          }}
+          onClick={handleBookingClick}
         >
           Забронировать
         </Button>

@@ -11,7 +11,7 @@ import {
   StackDivider,
   Text,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Carousel from '../RestaurantPageUI/Carousel';
 import type { OneRestaurantType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
@@ -24,19 +24,20 @@ type PendingCardProps = {
   rest: OneRestaurantType;
 };
 
-export default function PendingCard({ rest }: PendingCardProps): JSX.Element {
+function PendingCard({ rest }: PendingCardProps): JSX.Element {
   const [show, setShow] = useState(true);
   const { Images } = rest;
   const dispatch = useAppDispatch();
-  const acceptHandler = (): void => {
+  
+  const acceptHandler = useCallback((): void => {
     void dispatch(acceptRestaurantThunk(rest.id));
     setShow(false);
-  };
+  }, [dispatch, rest.id]);
 
-  const declineHandler = (): void => {
+  const declineHandler = useCallback((): void => {
     void dispatch(declineRestaurantThunk(rest.id));
     setShow(false);
-  };
+  }, [dispatch, rest.id]);
 
   return (
   show ? (
@@ -89,3 +90,5 @@ export default function PendingCard({ rest }: PendingCardProps): JSX.Element {
   ) : <> </>
   )
 }
+
+export default React.memo(PendingCard);
