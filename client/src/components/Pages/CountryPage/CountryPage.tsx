@@ -8,9 +8,15 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
-import Rating from '../../UI/RestaurantPageUI/Rating';
+
+import pizza from '../../../../public/img/pizzapng.png';
 
 import MoreButton from '../../UI/MoreButton/MoreButton';
+
+import Rating from '../../UI/RestaurantPageUI/Rating';
+
+import { ParallaxUp } from '../../UI/Animations/Parallax';
+
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
@@ -44,7 +50,7 @@ export default function CountryPage(): JSX.Element {
       ymaps.ready(() => {
         ymapRef.current = new ymaps.Map('map', {
           center: [55.751574, 37.573856],
-          zoom: 11,
+          zoom: 10,
         });
         const myMap: ymaps.Map = ymapRef.current;
         if (!restiks?.length) return;
@@ -77,18 +83,23 @@ export default function CountryPage(): JSX.Element {
 
   return (
     <>
-      <div className={style.cuisine}>
-        <Reveal>
-          <>
-            <h1>{oneCountry?.name}</h1>
-            <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
-          </>
-        </Reveal>
+
+      <div className={style.pageContainer}>
+        <div className={style.cuisine}>
+        
+          <Reveal>
+            <>
+              <h1>{oneCountry?.name}</h1>
+              <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
+            </>
+          </Reveal>
+          <ParallaxUp>
+            <img style={{ width: '400px' }, {paddingTop:'320px'}} src={pizza} alt="" />
+          </ParallaxUp>
+        </div>
       </div>
 
-
-
-      {oneCountry?.Restaurants?.map((el) => (
+      {oneCountry?.Restaurants?.map((el, index) => (
 
         <div className={style.miniCardContainer}>
           <div className={style.miniCard}>
