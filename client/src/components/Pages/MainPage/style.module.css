@@ -1,5 +1,3 @@
-
-
 .videoContainer {
   position: relative;
   width: 100%; /* Ширина контейнера, например, 100% ширины экрана */
@@ -55,4 +53,10 @@
   border-radius: 45%;
   filter: blur(20px);
   z-index: -1;
+}
+
+@media screen and (max-width: 576px) {
+  .brandname {
+    font-size: 70px;
+  }
 }
