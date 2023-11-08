@@ -54,7 +54,7 @@ export default function LoginPage(): JSX.Element {
   };
 
   return (
-    <div className={style.divRegist}>
+    <div className={style.divRegistLogin}>
       <Box bg={useColorModeValue('', 'gray.900')} w="lg" p={8} borderRadius="md">
         <form className={style.formRegist} onSubmit={submitHandler}>
           <VStack spacing={4}>
@@ -68,7 +68,7 @@ export default function LoginPage(): JSX.Element {
               />
             </FormControl>
             <FormControl>
-              <FormLabel color={useColorModeValue('gray.900', 'gray.100')}>Password</FormLabel>
+              <FormLabel color={useColorModeValue('gray.900', 'gray.100')}>Пароль</FormLabel>
               <Input
                 type="password"
                 name="password"
@@ -76,9 +76,9 @@ export default function LoginPage(): JSX.Element {
                 placeholder="Password"
                 bg={useColorModeValue('gray.100', 'gray.900')}
               />
-              <Text mt={1} color={useColorModeValue('gray.900', 'gray.100')}>
+              {/* <Text mt={1} color={useColorModeValue('gray.900', 'gray.100')}>
                 At least 8 characters long
-              </Text>
+              </Text> */}
             </FormControl>
             <RadioGroup name="radio" defaultValue="user">
               <Stack spacing={5} direction="row">
@@ -91,7 +91,7 @@ export default function LoginPage(): JSX.Element {
               </Stack>
             </RadioGroup>
             <Button type="submit" colorScheme="messenger" variant="outline" w="full" mt={4}>
-              Login
+              Войти
             </Button>
           </VStack>
         </form>

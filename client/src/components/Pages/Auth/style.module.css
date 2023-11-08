@@ -2,10 +2,23 @@
   display: flex;
   justify-content: center;
   margin-top: 50px;
-  margin-bottom: 150px;
+  margin-bottom: 139px;
+}
+
+.divRegistLogin {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 231px;
 }
 .formRegist {
   margin-bottom: 15px;
+}
+.code {
+  display: flex;
+  justify-content: center;
+  margin-top: 94px;
+  margin-bottom: 230px;
 }
 
 .registrLink {
