@@ -16,10 +16,6 @@ import OwnerCard from './ui/OwnerCard';
 import Bookings from './ui/Bookings';
 
 export default function OwnerAccount(): JSX.Element {
-
-
-
-
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
@@ -30,29 +26,14 @@ export default function OwnerAccount(): JSX.Element {
 
   useEffect(() => {
     void dispatch(getOwnerThunk(Number(id)));
-
-   
     void dispatch(getBookingsThunk(Number(id)));
   }, []);
-
-  const owner = useAppSelector((state) => state.lkReducer.currentOwner) as OwnerType;
-  const bookings = useAppSelector((state) => state.lkReducer.bookings);
-  const restmycomments = useAppSelector(
-    (state) => state.lkReducer.comments,
-  ) as CommentResponseType[];
-
-
 
   useEffect(() => {
     void dispatch(getMyComment(Number(id)));
   }, [owner]);
 
-
-
-
-
-
-
+  const bookings = useAppSelector((state) => state.lkReducer.bookings);
   const ownerBookings = bookings?.bookings || [];
 
   return (

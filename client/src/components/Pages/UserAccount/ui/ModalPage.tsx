@@ -33,7 +33,7 @@ function ModalPage({ isOpen, onClose, overlay, id, handlerSubmit }: ModalPagePro
   const country = useAppSelector((state) => state.lkReducer.country);
   const pref = useAppSelector(
     (state) =>
-      state.lkReducer.currentUserLk?.Preferences?.map((el) => el.countryId.toString()) || [],
+      state.lkReducer.currentUserLk?.Preferences?.map((el) => el.countryId?.toString()) || [],
   );
 
   //= =================checkbox
@@ -81,8 +81,8 @@ function ModalPage({ isOpen, onClose, overlay, id, handlerSubmit }: ModalPagePro
                 {country.map((el) => (
                   <Checkbox
                     key={el.id}
-                    isChecked={selectedCountryIds.includes(el.id.toString())}
-                    onChange={() => handleCountryChange(el.id.toString())}
+                    isChecked={selectedCountryIds.includes(el.id?.toString())}
+                    onChange={() => handleCountryChange(el.id?.toString())}
                     value={el.id}
                     colorScheme="green"
                     defaultChecked
