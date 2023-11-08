@@ -52,7 +52,7 @@ export default function UserCodePage(): JSX.Element {
           mb={4}
           color={useColorModeValue('gray.900', 'gray.100')}
         >
-          Мы отправили вам электронное письмо на почту!
+          Мы отправили вам письмо на электронную почту!
           <h1>Введите код</h1>
         </Text>
         <form onSubmit={submitCodeHandler}>

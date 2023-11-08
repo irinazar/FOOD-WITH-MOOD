@@ -104,7 +104,7 @@ export default function AuthPage(): JSX.Element {
               />
               <Text mt={1} color={borderColor}>
                 {isPasswordValid
-                  ? 'Валидный пороль '
+                  ? 'Валидный пароль '
                   : 'Пароль должен быть длиной не менее 8 символов'}
               </Text>
             </FormControl>
