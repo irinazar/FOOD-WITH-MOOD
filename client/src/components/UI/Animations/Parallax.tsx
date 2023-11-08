@@ -20,7 +20,7 @@ export function ParallaxUp({ children, width = 'fit-content' }: Props):JSX.Eleme
 
 
   return (
-    <div ref={ref} style={{  width }}>
+    <div ref={ref} style={{ position: 'relative', width }}>
       <motion.div
       style={{y: textY}}
       >{children}</motion.div>
