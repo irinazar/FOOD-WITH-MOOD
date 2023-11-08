@@ -17,8 +17,8 @@ function OverlayTwo(): any {
 type RestorantInfoProps = {
   owner: OwnerType;
 };
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
-export const STATIC_URL = import.meta.env.VITE_STATIC_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL as unknown as { VITE_BASE_URL: string };
+export const STATIC_URL = import.meta.env.VITE_STATIC_URL as unknown as { VITE_STATIC_URL: string };
 
 function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,7 +39,9 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
         />
       </div>
       <div className={style['profile-card__cnt']}>
-        <div className={style['profile-card__name']}>{owner?.name}</div>
+        <div className={style['profile-card__name']}>
+          <strong> {owner?.name} </strong>
+        </div>
         <div className={style['profile-card__txt']}>
           <strong>{owner?.telephone}</strong>
         </div>
@@ -71,7 +73,7 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
             onOpen();
           }}
         >
-          Оставить заявку на ваше заведение
+          Оставить заявку на заведение
         </button>
       </div>
       {selectedModal === 'edit' && (
@@ -92,6 +94,20 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
           overlay={overlay}
         />
       )}
+      <div className={style.area}>
+        <ul className={style.circles}>
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+        </ul>
+      </div>
     </div>
   );
 }

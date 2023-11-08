@@ -14,8 +14,7 @@ import {
 
 import { useParams } from 'react-router-dom';
 import style from './style.module.css';
-import { useAppDispatch } from '../../../hooks/reduxHooks';
-import type { BookingInputType } from '../../../types/oneRestaurantType/oneRestaurantTypes';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { addBookingThunk } from '../../../features/redux/slices/oneRestaurantSlice/oneRestaurantThunk';
 
 type BookingModalProps = {
@@ -25,6 +24,8 @@ type BookingModalProps = {
 };
 
 function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Element {
+  const userId = useAppSelector((state) => state.user.id) as number
+  
   const [bookingData, setBookingData] = useState({
     bookerName: '',
     bookerPhone: '',
@@ -38,18 +39,25 @@ function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Elem
     setBookingData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const bookingSubmitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+  const bookingSubmitHandler = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    if (bookingData) {
-      const formData = Object.fromEntries(new FormData(e.currentTarget)) as BookingInputType;
-      void dispatch(addBookingThunk({ id: idParam, formData }));
-      setBookingData({
-        bookerName: '',
-        bookerPhone: '',
-        date: '',
-      });
-    }
+  
+    const formData = new FormData(); 
+  
+    // Добавляем поля в formData
+    formData.append('bookerName', bookingData.bookerName);
+    formData.append('bookerPhone', bookingData.bookerPhone);
+    formData.append('date', bookingData.date);
+    formData.append('userId', userId.toString()); // Добавляем userId в formData
+  
+    void dispatch(addBookingThunk({ id: idParam, formData }));
+    setBookingData({
+      bookerName: '',
+      bookerPhone: '',
+      date: '',
+    });
   };
+  
 
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose}>

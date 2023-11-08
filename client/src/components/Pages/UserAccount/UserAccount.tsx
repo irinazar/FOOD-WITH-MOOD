@@ -19,8 +19,8 @@ import Rating from '../../UI/RestaurantPageUI/Rating';
 import useLkHooks from '../../../hooks/lkHooks/useLkHooks';
 import FavoriteButtonMy from './ui/FavoriteButtonMy';
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
-export const STATIC_URL = import.meta.env.VITE_STATIC_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL as unknown as { VITE_BASE_URL: string };
+export const STATIC_URL = import.meta.env.VITE_STATIC_URL as unknown as { VITE_STATIC_URL: string };
 
 function UserAccount(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -72,7 +72,7 @@ function UserAccount(): JSX.Element {
             <Link
               className={style.restName}
               style={{ textDecoration: 'underline' }}
-              to={`/countries/${el?.id}`}
+              to={`/restaurants/${el?.id}`}
             >
               <strong>{el.title}</strong>
             </Link>
@@ -119,7 +119,7 @@ function UserAccount(): JSX.Element {
             <Link
               className={style.restName}
               style={{ textDecoration: 'underline' }}
-              to={`/countries/${el?.id}`}
+              to={`/restaurants/${el?.id}`}
             >
               <strong>{el?.title}</strong>
             </Link>

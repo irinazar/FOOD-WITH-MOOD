@@ -44,13 +44,13 @@ restaurantRouter.get("/:id", async (req, res) => {
         id: comment.id,
         restaurantId: comment.restaurantId,
         body: comment.body,
-        user: comment.User
+        User: comment.User
           ? {
               userName: comment.User.name,
               avatar: comment.User.avatar,
             }
           : null,
-          commentReply: comment.CommentReplies.map((reply) => reply.body)
+        commentReply: comment.CommentReplies.map((reply) => reply.body)
       };
     });
     const pictures = await Image.findAll({
@@ -60,7 +60,7 @@ restaurantRouter.get("/:id", async (req, res) => {
     const ratings = oneRestaurant.Ratings.map((rating) => rating.rating);
     const averageRating =
       ratings.reduce((total, rating) => total + rating, 0) / ratings.length;
-    if ((oneRestaurant, comments, pictures, averageRating)) {
+    if ((oneRestaurant,  pictures, averageRating)) {
       res.json({ oneRestaurant, comments, pictures, averageRating });
     } else {
       res.status(404).json({ error: "restaurant not found" });
@@ -73,7 +73,7 @@ restaurantRouter.get("/:id", async (req, res) => {
 
 restaurantRouter.post("/:id/addComment", async (req, res) => {
   const { id } = req.params;
-  const { body } = req.body;
+  const { body, userId } = req.body;
 
   if (Number.isNaN(+id)) {
     res.status(400).json({ message: "Id is not a number" });
@@ -84,12 +84,35 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
     return;
   }
   try {
-    const newComment = await Comment.create({
-      userId: req.session.userId,
-      // userId: 3,
+    const createNewComment = await Comment.create({
+      userId,
       restaurantId: id,
       body,
     });
+
+    const newComment = await Comment.findOne({
+      where: { userId, restaurantId: id },
+      include: [
+        {
+          model: User,
+          attributes: ["name", "avatar"],
+        },
+        {
+          model: CommentReply, 
+          attributes: ["body"],
+        },
+      ],
+    });
+    newComment.user = newComment.User
+      ? {
+          userName: newComment.User.name,
+          avatar: newComment.User.avatar,
+        }
+      : null;
+    
+    newComment.commentReply = newComment.CommentReplies.map((reply) => reply.body);
+    
+console.log(newComment, 'NEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEWCOMMENT!!!!!!!!');
     res.json(newComment);
   } catch (error) {
     console.log(error);
@@ -99,7 +122,7 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
 
 restaurantRouter.patch("/:id/addRating", async (req, res) => {
   const { id } = req.params;
-  const { rating } = req.body;
+  const { rating, userId } = req.body;
 
 
   if (Number.isNaN(+id) || !rating || rating < 1 || rating > 5) {
@@ -117,7 +140,7 @@ restaurantRouter.patch("/:id/addRating", async (req, res) => {
     const [newRating, created] = await Rating.findOrCreate({
       where: {
         restaurantId: id,
-        userId: req.session.id,
+        userId,
       },
       defaults: {
         rating,
@@ -135,11 +158,11 @@ restaurantRouter.patch("/:id/addRating", async (req, res) => {
 
 restaurantRouter.post("/:id/booking", async (req, res) => {
   try {
-    const { bookerName, bookerPhone, date } = req.body;
-    if (!(bookerName && bookerPhone && date)) return res.sendStatus(400);
+    const { bookerName, bookerPhone, date, userId } = req.body;
+    if (!(bookerName && bookerPhone && date && userId)) return res.sendStatus(400);
     
     const [booking, created] = await Booking.findOrCreate({
-      where: { userId: req.session.id, restaurantId: req.params.id, date },
+      where: { userId, restaurantId: req.params.id, date },
 
       defaults: {
         bookerName,

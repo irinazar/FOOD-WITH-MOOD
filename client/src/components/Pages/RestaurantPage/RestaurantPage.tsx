@@ -20,7 +20,7 @@ export default function RestaurantPage(): JSX.Element {
   }, [restaurantId]);
 
   return (
-    <Box w="100%" p={4} color="black">
+    <Box w="100%" p={4} color="black" style={{ padding: '0' }}>
       {oneRestaurant && (
         <>
           <Carousel pictures={pictures} />

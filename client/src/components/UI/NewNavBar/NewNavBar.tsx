@@ -19,6 +19,8 @@ export default function NewNavBar(): JSX.Element {
     status: string;
     isAdmin: boolean;
   };
+
+  console.log(user.id);
   const owner = useAppSelector((state) => state.authOwner) as {
     id: number;
     status: string;
@@ -32,7 +34,7 @@ export default function NewNavBar(): JSX.Element {
   };
   return (
     <div className={style.menuContainer}>
-      <Box className="brand">
+      <Box className={style.brand}>
         <NavLink to="/" className={style.brand}>
           FOOD with MOOD
         </NavLink>

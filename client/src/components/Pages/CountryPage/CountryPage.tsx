@@ -10,16 +10,18 @@ import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
 import Rating from '../../UI/RestaurantPageUI/Rating';
 
+import MoreButton from '../../UI/MoreButton/MoreButton';
+
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const oneCountry = useAppSelector((state) => state.countries.oneCountry);
-
   const user = useAppSelector((state) => state.user);
   // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
   const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
+  console.log(restiks);
 
   useEffect(() => {
     void dispatch(oneCountryActionThunk(Number(id)));
@@ -83,19 +85,22 @@ export default function CountryPage(): JSX.Element {
         </Reveal>
       </div>
 
-      {oneCountry?.Restaurants?.map((el) => (
-        <div className={style.miniCardContainer} key={el.id}>
+      {oneCountry?.Restaurants?.map((el, index) => (
+        <div className={style.miniCardContainer}>
           <div className={style.miniCard}>
             <div className={style.imageText}>
               <Reveal>
-                <h1 className={style.restName}>{el.title}</h1>
+                <h1 className={style.restName}> {el.title}</h1>
               </Reveal>
 
               <OnTheLeft>
                 <p>{el.description}</p>
               </OnTheLeft>
               <br />
-              <FavoriteButton />
+              <FavoriteButton
+                restID={el.id}
+                isLiked={el.Favourites.map((fav) => fav.userId).includes(checkid())}
+              />
               {el.Ratings ? (
                 <Rating
                   averageRating={
@@ -106,6 +111,8 @@ export default function CountryPage(): JSX.Element {
               ) : (
                 <p>No ratings available</p>
               )}
+              <MoreButton restID={el.id} />
+              {/* <Rating averageRating={el.Ratings[0].rating} /> */}
             </div>
             <Reveal>
               <div className={style.image}>

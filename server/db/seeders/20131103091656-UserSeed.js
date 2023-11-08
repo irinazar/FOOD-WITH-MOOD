@@ -50,7 +50,7 @@ module.exports = {
         {
           name: "Ирина",
           email: "irina@mail.ru",
-          avatar: "Антон.png",
+          avatar: "Ирина.png",
           password: await bcrypt.hash("12345678", 10),
           isAdmin: true,
           active: true,
