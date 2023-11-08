@@ -44,7 +44,7 @@ restaurantRouter.get("/:id", async (req, res) => {
         id: comment.id,
         restaurantId: comment.restaurantId,
         body: comment.body,
-        user: comment.User
+        User: comment.User
           ? {
               userName: comment.User.name,
               avatar: comment.User.avatar,

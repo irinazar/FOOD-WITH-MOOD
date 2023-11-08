@@ -66,10 +66,10 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
                   <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                     <img
                       className="mr-2 w-10 h-10 rounded-full"
-                      src={`${STATIC_URL}/img/users/${el.user?.avatar}`}
-                      alt={`${el.user?.userName}`}
+                      src={`${STATIC_URL}/img/users/${el.User?.avatar}`}
+                      alt={`${el.User?.userName}`}
                     />
-                    {el.user?.userName}
+                    {el.User?.userName}
                   </p>
                 </div>
                 {userWithStatus?.isAdmin === true && (
