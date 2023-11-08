@@ -1,12 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { MdBuild } from 'react-icons/md';
-import { Button, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+
+import { ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import style from '../../UserAccount/style.module.css';
 import ModalPageRestorant from './ModalPageRestorant';
 import ModalNewRestorant from './ModalNewRestorant';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
-import { getOwnerThunk } from '../../../../features/redux/slices/lk/lkThuncks';
 import type { OwnerType } from '../../../../types/lkTypes/lkTypes';
 import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
 
