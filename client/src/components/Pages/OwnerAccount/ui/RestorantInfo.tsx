@@ -39,7 +39,9 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
         />
       </div>
       <div className={style['profile-card__cnt']}>
-        <div className={style['profile-card__name']}>{owner?.name}</div>
+        <div className={style['profile-card__name']}>
+          <strong> {owner?.name} </strong>
+        </div>
         <div className={style['profile-card__txt']}>
           <strong>{owner?.telephone}</strong>
         </div>
@@ -92,6 +94,20 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
           overlay={overlay}
         />
       )}
+      <div className={style.area}>
+        <ul className={style.circles}>
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+        </ul>
+      </div>
     </div>
   );
 }

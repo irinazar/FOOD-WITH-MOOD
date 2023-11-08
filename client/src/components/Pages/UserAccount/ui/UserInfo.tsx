@@ -37,7 +37,10 @@ function UserInfo({ userlk }: UserInfoProps): JSX.Element {
         />
       </div>
       <div className={style['profile-card__cnt']}>
-        <div className={style['profile-card__name']}>{userlk?.name}</div>
+        <div className={style['profile-card__name']}>
+          {' '}
+          <strong>{userlk?.name} </strong>
+        </div>
         <div className={style['profile-card__txt']}>
           <strong>{userlk?.telephone}</strong>
         </div>

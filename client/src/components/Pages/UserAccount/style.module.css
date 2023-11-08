@@ -13,7 +13,7 @@ body {
   margin: 50px 30px 30px 30px;
   box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
   background: rgb(230, 229, 237);
-  background: linear-gradient(90deg, rgba(230, 229, 237, 1) 0%, rgba(118, 120, 120, 1) 100%);
+  background: linear-gradient(90deg, rgba(230, 229, 237, 1) 0%, rgb(162, 144, 125) 100%);
   border-radius: 12px;
   padding: 20px 20px 0 20px;
   position: relative;
@@ -60,7 +60,7 @@ body {
 .usercardinfo .profile-card__name {
   font-weight: 700;
   font-size: 24px;
-  color: rgb(197, 97, 70);
+  color: rgb(70, 54, 50);
   margin-bottom: 5px;
 }
 
