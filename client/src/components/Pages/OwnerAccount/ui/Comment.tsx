@@ -19,6 +19,7 @@ function Comment({ comment }: CommentProps): JSX.Element {
   };
   return (
     <Box
+      style={{ boxShadow: '0px 8px 60px -10px rgba(13, 28, 39, 0.6)' }}
       className={style['comment-container']}
       p="4"
       border="1px"
