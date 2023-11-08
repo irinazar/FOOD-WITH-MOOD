@@ -1,18 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type {
-  CountryType,
-  OwnerType,
   SubmitRestaurantType,
-  UserLkType,
 } from '../../../../types/lkTypes/lkTypes';
 import {
-  getAllCountryThunk,
-  getOwnerThunk,
   getUserRestaurants,
-  getUserThunk,
-  newRestaurantThunk,
-  updateOwnerThunk,
-  updateUserThunk,
 } from './lkThuncks';
 
 const initialState: {

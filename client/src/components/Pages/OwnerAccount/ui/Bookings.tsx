@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import {
   Box,
   Button,
@@ -51,7 +52,7 @@ export default function Bookings({ booking }: BookingProps): JSX.Element {
   return(
     <>
     {show ? (
-    <Card bg="gray.100">
+    <Card bg="gray.100" className="w-full md:w-1/3">
       <CardHeader>
         <Heading size="md" color="red.700" textAlign="center">
           Заявка {booking.id}
@@ -115,7 +116,7 @@ export default function Bookings({ booking }: BookingProps): JSX.Element {
         </Button>
       </CardBody>
     </Card>
-  ) : null};
+  ) : null}
   </> 
   )
 

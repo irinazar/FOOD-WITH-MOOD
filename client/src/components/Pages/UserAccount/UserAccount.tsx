@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { AbsoluteCenter, Box, Divider, Flex, Text, Image } from '@chakra-ui/react';
 import { useParams, Link } from 'react-router-dom';
 import UserInfo from './ui/UserInfo';
@@ -14,8 +14,6 @@ import type {
   SubmitRestaurantType,
   UserLkType,
 } from '../../../types/lkTypes/lkTypes';
-import FavoriteButton from '../../UI/FavoriteButton/FavoriteButton';
-import Rating from '../../UI/RestaurantPageUI/Rating';
 import useLkHooks from '../../../hooks/lkHooks/useLkHooks';
 import FavoriteButtonMy from './ui/FavoriteButtonMy';
 
@@ -26,8 +24,6 @@ function UserAccount(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const { isFavorited, handleFavoriteClick } = useLkHooks();
-
-  const myrest = useAppSelector((state) => state.restREducer.restaurant); //! !!! че это
 
   const myfav = useAppSelector((state) => state.lkReducer.favorite) as FavoriteType[];
   const userlk = useAppSelector((state) => state.lkReducer.currentUserLk) as UserLkType;

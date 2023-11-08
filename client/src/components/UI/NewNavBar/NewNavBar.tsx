@@ -7,9 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { logoutUserThunk } from '../../../features/redux/slices/user/UserThunks';
 
 import { logoutOwnerThunk } from '../../../features/redux/slices/authOwner/authOwnerThunks';
-import { setRole } from '../../../features/redux/slices/role/RoleSlice';
-import { setUser } from '../../../features/redux/slices/user/UserSlice';
-import { setOwner } from '../../../features/redux/slices/authOwner/authOwnerSlice';
 
 export default function NewNavBar(): JSX.Element {
   const dispatch = useAppDispatch();

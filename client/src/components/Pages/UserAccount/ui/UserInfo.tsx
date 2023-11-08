@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { MdBuild } from 'react-icons/md';
-import { Button, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import {  ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import style from '../style.module.css';
 
 import ModalPage from './ModalPage';

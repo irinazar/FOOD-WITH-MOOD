@@ -1,5 +1,5 @@
 import apiService from "..";
-import type { CountryType, OneCountryType } from "../../types/categoryType/categoryTypes";
+import type { OneCountryType } from "../../types/categoryType/categoryTypes";
 
 
 
