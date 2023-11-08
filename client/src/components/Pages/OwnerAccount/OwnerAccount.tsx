@@ -16,10 +16,6 @@ import OwnerCard from './ui/OwnerCard';
 import Bookings from './ui/Bookings';
 
 export default function OwnerAccount(): JSX.Element {
-
-
-
-
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
