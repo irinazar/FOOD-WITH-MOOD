@@ -20,18 +20,34 @@ function Rating({ averageRating }: RestaurantCardProps): JSX.Element {
    void dispatch(addRatingThunk({ id: idParam, rating, userId }));
   }, [dispatch, idParam]);
 
+
   return (
     <Center>
-      {averageRating && (
+      {averageRating !== 0 ? (
         <HStack gap={1}>
           {Array(5)
             .fill('')
             .map((_, i) => (
               <FaRegStar
               key={uuidv4()}
-                style={{
-                  color: i < averageRating ? '#ffc107' : '#e4e5e9',
-                }}
+              style={{
+                color: i < averageRating ? '#ffc107' : '#e4e5e9',
+              }}
+                onClick={() => handleRatingClick(i + 1)}
+                className="cursor-pointer text-xl"
+              />
+            ))}
+        </HStack>
+      ):(
+        <HStack gap={1}>
+          {Array(5)
+            .fill('')
+            .map((_, i) => (
+              <FaRegStar
+              key={uuidv4()}
+              style={{
+                color: '#e4e5e9',
+              }}
                 onClick={() => handleRatingClick(i + 1)}
                 className="cursor-pointer text-xl"
               />

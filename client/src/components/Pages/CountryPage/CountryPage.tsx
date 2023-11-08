@@ -26,7 +26,7 @@ export default function CountryPage(): JSX.Element {
   // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
-  console.log(restiks);
+ 
 
   useEffect(() => {
     void dispatch(oneCountryActionThunk(Number(id)));
@@ -78,7 +78,6 @@ export default function CountryPage(): JSX.Element {
 
   useEffect(() => {
     if (restiks?.length && !ymapRef.current) loadMap();
-    console.log(ymapRef);
   }, [restiks]);
 
   return (
