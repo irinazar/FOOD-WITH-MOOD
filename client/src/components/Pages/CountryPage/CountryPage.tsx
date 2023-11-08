@@ -8,18 +8,22 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
+
+import MoreButton from '../../UI/MoreButton/MoreButton';
+
 import Rating from '../../UI/RestaurantPageUI/Rating';
+
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const oneCountry = useAppSelector((state) => state.countries.oneCountry);
-
   const user = useAppSelector((state) => state.user);
   // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
   const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
+  console.log(restiks);
 
 
   useEffect(() => {
@@ -86,24 +90,24 @@ export default function CountryPage(): JSX.Element {
         </Reveal>
       </div>
 
-      {
-  oneCountry?.Restaurants?.map((el) => (
-    <div className={style.miniCardContainer} key={el.id}>
-      <div className={style.miniCard}>
-        <div className={style.imageText}>
-          <Reveal>
-            <h1 className={style.restName}>{el.title}</h1>
-          </Reveal>
 
-          <OnTheLeft>
-            <p>{el.description}</p>
-          </OnTheLeft>
-          <br />
-          <FavoriteButton
+      {oneCountry?.Restaurants?.map((el, index) => (
+        <div className={style.miniCardContainer}>
+          <div className={style.miniCard}>
+            <div className={style.imageText}>
+              <Reveal>
+                <h1 className={style.restName}> {el.title}</h1>
+              </Reveal>
+
+              <OnTheLeft>
+                <p>{el.description}</p>
+              </OnTheLeft>
+              <br />
+              <FavoriteButton
                 restID={el.id}
                 isLiked={el.Favourites.map((fav) => fav.userId).includes(checkid())}
               />
-          {el.Ratings ? ( 
+               {el.Ratings ? ( 
             <Rating
               averageRating={
                 el.Ratings.map((rating) => rating.rating).reduce((a, b) => a + b, 0) /
@@ -113,21 +117,20 @@ export default function CountryPage(): JSX.Element {
           ) : (
             <p>No ratings available</p>
           )}
-        </div>
-        <Reveal>
-          <div className={style.image}>
-            <img
-              src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`}
-              alt=""
-            />
-          </div>
-        </Reveal>
-      </div>
-    </div>
-  ))
-}
-          <div className="map" id="map" style={{ width: '100%', height: '400px' }} />
+                 <MoreButton   restID={el.id} />
+              {/* <Rating averageRating={el.Ratings[0].rating} /> */}
+            </div>
+            <Reveal>
+              <div className={style.image}>
+                <img src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`} alt="" />
+              </div>
+            </Reveal>
 
+          </div>
+        </div>
+        
+      ))}
+            <div className="map" id="map" style={{ width: '100%', height: '400px' }} />
     </>
   );
 }

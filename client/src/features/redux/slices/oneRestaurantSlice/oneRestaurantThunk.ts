@@ -7,9 +7,9 @@ export const getOneRestaurantThunk = createAsyncThunk<{oneRestaurant: OneRestaur
   'restaurant/getOne',
   async (id: number) => getOneRestaurantService(id).then((data) => data));
 
-export const addCommentThunk = createAsyncThunk<CommentType, { id: number; body: string }>(
+export const addCommentThunk = createAsyncThunk<CommentType, { id: number; body: string, userId: number }>(
   'restaurant/addComment',
-  async ({ id, body }) => addOneCommentService(id, body).then((data) => data)
+  async ({ id, body, userId }) => addOneCommentService(id, body, userId).then((data) => data)
 );
 
 export const deleteCommentThunk = createAsyncThunk<CommentType, { restaurantId: number, commentId: number }>(
@@ -18,9 +18,9 @@ export const deleteCommentThunk = createAsyncThunk<CommentType, { restaurantId: 
     deleteOneCommentService(restaurantId, commentId).then((data) => data)
 );
 
-export const addRatingThunk = createAsyncThunk<RatingType, { id: number; rating: number }>(
+export const addRatingThunk = createAsyncThunk<RatingType, { id: number; rating: number, userId: number }>(
   'restaurant/addRating',
-  async ({ id, rating }) => addRatingService(id, rating).then((data) => data)
+  async ({ id, rating, userId }) => addRatingService(id, rating, userId).then((data) => data)
 );
 
 export const addBookingThunk = createAsyncThunk<BookingType, { id: number; formData: BookingInputType}>(

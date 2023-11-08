@@ -7,7 +7,7 @@ export type CommentType = {
   id: number;
   restaurantId: number;
   body: string;
-  user: UserComments;
+  User: UserComments;
   commentReply: CommentType[];
 };
 
