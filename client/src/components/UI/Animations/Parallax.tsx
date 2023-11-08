@@ -1,5 +1,5 @@
 import React, {  useRef } from 'react';
-import { motion, useInView, useAnimation, useScroll, useTransform } from 'framer-motion';
+import { motion,  useScroll, useTransform } from 'framer-motion';
 
 type Props = {
   children: JSX.Element;
