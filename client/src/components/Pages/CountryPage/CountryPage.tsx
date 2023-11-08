@@ -8,11 +8,13 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
+import pizza from '../../../../public/img/pizzapng.png';
 
 import MoreButton from '../../UI/MoreButton/MoreButton';
 
 import Rating from '../../UI/RestaurantPageUI/Rating';
 
+import { ParallaxUp } from '../../UI/Animations/Parallax';
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
@@ -24,7 +26,6 @@ export default function CountryPage(): JSX.Element {
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
   console.log(restiks);
-
 
   useEffect(() => {
     void dispatch(oneCountryActionThunk(Number(id)));
@@ -48,7 +49,7 @@ export default function CountryPage(): JSX.Element {
       ymaps.ready(() => {
         ymapRef.current = new ymaps.Map('map', {
           center: [55.751574, 37.573856],
-          zoom: 11,
+          zoom: 10,
         });
         const myMap = ymapRef.current;
         if (!restiks?.length) return;
@@ -79,17 +80,20 @@ export default function CountryPage(): JSX.Element {
 
   return (
     <>
-
-
-      <div className={style.cuisine}>
-        <Reveal>
-          <>
-            <h1>{oneCountry?.name}</h1>
-            <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
-          </>
-        </Reveal>
+      <div className={style.pageContainer}>
+        <div className={style.cuisine}>
+        
+          <Reveal>
+            <>
+              <h1>{oneCountry?.name}</h1>
+              <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
+            </>
+          </Reveal>
+          <ParallaxUp>
+            <img style={{ width: '400px' }, {paddingTop:'320px'}} src={pizza} alt="" />
+          </ParallaxUp>
+        </div>
       </div>
-
 
       {oneCountry?.Restaurants?.map((el, index) => (
         <div className={style.miniCardContainer}>
@@ -107,17 +111,17 @@ export default function CountryPage(): JSX.Element {
                 restID={el.id}
                 isLiked={el.Favourites.map((fav) => fav.userId).includes(checkid())}
               />
-               {el.Ratings ? ( 
-            <Rating
-              averageRating={
-                el.Ratings.map((rating) => rating.rating).reduce((a, b) => a + b, 0) /
-                el.Ratings.length
-              }
-            />
-          ) : (
-            <p>No ratings available</p>
-          )}
-                 <MoreButton   restID={el.id} />
+              {el.Ratings ? (
+                <Rating
+                  averageRating={
+                    el.Ratings.map((rating) => rating.rating).reduce((a, b) => a + b, 0) /
+                    el.Ratings.length
+                  }
+                />
+              ) : (
+                <p>No ratings available</p>
+              )}
+              <MoreButton restID={el.id} />
               {/* <Rating averageRating={el.Ratings[0].rating} /> */}
             </div>
             <Reveal>
@@ -125,12 +129,10 @@ export default function CountryPage(): JSX.Element {
                 <img src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`} alt="" />
               </div>
             </Reveal>
-
           </div>
         </div>
-        
       ))}
-            <div className="map" id="map" style={{ width: '100%', height: '400px' }} />
+      <div className="map" id="map" style={{ width: '100%', height: '400px' }} />
     </>
   );
 }
