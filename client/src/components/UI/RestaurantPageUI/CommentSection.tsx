@@ -18,14 +18,13 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
   const [input, setInput] = useState({ body: '' });
   const dispatch = useAppDispatch();
 
+  const userId = useAppSelector((state) => state.user.id) as number
+
   const userWithStatus = useAppSelector((store) => store.lkReducer.currentUserLk);
 
   const changeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
-console.log(comments);
-
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
@@ -52,7 +51,7 @@ console.log(comments);
             type="submit"
             className="inline-flex items-center py-2.5 px-4 text-md font-medium text-center text-white bg-blue-600 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
             onClick={() => {
-              void dispatch(addCommentThunk({ id: comments[0].restaurantId, body: input.body }));
+              void dispatch(addCommentThunk({ id: comments[0].restaurantId, body: input.body, userId}));
               setInput({ body: '' });
             }}
           >
@@ -60,17 +59,17 @@ console.log(comments);
           </button>
         </form>
         {comments?.map((el) => (
-          <>
+          <div key={uuidv4()}>
             <article className="p-2 text-base bg-white rounded-lg dark:bg-gray-900">
               <footer className="flex justify-between items-center mb-2">
                 <div className="flex items-center">
                   <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                     <img
                       className="mr-2 w-10 h-10 rounded-full"
-                      src={`${STATIC_URL}/img/users/${el.user?.avatar}`}
-                      alt={`${el.user?.userName}`}
+                      src={`${STATIC_URL}/img/users/${el.User?.avatar}`}
+                      alt={`${el.User?.userName}`}
                     />
-                    {el.user?.userName}
+                    {el.User?.userName}
                   </p>
                 </div>
                 {userWithStatus?.isAdmin === true && (
@@ -124,7 +123,7 @@ console.log(comments);
                 </article>
               </article>
             ))}
-          </>
+          </div>
         ))}
       </div>
     </section>
