@@ -76,7 +76,7 @@ module.exports = {
           coordY: 37.604708,
           status: "Accepted",
           countryId: 2,
-          restOwnerId: 4,
+          restOwnerId: 1,
         },
         {
           title: "La Bottega Siciliana",
@@ -125,7 +125,7 @@ module.exports = {
           coordY: 37.634182,
           status: "Accepted",
           countryId: 4,
-          restOwnerId: 1,
+          restOwnerId: 2,
         },
         {
           title: "Moscow-Delhi",
@@ -197,7 +197,7 @@ module.exports = {
           coordY: 37.808384,
           status: "Accepted",
           countryId: 6,
-          restOwnerId: 1,
+          restOwnerId: 2,
         },
         {
           title: "Gayane’s",
@@ -233,7 +233,7 @@ module.exports = {
           coordY: 37.480148,
           status: "Accepted",
           countryId: 7,
-          restOwnerId: 7,
+          restOwnerId: 1,
         },
         {
           title: "Mr. Ливанец",
@@ -293,7 +293,7 @@ module.exports = {
           coordY: 37.634021,
           status: "Accepted",
           countryId: 9,
-          restOwnerId: 5,
+          restOwnerId: 1,
         },
         
         {
@@ -307,6 +307,18 @@ module.exports = {
           status: "Pending",
           countryId: 3,
           restOwnerId: 6,
+        },
+        {
+          title: "Месопотамия",
+          description:
+            "Демократичный ресторан турецкой кухни. Во внушительном меню собраны традиционные турецкие закуски, супы, горячие блюда, мясо на углях, выпечка и сладости. Есть и европейские блюда, но их гораздо меньше.",
+          adress: "ул.Арбат 4 строение 1",
+          phone: "+7 (977) 886-61-63",
+          coordX: 55.752050, 
+          coordY: 37.598546,
+          status: "Pending",
+          countryId: 7,
+          restOwnerId: 2,
         },
         
       ],
