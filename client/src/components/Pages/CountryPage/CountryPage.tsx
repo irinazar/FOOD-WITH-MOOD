@@ -20,7 +20,6 @@ export default function CountryPage(): JSX.Element {
   const oneCountry = useAppSelector((state) => state.countries.oneCountry);
   const user = useAppSelector((state) => state.user);
   // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
-  const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
   console.log(restiks);
@@ -42,15 +41,15 @@ export default function CountryPage(): JSX.Element {
     return null;
   };
 
+  
   const loadMap = () => {
-    console.log(ymaps);
     if (ymaps) {
       ymaps.ready(() => {
         ymapRef.current = new ymaps.Map('map', {
           center: [55.751574, 37.573856],
           zoom: 11,
         });
-        const myMap = ymapRef.current;
+        const myMap: ymaps.Map = ymapRef.current;
         if (!restiks?.length) return;
         restiks?.forEach((restik) => {
           const placemark = new ymaps.Placemark([restik.coordX, restik.coordY], {
@@ -66,7 +65,9 @@ export default function CountryPage(): JSX.Element {
           });
 
           // Добавляем метку на карту
-          myMap.geoObjects.add(placemark);
+          if (myMap) {
+            myMap.geoObjects.add(placemark);
+          }
         });
       });
     }
@@ -91,7 +92,7 @@ export default function CountryPage(): JSX.Element {
       </div>
 
 
-      {oneCountry?.Restaurants?.map((el, index) => (
+      {oneCountry?.Restaurants?.map((el) => (
         <div className={style.miniCardContainer}>
           <div className={style.miniCard}>
             <div className={style.imageText}>

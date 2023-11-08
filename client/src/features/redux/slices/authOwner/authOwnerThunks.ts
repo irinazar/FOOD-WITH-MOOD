@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { checkUserService } from '../../../../services/userService/userService';
 import {
   checkOwnerService,
   logoutOwnerService,

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { CountryType, OneCountryType } from '../../../../types/categoryType/categoryTypes';
-import { allCountriesActionThunk, deleteOneCountryActionThunk, oneCountryActionThunk } from './CountryThuncks';
+import { allCountriesActionThunk, oneCountryActionThunk } from './CountryThuncks';
 
 const initialState: {
   countries: CountryType[];
