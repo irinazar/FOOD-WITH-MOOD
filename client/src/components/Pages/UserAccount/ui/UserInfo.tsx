@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MdBuild } from 'react-icons/md';
 import { Button, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import style from '../style.module.css';
+
 import ModalPage from './ModalPage';
 import type { UserLkType } from '../../../../types/lkTypes/lkTypes';
 import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
@@ -62,6 +63,20 @@ function UserInfo({ userlk }: UserInfoProps): JSX.Element {
         onClose={onClose}
         overlay={overlay}
       />
+      <div className={style.area}>
+        <ul className={style.circles}>
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+        </ul>
+      </div>
     </div>
   );
 }
