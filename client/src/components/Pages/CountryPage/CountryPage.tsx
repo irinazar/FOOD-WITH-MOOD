@@ -8,9 +8,15 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
-import Rating from '../../UI/RestaurantPageUI/Rating';
+
+import pizza from '../../../../public/img/pizzapng.png';
 
 import MoreButton from '../../UI/MoreButton/MoreButton';
+
+import Rating from '../../UI/RestaurantPageUI/Rating';
+
+import { ParallaxUp } from '../../UI/Animations/Parallax';
+
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
@@ -18,7 +24,6 @@ export default function CountryPage(): JSX.Element {
   const oneCountry = useAppSelector((state) => state.countries.oneCountry);
   const user = useAppSelector((state) => state.user);
   // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
-  const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
   console.log(restiks);
@@ -39,15 +44,15 @@ export default function CountryPage(): JSX.Element {
     return null;
   };
 
+  
   const loadMap = () => {
-    console.log(ymaps);
     if (ymaps) {
       ymaps.ready(() => {
         ymapRef.current = new ymaps.Map('map', {
           center: [55.751574, 37.573856],
-          zoom: 11,
+          zoom: 10,
         });
-        const myMap = ymapRef.current;
+        const myMap: ymaps.Map = ymapRef.current;
         if (!restiks?.length) return;
         restiks?.forEach((restik) => {
           const placemark = new ymaps.Placemark([restik.coordX, restik.coordY], {
@@ -63,7 +68,9 @@ export default function CountryPage(): JSX.Element {
           });
 
           // Добавляем метку на карту
-          myMap.geoObjects.add(placemark);
+          if (myMap) {
+            myMap.geoObjects.add(placemark);
+          }
         });
       });
     }
@@ -76,16 +83,24 @@ export default function CountryPage(): JSX.Element {
 
   return (
     <>
-      <div className={style.cuisine}>
-        <Reveal>
-          <>
-            <h1>{oneCountry?.name}</h1>
-            <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
-          </>
-        </Reveal>
+
+      <div className={style.pageContainer}>
+        <div className={style.cuisine}>
+        
+          <Reveal>
+            <>
+              <h1>{oneCountry?.name}</h1>
+              <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
+            </>
+          </Reveal>
+          <ParallaxUp>
+            <img style={{ width: '400px' }, {paddingTop:'320px'}} src={pizza} alt="" />
+          </ParallaxUp>
+        </div>
       </div>
 
       {oneCountry?.Restaurants?.map((el, index) => (
+
         <div className={style.miniCardContainer}>
           <div className={style.miniCard}>
             <div className={style.imageText}>

@@ -3,10 +3,9 @@ import { motion, useInView, useAnimation } from 'framer-motion';
 
 type Props = {
   children: JSX.Element;
-  width?: 'fit-content' | '100';
 };
 
-export function Hide({ children, width = 'fit-content' }: Props):JSX.Element {
+export function Hide({ children }: Props):JSX.Element {
     const ref= useRef(null)
     const isInView = useInView(ref, {once:true})
 

@@ -9,7 +9,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Text,
 } from '@chakra-ui/react';
 
 import React from 'react';

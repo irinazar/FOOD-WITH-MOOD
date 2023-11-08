@@ -10,8 +10,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { useAppDispatch} from '../../../hooks/reduxHooks';
 import type { AuthType, CreateConfirmType } from '../../../types/authType/authTypes';
 import { setOwner } from '../../../features/redux/slices/authOwner/authOwnerSlice';
 import { setUser } from '../../../features/redux/slices/user/UserSlice';

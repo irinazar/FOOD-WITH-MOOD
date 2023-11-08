@@ -24,13 +24,18 @@
   .image {
     flex: 1; /* Занимает доступное пространство по горизонтали */
     padding-left: 4vw;
+    
 
   }
   
   .image img {
-    max-width: 100%; 
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5)
+    max-width: 100%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border: 4px solid rgb(255, 255, 255); /* Добавляем границу черного цвета шириной 4px */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.3); /* Внешняя тень по всему периметру */
   }
+  
+  
   
   .imageText {
     flex: 1; /* Занимает доступное пространство по горизонтали */
@@ -52,4 +57,32 @@
     max-width: 20vw;
   }
 
+  .cuisine {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .cuisineImage {
+    width: 20vw;
+    float: right;
+  }
+
+  .pageContainer {
+    display: flex;
+    justify-content: center; /* Горизонтальное центрирование */
+    align-items: center; /* Вертикальное центрирование */
+    height: 100vh; /* Расширение контейнера по вертикали на всю высоту окна */
+  }
+  
+  .cuisine {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .cuisineImage {
+    width: 20vw;
+    float: right;
+  }
   

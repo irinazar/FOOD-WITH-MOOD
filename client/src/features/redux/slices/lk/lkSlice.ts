@@ -1,12 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useToast } from '@chakra-ui/react';
 import type {
   CommentResponseType,
   CountryType,
-  FavoriteResponse,
   FavoriteType,
   OwnerType,
-  SubmitRestaurantType,
   UserLkType,
 } from '../../../../types/lkTypes/lkTypes';
 import {
@@ -17,7 +14,6 @@ import {
   getBookingsThunk,
   getMyComment,
   getOwnerThunk,
-  getUserRestaurants,
   getUserThunk,
   myFavoriteThunk,
   newRestaurantThunk,
