@@ -29,9 +29,10 @@ export const getOneRestaurantService = (
       throw error;
     });
 
-export const addOneCommentService = (id: number, body: string): Promise<CommentType> => {
+export const addOneCommentService = (id: number, body: string, userId: number): Promise<CommentType> => {
   const formData = new FormData();
   formData.append('body', body);
+  formData.append('userId', userId);
   return apiService
     .post<CommentType>(`/restaurants/${id}/addComment`, Object.fromEntries(formData))
     .then((response) => response.data)
