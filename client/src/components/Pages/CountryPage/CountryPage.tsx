@@ -16,6 +16,7 @@ import MoreButton from '../../UI/MoreButton/MoreButton';
 import Rating from '../../UI/RestaurantPageUI/Rating';
 
 import { ParallaxUp } from '../../UI/Animations/Parallax';
+import Hide from '../../UI/Animations/Hide';
 
 
 export default function CountryPage(): JSX.Element {
@@ -85,15 +86,17 @@ export default function CountryPage(): JSX.Element {
 
       <div className={style.pageContainer}>
         <div className={style.cuisine}>
-        
           <Reveal>
             <>
               <h1>{oneCountry?.name}</h1>
               <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
             </>
           </Reveal>
+
           <ParallaxUp>
-            <img style={{ width: '400px' }, {paddingTop:'320px'}} src={pizza} alt="" />
+          <Reveal>
+            <img style={({ width: '400px' }, { paddingTop: '320px', paddingLeft:'18px'})} src={`${STATIC_URL}/miniImg/${oneCountry?.miniImg}`} alt="" />
+            </Reveal>
           </ParallaxUp>
         </div>
       </div>
@@ -130,7 +133,7 @@ export default function CountryPage(): JSX.Element {
             </div>
             <Reveal>
               <div className={style.image}>
-                <img src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`} alt="" />
+                <img style={{ width: '700px'}} src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`} alt="" />
               </div>
             </Reveal>
           </div>
