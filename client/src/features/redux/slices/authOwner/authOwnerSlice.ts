@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   checkOwnerThunk,
-  codeOwnerThunk,
   loginOwnerThunk,
   logoutOwnerThunk,
   signUpOwnerThunk,
@@ -10,7 +9,6 @@ import {
 import type {
   AuthLoadingType,
   AuthType,
-  CreateConfirmType,
 } from '../../../../types/authType/authTypes';
 
 type OwnerState = AuthLoadingType;

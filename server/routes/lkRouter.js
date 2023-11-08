@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const lkRouter = require("express").Router();
 const {
   Image,
+  Rating,
   Country,
   RestOwner,
   User,
@@ -205,6 +206,11 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
         await Image.bulkCreate(images);
       }
 
+      await Rating.create({
+        restaurantId: newRestaurantId,
+        rating: 0,
+      });
+
       const newRestaurantWithImages = await Restaurant.findByPk(
         newRestaurantId,
         {
@@ -386,7 +392,6 @@ lkRouter.get("/myfav/:id", async (req, res) => {
     res.sendStatus(400);
   }
 });
-
 
 lkRouter.get("/:id/booking", async (req, res) => {
   const ownerId = req.params.id;

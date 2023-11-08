@@ -37,7 +37,7 @@ function App(): JSX.Element {
           path="/admin"
           element={
             <PrivateRoute
-              isAllowed={user.status === 'logged' && userWithStatus?.isAdmin === true}
+              isAllowed={user.status === 'logged' && userWithStatus?.isAdmin !== true}
               redirectTo="/"
             >
               <AdminPage />

@@ -1,12 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { MdBuild } from 'react-icons/md';
-import { Button, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+
+import { ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import style from '../../UserAccount/style.module.css';
 import ModalPageRestorant from './ModalPageRestorant';
 import ModalNewRestorant from './ModalNewRestorant';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
-import { getOwnerThunk } from '../../../../features/redux/slices/lk/lkThuncks';
 import type { OwnerType } from '../../../../types/lkTypes/lkTypes';
 import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
 
@@ -39,7 +36,9 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
         />
       </div>
       <div className={style['profile-card__cnt']}>
-        <div className={style['profile-card__name']}>{owner?.name}</div>
+        <div className={style['profile-card__name']}>
+          <strong> {owner?.name} </strong>
+        </div>
         <div className={style['profile-card__txt']}>
           <strong>{owner?.telephone}</strong>
         </div>
@@ -92,6 +91,20 @@ function RestorantInfo({ owner }: RestorantInfoProps): JSX.Element {
           overlay={overlay}
         />
       )}
+      <div className={style.area}>
+        <ul className={style.circles}>
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+        </ul>
+      </div>
     </div>
   );
 }

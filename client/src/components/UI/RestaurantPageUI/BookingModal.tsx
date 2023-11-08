@@ -103,6 +103,7 @@ function BookingModal({ isOpen, onClose, overlay }: BookingModalProps): JSX.Elem
                 className={style.btn}
                 colorScheme="blackAlpha"
                 variant="outline"
+                onClick={onClose}
               >
                 Забронировать
               </Button>

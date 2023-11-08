@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import style from '../../../UI/FavoriteButton/style.module.css';
 import type { FavoriteType } from '../../../../types/lkTypes/lkTypes';
