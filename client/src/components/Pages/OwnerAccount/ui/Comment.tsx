@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Box, Button, Divider, Flex, Text, Textarea } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Text, Textarea } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import style from '../../UserAccount/style.module.css';
 import type { CommentResponseType } from '../../../../types/lkTypes/lkTypes';
@@ -19,6 +19,7 @@ function Comment({ comment }: CommentProps): JSX.Element {
   };
   return (
     <Box
+      style={{ boxShadow: '0px 8px 60px -10px rgba(13, 28, 39, 0.6)' }}
       className={style['comment-container']}
       p="4"
       border="1px"
@@ -32,7 +33,7 @@ function Comment({ comment }: CommentProps): JSX.Element {
           <Text fontWeight="bold" fontSize="sm" ml="4">
             {comment.User.name}
           </Text>
-          <Text color="gray.500" fontSize="sm" ml="4">
+          <Text fontSize="sm" ml="4">
             {comment.createdAt.slice(0, 10)}
           </Text>
         </Flex>
@@ -47,6 +48,7 @@ function Comment({ comment }: CommentProps): JSX.Element {
         mt="2"
         colorScheme="blackAlpha"
         variant="outline"
+        bg="white"
         onClick={toggleReplyForm}
       >
         Ответить
@@ -68,13 +70,14 @@ function Comment({ comment }: CommentProps): JSX.Element {
       {isReplyFormOpen && (
         <form onSubmit={(e) => handlerReplySubmit(e, comment.id, Number(id))}>
           <Box mt="2">
-            <Textarea name="body" colorScheme="blackAlpha" placeholder="Ваш ответ" />
+            <Textarea name="body" bg="white" colorScheme="blackAlpha" placeholder="Ваш ответ" />
             <Button
               size="sm"
               mt="2"
               type="submit"
               colorScheme="blackAlpha"
               variant="outline"
+              bg="white"
               className={style.btn}
             >
               Отправить

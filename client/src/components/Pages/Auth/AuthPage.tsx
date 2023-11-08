@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -25,6 +25,7 @@ export default function AuthPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const [password, setPassword] = useState(''); // Состояние для хранения пароля
 
   const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -64,13 +65,16 @@ export default function AuthPage(): JSX.Element {
     navigate('/code');
   };
 
+  const isPasswordValid = password.length >= 8;
+  const borderColor = isPasswordValid ? 'green.500' : 'red.500';
+
   return (
     <div className={style.divRegist}>
       <Box bg={useColorModeValue('', 'gray.900')} w="lg" p={8} borderRadius="md">
         <form className={style.formRegist} onSubmit={submitHandler}>
           <VStack spacing={4}>
             <FormControl>
-              <FormLabel color={useColorModeValue('gray.900', 'gray.100')}>Name</FormLabel>
+              <FormLabel color={useColorModeValue('gray.900', 'gray.100')}>Имя</FormLabel>
               <Input
                 placeholder="Name"
                 name="name"
@@ -87,17 +91,21 @@ export default function AuthPage(): JSX.Element {
                 bg={useColorModeValue('gray.100', 'gray.900')}
               />
             </FormControl>
-            <FormControl>
-              <FormLabel color={useColorModeValue('gray.900', 'gray.100')}>Password</FormLabel>
+            <FormControl isInvalid={!isPasswordValid}>
+              <FormLabel color={useColorModeValue('gray.900', 'gray.100')}>Пароль</FormLabel>
               <Input
                 type="password"
                 name="password"
                 placeholder="Password"
                 autoComplete=""
                 bg={useColorModeValue('gray.100', 'gray.900')}
+                borderColor={borderColor} // Изменяем цвет рамки поля
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <Text mt={1} color={useColorModeValue('gray.900', 'gray.100')}>
-                At least 8 characters long
+              <Text mt={1} color={borderColor}>
+                {isPasswordValid
+                  ? 'Валидный пароль '
+                  : 'Пароль должен быть длиной не менее 8 символов'}
               </Text>
             </FormControl>
             <RadioGroup name="radio" defaultValue="user">
@@ -111,7 +119,7 @@ export default function AuthPage(): JSX.Element {
               </Stack>
             </RadioGroup>
             <Button type="submit" colorScheme="messenger" variant="outline" w="full" mt={4}>
-              Signup
+              Зарегистрироваться
             </Button>
           </VStack>
         </form>

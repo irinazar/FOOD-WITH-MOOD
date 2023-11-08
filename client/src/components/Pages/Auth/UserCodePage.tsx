@@ -10,11 +10,11 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import { useAppDispatch} from '../../../hooks/reduxHooks';
 import type { AuthType, CreateConfirmType } from '../../../types/authType/authTypes';
 import { setOwner } from '../../../features/redux/slices/authOwner/authOwnerSlice';
 import { setUser } from '../../../features/redux/slices/user/UserSlice';
+import style from './style.module.css';
 
 export default function UserCodePage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -31,11 +31,8 @@ export default function UserCodePage(): JSX.Element {
       })
       .then((response) => {
         if (response.data.isOwner) {
-          
           void dispatch(setOwner(response.data));
         } else {
-        
-
           void dispatch(setUser(response.data));
         }
       })
@@ -45,7 +42,7 @@ export default function UserCodePage(): JSX.Element {
   };
 
   return (
-    <div className="flex justify-center mt-5">
+    <div className={style.code}>
       <Box bg={useColorModeValue('', 'gray.900')} w="lg" p={8} borderRadius="md">
         <Text
           fontSize="2xl"
@@ -54,7 +51,8 @@ export default function UserCodePage(): JSX.Element {
           mb={4}
           color={useColorModeValue('gray.900', 'gray.100')}
         >
-          Код подтверждения
+          Мы отправили вам письмо на электронную почту!
+          <h1>Введите код</h1>
         </Text>
         <form onSubmit={submitCodeHandler}>
           <VStack spacing={4}>
