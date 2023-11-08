@@ -12,6 +12,7 @@ import {
   StackDivider,
 } from '@chakra-ui/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Carousel from '../../../UI/RestaurantPageUI/Carousel';
 import type { SubmitRestaurantType } from '../../../../types/lkTypes/lkTypes';
 import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
@@ -26,7 +27,15 @@ function OwnerCard({ rest }: OwnerCardProps): JSX.Element {
   return (
     <Card>
       <CardHeader textAlign="center">
-        <Heading size="md">{rest.title}</Heading>
+        <Heading size="md">
+          <Link
+            className={style.restName}
+            style={{ textDecoration: 'underline' }}
+            to={`/restaurants/${rest?.id}`}
+          >
+            <strong>{rest.title}</strong>
+          </Link>
+        </Heading>
       </CardHeader>
 
       <CardBody>

@@ -10,19 +10,38 @@
   background: #1a1e23;
   height: 65px;
 }
+@media screen and (max-width: 768px) {
+  .menuContainer {
+    font-size: 12px;
+  }
+}
+
 .menu {
-  display: flex; /* Используем flex для горизонтального размещения элементов */
+  display: flex;
   list-style-type: none;
 }
 
 .menuEl {
   padding: 6px;
-  margin: 0; /* Удаляем отступы между элементами списка */
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .menuEl {
+    padding: 0;
+  }
 }
 
 .brand {
   color: #ecf0f1;
   font-size: 20px;
+}
+@media screen and (max-width: 768px) {
+  .brand {
+    max-width: 50px;
+    font-size: 14px;
+
+  }
 }
 
 .menuLink {

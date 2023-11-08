@@ -34,7 +34,7 @@ export default function NewNavBar(): JSX.Element {
   };
   return (
     <div className={style.menuContainer}>
-      <Box className="brand">
+      <Box className={style.brand}>
         <NavLink to="/" className={style.brand}>
           FOOD with MOOD
         </NavLink>
