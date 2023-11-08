@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { oneCountryActionThunk } from '../../../features/redux/slices/country/CountryThuncks';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
+import Rating from '../../UI/RestaurantPageUI/Rating';
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
@@ -19,10 +20,6 @@ export default function CountryPage(): JSX.Element {
   const averageRating = useAppSelector((state) => state.oneRestaurant.averageRating);
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
-
-
-
-
 
   useEffect(() => {
     void dispatch(oneCountryActionThunk(Number(id)));
@@ -77,8 +74,6 @@ export default function CountryPage(): JSX.Element {
 
   return (
     <>
-
-
       <div className={style.cuisine}>
         <Reveal>
           <>
@@ -88,45 +83,39 @@ export default function CountryPage(): JSX.Element {
         </Reveal>
       </div>
 
-      {
-  oneCountry?.Restaurants?.map((el) => (
-    <div className={style.miniCardContainer} key={el.id}>
-      <div className={style.miniCard}>
-        <div className={style.imageText}>
-          <Reveal>
-            <h1 className={style.restName}>{el.title}</h1>
-          </Reveal>
+      {oneCountry?.Restaurants?.map((el) => (
+        <div className={style.miniCardContainer} key={el.id}>
+          <div className={style.miniCard}>
+            <div className={style.imageText}>
+              <Reveal>
+                <h1 className={style.restName}>{el.title}</h1>
+              </Reveal>
 
-          <OnTheLeft>
-            <p>{el.description}</p>
-          </OnTheLeft>
-          <br />
-          <FavoriteButton />
-          {el.Ratings ? ( 
-            <Rating
-              averageRating={
-                el.Ratings.map((rating) => rating.rating).reduce((a, b) => a + b, 0) /
-                el.Ratings.length
-              }
-            />
-          ) : (
-            <p>No ratings available</p>
-          )}
-        </div>
-        <Reveal>
-          <div className={style.image}>
-            <img
-              src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`}
-              alt=""
-            />
+              <OnTheLeft>
+                <p>{el.description}</p>
+              </OnTheLeft>
+              <br />
+              <FavoriteButton />
+              {el.Ratings ? (
+                <Rating
+                  averageRating={
+                    el.Ratings.map((rating) => rating.rating).reduce((a, b) => a + b, 0) /
+                    el.Ratings.length
+                  }
+                />
+              ) : (
+                <p>No ratings available</p>
+              )}
+            </div>
+            <Reveal>
+              <div className={style.image}>
+                <img src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`} alt="" />
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
-      </div>
-    </div>
-  ))
-}
-          <div className="map" id="map" style={{ width: '100%', height: '400px' }} />
-
+        </div>
+      ))}
+      <div className="map" id="map" style={{ width: '100%', height: '400px' }} />
     </>
   );
 }
