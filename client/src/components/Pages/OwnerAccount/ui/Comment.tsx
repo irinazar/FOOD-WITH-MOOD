@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Box, Button, Divider, Flex, Text, Textarea } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Text, Textarea } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import style from '../../UserAccount/style.module.css';
 import type { CommentResponseType } from '../../../../types/lkTypes/lkTypes';

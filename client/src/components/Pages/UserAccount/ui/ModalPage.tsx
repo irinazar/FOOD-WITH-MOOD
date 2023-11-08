@@ -15,7 +15,6 @@ import {
 import React, { useEffect, useState } from 'react';
 import style from '../style.module.css';
 import { useAppSelector } from '../../../../hooks/reduxHooks';
-import useLkHooks from '../../../../hooks/lkHooks/useLkHooks';
 
 type ModalPageProps = {
   isOpen: boolean;

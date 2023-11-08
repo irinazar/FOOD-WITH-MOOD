@@ -11,14 +11,16 @@ export default function MainPage(): JSX.Element {
     <>
       <div className={style.videoContainer}>
         <video className={style.videoBackground} autoPlay muted loop>
-          <source src={`${STATIC_URL}/video/Food.mp4`}  type="video/mp4" />
+          <source src={`${STATIC_URL}/video/Food.mp4`} type="video/mp4" />
         </video>
         <div className={style.content}>
-        <h1 className={style.brandname}>FOOD with MOOD</h1>
+          <div className={style.backgroundShadow}>
+            <h1 className={style.brandname}>FOOD with MOOD</h1>
+          </div>
         </div>
       </div>
       <div className={style.shadow}>sdv</div>
-      
+
       <Description />
 
       <Categories />
