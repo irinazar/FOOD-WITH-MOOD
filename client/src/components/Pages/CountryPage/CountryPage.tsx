@@ -59,7 +59,7 @@ export default function CountryPage(): JSX.Element {
           const placemark = new ymaps.Placemark([restik.coordX, restik.coordY], {
             balloonContentHeader: `<a style="color: black" href ='post/house/${restik.id}'> ${restik.title}</a>`,
 
-            balloonContentBody: restik.description,
+            balloonContentBody: [restik.adress, ` ${restik.phone}`],
 
             iconLayout: 'default#image',
             iconImageHref: '/img/geo.png',
