@@ -29,7 +29,7 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
-      <div className="max-w-2xl mx-auto px-4">
+      <div className="max-w-3xl mx-auto px-4">
         <div className="flex justify-center items-center mb-6">
           <h2 className="text-lg lg:text-2xl font-bold text-white dark:text-white p-2 px-1 rounded-lg uppercase">
             Отзывы:
@@ -62,7 +62,7 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
         {comments?.map((el) => (
         <Reveal>
           <div key={uuidv4()}>
-            <article className="p-2 text-base bg-white rounded-lg dark:bg-gray-900">
+            <article className="p-2 text-xl bg-white font-bold rounded-lg dark:bg-gray-900">
               <footer className="flex justify-between items-center mb-2">
                 <div className="flex items-center">
                   <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
