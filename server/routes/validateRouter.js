@@ -6,7 +6,6 @@ const validateRooter = express.Router();
 const jwtSecretKey = "your-secret-key"; // секретный ключ
 
 validateRooter.post("/", async (req, res) => {
-  
   const { randomString } = req.body;
   if (!randomString) return res.sendStatus(400);
 
@@ -31,14 +30,7 @@ validateRooter.post("/", async (req, res) => {
     };
     await req.session.save();
     await codeEntry.destroy();
-    // const token = jwt.sign(
-    //   { userName: ownerNew.name, restOwnerId: ownerNew.id },
-    //   jwtSecretKey,
-    //   {
-    //     expiresIn: "1h",
-    //   }
-    // );
-    // res.cookie("token", token, { httpOnly: true });
+
     const owner = JSON.parse(JSON.stringify(ownerNew));
     delete owner.password;
     owner.isOwner = true;
@@ -53,13 +45,7 @@ validateRooter.post("/", async (req, res) => {
       id: userNew.id,
     };
     await codeEntry.destroy();
-    // const token = jwt.sign(
-    //   { userName: userNew.name, userId: userNew.id },
-    //   jwtSecretKey,
-    //   {
-    //     expiresIn: "1h",
-    //   }
-    // );
+
     const user = JSON.parse(JSON.stringify(userNew));
     delete user.password;
     return res.status(200).json(user);
