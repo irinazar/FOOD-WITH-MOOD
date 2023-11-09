@@ -60,7 +60,13 @@ restaurantRouter.get("/:id", async (req, res) => {
     const ratings = oneRestaurant.Ratings.map((rating) => rating.rating);
     const averageRating =
       ratings.reduce((total, rating) => total + rating, 0) / ratings.length;
-    if ((oneRestaurant,  pictures, averageRating)) {
+      console.log(
+        oneRestaurant, 'OLOOOOOOOOOOOOOOOOOOOOOOO', 
+        comments , 'OLOOOOOOOOOOOOOOOOOOOOOOO', 
+        pictures,'OLOOOOOOOOOOOOOOOOOOOOOOO', 
+        averageRating, 'OLOOOOOOOOOOOOOOOOOOOOOOO');
+
+    if ((oneRestaurant,  pictures)) {
       res.json({ oneRestaurant, comments, pictures, averageRating });
     } else {
       res.status(404).json({ error: "restaurant not found" });
@@ -124,7 +130,7 @@ restaurantRouter.patch("/:id/addRating", async (req, res) => {
   const { rating, userId } = req.body;
 
 
-  if (Number.isNaN(+id) || !rating || rating < 1 || rating > 5) {
+  if (Number.isNaN(+id) || !rating || rating < 0 || rating > 5) {
     res.status(400).json({ message: "Invalid rating value" });
     return;
   }

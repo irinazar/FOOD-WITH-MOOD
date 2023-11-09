@@ -17,10 +17,13 @@ export default function NewNavBar(): JSX.Element {
     isAdmin: boolean;
   };
 
+
+
   const owner = useAppSelector((state) => state.authOwner) as {
     id: number;
     status: string;
     isAdmin: boolean;
+    isOwner: boolean;
   };
 
   const handleLogout = (): void => {

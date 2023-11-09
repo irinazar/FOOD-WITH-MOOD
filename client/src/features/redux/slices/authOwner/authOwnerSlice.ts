@@ -6,10 +6,7 @@ import {
   logoutOwnerThunk,
   signUpOwnerThunk,
 } from './authOwnerThunks';
-import type {
-  AuthLoadingType,
-  AuthType,
-} from '../../../../types/authType/authTypes';
+import type { AuthLoadingType, AuthType } from '../../../../types/authType/authTypes';
 
 type OwnerState = AuthLoadingType;
 const initialState: OwnerState = { status: 'loading' };

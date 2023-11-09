@@ -10,7 +10,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useAppDispatch} from '../../../hooks/reduxHooks';
+import { useAppDispatch } from '../../../hooks/reduxHooks';
 import type { AuthType, CreateConfirmType } from '../../../types/authType/authTypes';
 import { setOwner } from '../../../features/redux/slices/authOwner/authOwnerSlice';
 import { setUser } from '../../../features/redux/slices/user/UserSlice';
@@ -30,6 +30,8 @@ export default function UserCodePage(): JSX.Element {
         withCredentials: true,
       })
       .then((response) => {
+        console.log(response.data);
+
         if (response.data.isOwner) {
           void dispatch(setOwner(response.data));
         } else {
