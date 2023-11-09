@@ -19,6 +19,7 @@ export default function OwnerAccount(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
+  console.log(id);
   const restmycomments = useAppSelector(
     (state) => state.lkReducer.comments,
   ) as CommentResponseType[];

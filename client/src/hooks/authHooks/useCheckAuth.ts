@@ -16,6 +16,7 @@ const useCheckAuth = (): void => {
         withCredentials: true,
       })
       .then((response) => {
+        console.log(response.data);
         if (response.data.isOwner) {
           void dispatch(setOwner(response.data));
           void dispatch(setUser({ status: 'guest' }));
