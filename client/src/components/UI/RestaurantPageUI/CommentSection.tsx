@@ -6,26 +6,32 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import {
   addCommentThunk,
   deleteCommentThunk,
+  
 } from '../../../features/redux/slices/oneRestaurantSlice/oneRestaurantThunk';
 import { STATIC_URL } from '../../Pages/UserAccount/ui/UserInfo';
 import style from './style.module.css';
 import { Reveal } from '../Animations/Reveal';
+
 
 type CommentProp = {
   comments: CommentType[];
 };
 
 function CommentSection({ comments }: CommentProp): JSX.Element {
+
   const [input, setInput] = useState({ body: '' });
   const dispatch = useAppDispatch();
 
   const userId = useAppSelector((state) => state.user.id) as number
 
-  const userWithStatus = useAppSelector((store) => store.lkReducer.currentUserLk);
+  const user = useAppSelector((state) => state.user)
 
   const changeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+
+
 
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
@@ -77,7 +83,9 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
                     {el.User?.userName}
                   </p>
                 </div>
-                {userWithStatus?.isAdmin === true && (
+                {/* {userWithStatus?.isAdmin === true && (
+                   */}
+                   {user.isAdmin &&(
                   <button
                     type="button"
                     className={style.deleteComment}

@@ -5,12 +5,6 @@ import type {
   AuthType,
   CreateConfirmType,
 } from '../../types/authType/authTypes';
-// import type {
-//   CreateConfirmType,
-//   OwnerLoginType,
-//   OwnerSignUpType,
-//   RestOwnerType,
-// } from '../../types/authType/authTypes';
 
 export const checkOwnerService = async (): Promise<AuthType> => {
   const { data } = await apiService<AuthType>('/authOwner/check');

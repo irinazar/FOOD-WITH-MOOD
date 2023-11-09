@@ -60,11 +60,7 @@ restaurantRouter.get("/:id", async (req, res) => {
     const ratings = oneRestaurant.Ratings.map((rating) => rating.rating);
     const averageRating =
       ratings.reduce((total, rating) => total + rating, 0) / ratings.length;
-      console.log(
-        oneRestaurant, 'OLOOOOOOOOOOOOOOOOOOOOOOO', 
-        comments , 'OLOOOOOOOOOOOOOOOOOOOOOOO', 
-        pictures,'OLOOOOOOOOOOOOOOOOOOOOOOO', 
-        averageRating, 'OLOOOOOOOOOOOOOOOOOOOOOOO');
+
 
     if ((oneRestaurant,  pictures)) {
       res.json({ oneRestaurant, comments, pictures, averageRating });
@@ -183,24 +179,30 @@ restaurantRouter.post("/:id/booking", async (req, res) => {
   }
 });
 
-restaurantRouter.delete("/:id/comments/:commentId", async (req, res) => {
-  const { id, commentId } = req.params;
-  if (Number.isNaN(+id) || Number.isNaN(+commentId)) {
-    res.status(400).json({ message: "Invalid IDs" });
-    return;
-  }
+restaurantRouter.delete("/:restaurantId/comments/:commentId", async (req, res) => {
+  const { restaurantId, commentId } = req.params;
+  // if (Number.isNaN(+id) || Number.isNaN(+commentId)) {
+  //   res.status(400).json({ message: "Invalid IDs" });
+  //   return;
+  // }
 
   try {
-    const restaurant = await Restaurant.findByPk(id);
+    const restaurant = await Restaurant.findOne({
+      where: {
+        id: restaurantId
+      }
+    })
+    console.log(restaurant, 'REEEEEEEEEESTIK');
     if (!restaurant) {
       res.status(404).json({ error: "Restaurant not found" });
       return;
     }
 
     const deletedComment = await Comment.destroy({
-      where: { id: commentId, restaurantId: id },
+      where: { id: commentId, restaurantId },
     });
 
+    console.log(deletedComment, 'DELETEEED');
     if (deletedComment) {
       res.json(deletedComment);
     } else {
