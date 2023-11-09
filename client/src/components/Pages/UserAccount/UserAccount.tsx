@@ -28,7 +28,6 @@ function UserAccount(): JSX.Element {
   const myfav = useAppSelector((state) => state.lkReducer.favorite) as FavoriteType[];
   const userlk = useAppSelector((state) => state.lkReducer.currentUserLk) as UserLkType;
 
-  console.log(myfav);
 
   useEffect(() => {
     void dispatch(getUserThunk(Number(id)));
