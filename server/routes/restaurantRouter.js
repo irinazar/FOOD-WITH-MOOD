@@ -179,12 +179,12 @@ restaurantRouter.post("/:id/booking", async (req, res) => {
   }
 });
 
-restaurantRouter.delete("/:restaurantId/comments/:commentId", async (req, res) => {
-  const { restaurantId, commentId } = req.params;
-  // if (Number.isNaN(+id) || Number.isNaN(+commentId)) {
-  //   res.status(400).json({ message: "Invalid IDs" });
-  //   return;
-  // }
+restaurantRouter.delete("/:id/comments/:commentId", async (req, res) => {
+  const { id, commentId } = req.params;
+  if (Number.isNaN(+id) || Number.isNaN(+commentId)) {
+    res.status(400).json({ message: "Invalid IDs" });
+    return;
+  }
 
   try {
     const restaurant = await Restaurant.findOne({
