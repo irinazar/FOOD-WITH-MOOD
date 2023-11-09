@@ -6,6 +6,7 @@ const validateRooter = express.Router();
 const jwtSecretKey = "your-secret-key"; // секретный ключ
 
 validateRooter.post("/", async (req, res) => {
+  
   const { randomString } = req.body;
   if (!randomString) return res.sendStatus(400);
 
