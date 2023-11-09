@@ -10,7 +10,6 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  Text,
   VStack,
   useColorModeValue,
   useToast,
@@ -21,7 +20,6 @@ import { useAppDispatch } from '../../../hooks/reduxHooks';
 import { loginOwnerThunk } from '../../../features/redux/slices/authOwner/authOwnerThunks';
 
 export default function LoginPage(): JSX.Element {
-  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const toast = useToast();
 
@@ -50,7 +48,6 @@ export default function LoginPage(): JSX.Element {
     if (formData.radio === 'owner') {
       void dispatch(loginOwnerThunk(formData));
     }
-    // navigate('/');
   };
 
   return (
