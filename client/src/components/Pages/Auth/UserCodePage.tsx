@@ -30,8 +30,6 @@ export default function UserCodePage(): JSX.Element {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data);
-
         if (response.data.isOwner) {
           void dispatch(setOwner(response.data));
         } else {
@@ -53,8 +51,7 @@ export default function UserCodePage(): JSX.Element {
           mb={4}
           color={useColorModeValue('gray.900', 'gray.100')}
         >
-          Мы отправили вам письмо на электронную почту!
-          <h1>Введите код</h1>
+          Мы отправили вам письмо на электронную почту! Введите код
         </Text>
         <form onSubmit={submitCodeHandler}>
           <VStack spacing={4}>
