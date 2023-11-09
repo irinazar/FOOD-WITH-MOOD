@@ -9,14 +9,14 @@ import { oneCountryActionThunk } from '../../../features/redux/slices/country/Co
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
 
-import pizza from '../../../../public/img/pizzapng.png';
+
 
 import MoreButton from '../../UI/MoreButton/MoreButton';
 
 import Rating from '../../UI/RestaurantPageUI/Rating';
 
 import { ParallaxUp } from '../../UI/Animations/Parallax';
-import Hide from '../../UI/Animations/Hide';
+
 
 
 export default function CountryPage(): JSX.Element {
@@ -26,7 +26,6 @@ export default function CountryPage(): JSX.Element {
   console.log(oneCountry, 'ONECOUNTRY');
   
   const user = useAppSelector((state) => state.user);
-  // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
  
@@ -61,7 +60,7 @@ export default function CountryPage(): JSX.Element {
           const placemark = new ymaps.Placemark([restik.coordX, restik.coordY], {
             balloonContentHeader: `<a style="color: black" href ='post/house/${restik.id}'> ${restik.title}</a>`,
 
-            balloonContentBody: restik.description,
+            balloonContentBody: [restik.adress, ` ${restik.phone}`],
 
             iconLayout: 'default#image',
             iconImageHref: '/img/geo.png',

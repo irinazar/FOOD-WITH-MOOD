@@ -28,10 +28,12 @@ authOwnerRouter.post("/signup", async (req, res) => {
       return res.sendStatus(403);
     }
 
+
     const codeEntry = await Confirm.create({
       randomString: confirm,
       restOwnerId: user.id,
     });
+
 
     sendConfirmationCodeEmail(email, confirm);
     const sessionUser = JSON.parse(JSON.stringify(user));

@@ -4,6 +4,7 @@ const { RestOwner, Confirm, User } = require("../db/models");
 const validateRooter = express.Router();
 
 validateRooter.post("/", async (req, res) => {
+  
   const { randomString } = req.body;
   if (!randomString) return res.sendStatus(400);
   try {
