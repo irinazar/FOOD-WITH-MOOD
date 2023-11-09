@@ -20,6 +20,7 @@ countryRouter.route("/:id").get(async (req, res) => {
       include: [
         {
           model: Restaurant,
+          where : {status: 'Accepted'},
 
           include: [Image, Favourite,Rating],
 

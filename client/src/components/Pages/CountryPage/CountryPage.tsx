@@ -23,6 +23,8 @@ export default function CountryPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const oneCountry = useAppSelector((state) => state.countries.oneCountry);
+  console.log(oneCountry, 'ONECOUNTRY');
+  
   const user = useAppSelector((state) => state.user);
   // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
   const restiks = oneCountry?.Restaurants;
