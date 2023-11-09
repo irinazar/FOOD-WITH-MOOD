@@ -62,10 +62,13 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
         {comments?.map((el) => (
         <Reveal>
           <div key={uuidv4()}>
-            <article className="p-2 text-xl bg-white font-bold rounded-lg dark:bg-gray-900">
+
+
+            <article className="p-2 text-xl font-semibold bg-white rounded-lg dark:bg-gray-900">
+
               <footer className="flex justify-between items-center mb-2">
                 <div className="flex items-center">
-                  <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                  <p className="inline-flex items-center mr-3 text-m text-gray-900 dark:text-white font-semibold">
                     <img
                       className="mr-2 w-10 h-10 rounded-full"
                       src={`${STATIC_URL}/img/users/${el.User?.avatar}`}
