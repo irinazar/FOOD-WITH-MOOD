@@ -86,7 +86,6 @@ userRouter.post("/login", async (req, res) => {
       req.session.user = sessionUser;
       return res.json(sessionUser);
     } catch (e) {
-      // console.log(e);
       return res.sendStatus(500);
     }
   }

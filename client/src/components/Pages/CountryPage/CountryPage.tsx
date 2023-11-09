@@ -26,7 +26,6 @@ export default function CountryPage(): JSX.Element {
   console.log(oneCountry, 'ONECOUNTRY');
   
   const user = useAppSelector((state) => state.user);
-  // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
  
