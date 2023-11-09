@@ -4,6 +4,7 @@ import PendingCard from '../../UI/AdminUI/PendingCard';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { getPendingRestaurantThunk } from '../../../features/redux/slices/adminSlice/adminThunk';
 
+
 export default function AdminPage(): JSX.Element {
   const dispatch = useAppDispatch()
   const pendingRestaurants = useAppSelector((state) => state.admin.pendingRestaurants)
@@ -13,7 +14,7 @@ export default function AdminPage(): JSX.Element {
   }, [])
   
   return (
-    <div className="flex flex-col w-full ml-20 mr-20 mb-30">
+    <div className="flex flex-col w-full ml-1 mr-20 mb-350" style={{marginBottom: '380px'}}>
       <Box position="relative" padding="10">
         <Divider />
         <AbsoluteCenter  bg='gray.100' px="4" fontSize="xl" fontWeight="bold">
