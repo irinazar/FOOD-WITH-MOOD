@@ -13,5 +13,6 @@ export type CountryType = {
     name: string;
     description: string;
     img: string;
+    miniImg:string;
     Restaurants: OneRestaurantType[]
   };

@@ -62,7 +62,7 @@ const useLkHooks = (): {
       formData.append('countryId', selectedCountryIds.join(' '));
 
       void dispatch(updateUserThunk({ formData, id }));
-      void dispatch(getUserRestaurants(Number(id))); //! !!!!!!!! не работает второй диспатч
+      void dispatch(getUserRestaurants(Number(id)));
     },
     [],
   );

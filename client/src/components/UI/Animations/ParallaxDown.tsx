@@ -13,14 +13,14 @@ export function ParallaxDown({ children, width = 'fit-content' }: Props):JSX.Ele
         offset: ['start start', 'end start']
     })
    
-    const backgroundY = useTransform(scrollYProgress, [0,1], ['0%', '100%'])
+    const backgroundY = useTransform(scrollYProgress, [0,1], ['0%', '200%'])
     const textY = useTransform(scrollYProgress, [0,1], ['0%', '-100%'])
 
     
 
 
   return (
-    <div ref={ref} style={{  width }}>
+    <div ref={ref} style={{ position: 'relative', width }}>
       <motion.div
       style={{y: backgroundY}}
       >{children}</motion.div>

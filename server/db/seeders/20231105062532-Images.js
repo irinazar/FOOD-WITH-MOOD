@@ -300,6 +300,26 @@ module.exports = {
           restaurantId: 25,
           image: "shurma.webp",
         },
+        {
+          restaurantId: 25,
+          image: "shurma2.jpg",
+        },
+        {
+          restaurantId: 25,
+          image: "shurma3.jpg",
+        },
+        {
+          restaurantId: 26,
+          image: "meso1.webp",
+        },
+        {
+          restaurantId: 26,
+          image: "meso2.jpg",
+        },
+        {
+          restaurantId: 26,
+          image: "meso3.jpg",
+        },
       ],
       {}
     );

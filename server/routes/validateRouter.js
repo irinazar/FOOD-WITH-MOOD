@@ -7,7 +7,6 @@ const jwtSecretKey = "your-secret-key"; // секретный ключ
 
 validateRooter.post("/", async (req, res) => {
   const { randomString } = req.body;
-  // console.log("randomString", randomString);
   if (!randomString) return res.sendStatus(400);
 
   const codeEntry = await Confirm.findOne({
