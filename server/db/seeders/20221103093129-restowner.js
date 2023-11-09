@@ -8,7 +8,7 @@ module.exports = {
       [
         {
           name: "Георгий Бабаян",
-          email: "elbrus@gmail.com",
+          email: "elbrus@example.com",
           telephone: 89106066666,
           password: await bcrypt.hash("12345678", 10),
           avatar: "Гоша.jpeg",
