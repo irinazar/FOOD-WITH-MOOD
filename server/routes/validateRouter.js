@@ -29,15 +29,17 @@ validateRooter.post("/", async (req, res) => {
       isOwner: true,
     };
     await codeEntry.destroy();
-    const token = jwt.sign(
-      { userName: ownerNew.name, restOwnerId: ownerNew.id },
-      jwtSecretKey,
-      {
-        expiresIn: "1h",
-      }
-    );
-    res.cookie("token", token, { httpOnly: true });
-    return res.status(200).json({ token, isOwner: true });
+    // const token = jwt.sign(
+    //   { userName: ownerNew.name, restOwnerId: ownerNew.id },
+    //   jwtSecretKey,
+    //   {
+    //     expiresIn: "1h",
+    //   }
+    // );
+    // res.cookie("token", token, { httpOnly: true });
+    const owner = JSON.parse(JSON.stringify(ownerNew));
+    delete owner.password;
+    return res.status(200).json(owner);
   } else {
     const userNew = await User.findByPk(codeEntry.userId);
     userNew.active = true;
@@ -47,15 +49,16 @@ validateRooter.post("/", async (req, res) => {
       id: userNew.id,
     };
     await codeEntry.destroy();
-    const token = jwt.sign(
-      { userName: userNew.name, userId: userNew.id },
-      jwtSecretKey,
-      {
-        expiresIn: "1h",
-      }
-    );
-    res.cookie("token", token, { httpOnly: true });
-    return res.status(200).json({ token });
+    // const token = jwt.sign(
+    //   { userName: userNew.name, userId: userNew.id },
+    //   jwtSecretKey,
+    //   {
+    //     expiresIn: "1h",
+    //   }
+    // );
+    const user = JSON.parse(JSON.stringify(userNew));
+    delete user.password;
+    return res.status(200).json(user);
   }
 });
 

@@ -55,8 +55,12 @@ authOwnerRouter.post("/signup", async (req, res) => {
   });
 
   sendConfirmationCodeEmail(email, confirm);
+  const sessionUser = JSON.parse(JSON.stringify(user));
+  delete sessionUser.password;
+  req.session.user = sessionUser;
+    req.session.user.isOwner = true;
 
-  return res.sendStatus(201);
+  return res.status(201).json(sessionUser);
 });
 
 authOwnerRouter.post("/login", async (req, res) => {
@@ -92,7 +96,7 @@ authOwnerRouter.get("/check", (req, res) => {
 
 authOwnerRouter.get("/logout", (req, res) => {
   req.session.destroy();
-  res.clearCookie("token").sendStatus(200);
+  res.clearCookie("sid").sendStatus(200);
 });
 
 module.exports = authOwnerRouter;

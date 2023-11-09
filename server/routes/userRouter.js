@@ -53,19 +53,21 @@ userRouter.post("/signup", async (req, res) => {
   });
 
   sendConfirmationCodeEmail(email, confirm);
+  const sessionUser = JSON.parse(JSON.stringify(user));
+  delete sessionUser.password;
+  req.session.user = sessionUser;
+  // const token = jwt.sign(
+  //   { userName: user.name, userId: user.id },
+  //   jwtSecretKey,
+  //   {
+  //     expiresIn: "1h",
+  //   }
+  // );
 
-  const token = jwt.sign(
-    { userName: user.name, userId: user.id },
-    jwtSecretKey,
-    {
-      expiresIn: "1h",
-    }
-  );
+  // // Установка токена в куки
+  // res.cookie("token", token, { httpOnly: true });
 
-  // Установка токена в куки
-  res.cookie("token", token, { httpOnly: true });
-
-  return res.status(201).json({ token });
+  return res.status(201).json(sessionUser);
 });
 
 userRouter.post("/login", async (req, res) => {
@@ -100,7 +102,7 @@ userRouter.get("/check", (req, res) => {
 
 userRouter.get("/logout", (req, res) => {
   req.session.destroy();
-  res.clearCookie("token").sendStatus(200);
+  res.clearCookie("sid").sendStatus(200);
 });
 
 module.exports = userRouter;
