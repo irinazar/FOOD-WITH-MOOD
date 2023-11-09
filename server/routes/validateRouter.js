@@ -7,7 +7,6 @@ const jwtSecretKey = "your-secret-key"; // секретный ключ
 
 validateRooter.post("/", async (req, res) => {
   const { randomString } = req.body;
-  // console.log("randomString", randomString);
   if (!randomString) return res.sendStatus(400);
 
   const codeEntry = await Confirm.findOne({
@@ -19,6 +18,7 @@ validateRooter.post("/", async (req, res) => {
   if (!codeEntry) {
     return res.sendStatus(403);
   }
+
   if (!codeEntry.userId) {
     const ownerNew = await RestOwner.findByPk(codeEntry.restOwnerId);
     ownerNew.active = true;
@@ -28,6 +28,7 @@ validateRooter.post("/", async (req, res) => {
       id: ownerNew.id,
       isOwner: true,
     };
+    await req.session.save();
     await codeEntry.destroy();
     // const token = jwt.sign(
     //   { userName: ownerNew.name, restOwnerId: ownerNew.id },
@@ -39,8 +40,10 @@ validateRooter.post("/", async (req, res) => {
     // res.cookie("token", token, { httpOnly: true });
     const owner = JSON.parse(JSON.stringify(ownerNew));
     delete owner.password;
+    owner.isOwner = true;
     return res.status(200).json(owner);
   } else {
+    console.log("else");
     const userNew = await User.findByPk(codeEntry.userId);
     userNew.active = true;
     await userNew.save();
