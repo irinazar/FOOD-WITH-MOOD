@@ -9,14 +9,14 @@ import { oneCountryActionThunk } from '../../../features/redux/slices/country/Co
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
 
-import pizza from '../../../../public/img/pizzapng.png';
+
 
 import MoreButton from '../../UI/MoreButton/MoreButton';
 
 import Rating from '../../UI/RestaurantPageUI/Rating';
 
 import { ParallaxUp } from '../../UI/Animations/Parallax';
-import Hide from '../../UI/Animations/Hide';
+
 
 
 export default function CountryPage(): JSX.Element {
