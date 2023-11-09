@@ -20,6 +20,7 @@ export const checkOwnerService = async (): Promise<AuthType> => {
 export const submitSignupService = async (formData: AuthSignUpType): Promise<AuthType> => {
   const { data } = await apiService.post<AuthType>('/authOwner/signup', formData);
 
+
   return data;
 };
 

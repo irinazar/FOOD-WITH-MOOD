@@ -23,6 +23,8 @@ export default function CountryPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const oneCountry = useAppSelector((state) => state.countries.oneCountry);
+  console.log(oneCountry, 'ONECOUNTRY');
+  
   const user = useAppSelector((state) => state.user);
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
@@ -58,7 +60,7 @@ export default function CountryPage(): JSX.Element {
           const placemark = new ymaps.Placemark([restik.coordX, restik.coordY], {
             balloonContentHeader: `<a style="color: black" href ='post/house/${restik.id}'> ${restik.title}</a>`,
 
-            balloonContentBody: restik.description,
+            balloonContentBody: [restik.adress, ` ${restik.phone}`],
 
             iconLayout: 'default#image',
             iconImageHref: '/img/geo.png',
