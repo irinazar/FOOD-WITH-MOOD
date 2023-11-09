@@ -14,6 +14,7 @@ import {
 import type { CommentResponseType, OwnerType } from '../../../types/lkTypes/lkTypes';
 import OwnerCard from './ui/OwnerCard';
 import Bookings from './ui/Bookings';
+import { Reveal } from '../../UI/Animations/Reveal';
 
 export default function OwnerAccount(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -62,7 +63,8 @@ export default function OwnerAccount(): JSX.Element {
         </AbsoluteCenter>
       </Box>
       <div className={style['comment-owner-container']}>
-        {restmycomments?.map((comment) => <Comment key={comment.id} comment={comment} />)}
+        
+        {restmycomments?.map((comment) => <Reveal> <><Comment key={comment.id} comment={comment} />  </></Reveal>)}
       </div>
     </div>
   );

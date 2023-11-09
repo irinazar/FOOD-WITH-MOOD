@@ -49,7 +49,7 @@ module.exports = {
         },
         {
           name: "Ирина",
-          email: "irina@mail.ru",
+          email: "ir@gmail.com",
           avatar: "Ирина.png",
           password: await bcrypt.hash("12345678", 10),
           isAdmin: true,

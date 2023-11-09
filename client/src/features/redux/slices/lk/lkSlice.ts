@@ -70,7 +70,7 @@ export const lkSlice = createSlice({
     });
     builder.addCase(newRestaurantThunk.fulfilled, (state, action) => {
       if (state.currentOwner) {
-        state.currentOwner.Restaurants.push(action.payload);
+        state.currentOwner.Restaurants.unshift(action.payload);
       }
     });
 

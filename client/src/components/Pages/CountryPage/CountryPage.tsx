@@ -30,6 +30,7 @@ export default function CountryPage(): JSX.Element {
   const ymapRef = useRef(null);
  
 
+
   useEffect(() => {
     void dispatch(oneCountryActionThunk(Number(id)));
 
@@ -117,10 +118,10 @@ export default function CountryPage(): JSX.Element {
                 <p>{el.description}</p>
               </OnTheLeft>
               <br />
-              <FavoriteButton
+             {user.status ==='logged'  && <FavoriteButton
                 restID={el.id}
                 isLiked={el.Favourites.map((fav) => fav.userId).includes(checkid())}
-              />
+              />}
               {el.Ratings ? (
                 <Rating
                   averageRating={

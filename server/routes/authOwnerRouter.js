@@ -28,20 +28,19 @@ authOwnerRouter.post("/signup", async (req, res) => {
       return res.sendStatus(403);
     }
 
-
     const codeEntry = await Confirm.create({
       randomString: confirm,
       restOwnerId: user.id,
     });
 
-
     sendConfirmationCodeEmail(email, confirm);
-    const sessionUser = JSON.parse(JSON.stringify(user));
-    delete sessionUser.password;
-    req.session.user = sessionUser;
-    req.session.user.isOwner = true;
+    // const sessionUser = JSON.parse(JSON.stringify(user));
+    // delete sessionUser.password;
+    // req.session.user = sessionUser;
+    // req.session.user.isOwner = true;
 
-    return res.status(201).json(sessionUser);
+    // return res.status(201).json(sessionUser);
+    return res.sendStatus(200);
   } catch (e) {
     return res.sendStatus(500);
   }
@@ -58,11 +57,21 @@ authOwnerRouter.post("/login", async (req, res) => {
         return res.sendStatus(401);
       }
 
-      const sessionUser = JSON.parse(JSON.stringify(user));
-      delete sessionUser.password;
-      req.session.user = sessionUser;
-      req.session.user.isOwner = true;
-      return res.json(sessionUser);
+      if (user) {
+        const confirm = await Confirm.findOne({
+          where: { restOwnerId: user.id },
+        });
+
+        if (confirm) {
+          confirm.destroy();
+          user.destroy();
+        } else {
+          const sessionUser = JSON.parse(JSON.stringify(user));
+          delete sessionUser.password;
+          req.session.user = sessionUser;
+          return res.json(sessionUser);
+        }
+      }
     } catch (e) {
       return res.sendStatus(500);
     }

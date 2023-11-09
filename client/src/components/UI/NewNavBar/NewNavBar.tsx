@@ -54,14 +54,14 @@ export default function NewNavBar(): JSX.Element {
         <li className={style.menuEl}>
           {user.status === 'logged' && !user.isAdmin && (
             <NavLink className={style.menuLink} to={`/user/${user?.id}`}>
-              ЛК пользователя
+              Личный кабинет
             </NavLink>
           )}
         </li>
         <li className={style.menuEl}>
           {owner.status === 'logged' && !user.isAdmin && (
             <NavLink className={style.menuLink} to={`/owner/${owner?.id}`}>
-              ЛК ресторана
+              Личный кабинет
             </NavLink>
           )}
         </li>
