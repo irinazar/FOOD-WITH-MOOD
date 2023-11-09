@@ -1,13 +1,22 @@
 .description {
+  display: flex;
+  justify-content: center; /* Горизонтальное центрирование */
+  align-items: center; /* Вертикальное центрирование */
+  height: 100vh; /* Задает высоту элемента на всю высоту видимой области страницы */
+  text-align: center; /* Выравнивание текста по центру */
+}
+.descText {
+  width: 50vw;
+  font-size: 35px;
+}
 
-    display: flex;
-    justify-content: center; /* Горизонтальное центрирование */
-    align-items: center; /* Вертикальное центрирование */
-    height: 100vh; /* Задает высоту элемента на всю высоту видимой области страницы */
-    text-align: center; /* Выравнивание текста по центру */
+@media screen and (max-width: 650px) {
+  .descText {
+    width: 500px;
+    font-size: 23px;
+    padding: 10px;
   }
-  .descText{
-
-    width: 50vw;
-    font-size: 35px;
+  .description {
+    height: 75vh;
   }
+}

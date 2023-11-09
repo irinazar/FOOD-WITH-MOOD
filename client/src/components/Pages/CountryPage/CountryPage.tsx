@@ -9,14 +9,14 @@ import { oneCountryActionThunk } from '../../../features/redux/slices/country/Co
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 import { clearAllRestaurants } from '../../../features/redux/slices/country/CountrySlice';
 
-import pizza from '../../../../public/img/pizzapng.png';
+
 
 import MoreButton from '../../UI/MoreButton/MoreButton';
 
 import Rating from '../../UI/RestaurantPageUI/Rating';
 
 import { ParallaxUp } from '../../UI/Animations/Parallax';
-import Hide from '../../UI/Animations/Hide';
+
 
 
 export default function CountryPage(): JSX.Element {
@@ -26,7 +26,6 @@ export default function CountryPage(): JSX.Element {
   console.log(oneCountry, 'ONECOUNTRY');
   
   const user = useAppSelector((state) => state.user);
-  // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
  
@@ -91,13 +90,15 @@ export default function CountryPage(): JSX.Element {
           <Reveal>
             <>
               <h1>{oneCountry?.name}</h1>
-              <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
+              <p  
+              // style={{ fontSize: '25px' }}
+              >{oneCountry?.description}</p>
             </>
           </Reveal>
 
           <ParallaxUp>
           <Reveal>
-            <img style={({ width: '400px' }, { paddingTop: '320px', paddingLeft:'18px'})} src={`${STATIC_URL}/miniImg/${oneCountry?.miniImg}`} alt="" />
+            <img className={style.imgmy}  src={`${STATIC_URL}/miniImg/${oneCountry?.miniImg}`} alt="" />
             </Reveal>
           </ParallaxUp>
         </div>

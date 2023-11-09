@@ -23,6 +23,7 @@ type OwnerCardProps = {
 };
 
 function OwnerCard({ rest }: OwnerCardProps): JSX.Element {
+
   const { deleteHandler } = useLkHooks();
   return (
     <Card>

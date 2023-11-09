@@ -263,7 +263,6 @@ lkRouter.post("/getmyrest/:id", async (req, res) => {
 lkRouter.delete("/delmyrest/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const rest = await Restaurant.findByPk(id);
     rest.destroy();
     res.sendStatus(200);
@@ -330,7 +329,6 @@ lkRouter.post("/replycomment", async (req, res) => {
 });
 
 lkRouter.post("/favorite", async (req, res) => {
-  console.log(req.body);
   try {
     const { userId, restaurantId } = req.body;
 
@@ -344,7 +342,6 @@ lkRouter.post("/favorite", async (req, res) => {
     if (!created) {
       await favorite.destroy();
 
-      // console.log(rest, "oldddddddd");
       res.status(200).json({ del: true, rest: { id: restaurantId } });
       return;
     } else {
@@ -359,7 +356,6 @@ lkRouter.post("/favorite", async (req, res) => {
         ],
       });
 
-      // console.log(rest, "newwwwwwwww");
 
       res.status(200).json({ rest });
     }

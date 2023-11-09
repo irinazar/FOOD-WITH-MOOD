@@ -13,7 +13,6 @@ export const oneCountryActionThunk = createAsyncThunk<OneCountryType, number>(
   'country/one',
   async (id) => {
     const response = await oneCountryService(id);
-    // console.log(response);
     return response;
   },
 );
