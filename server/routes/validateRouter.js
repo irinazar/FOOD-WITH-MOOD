@@ -4,7 +4,6 @@ const { RestOwner, Confirm, User } = require("../db/models");
 const validateRooter = express.Router();
 
 validateRooter.post("/", async (req, res) => {
-  
   const { randomString } = req.body;
   if (!randomString) return res.sendStatus(400);
   try {
@@ -17,7 +16,6 @@ validateRooter.post("/", async (req, res) => {
     if (!codeEntry) {
       return res.sendStatus(403);
     }
-
     if (!codeEntry.userId) {
       const ownerNew = await RestOwner.findByPk(codeEntry.restOwnerId);
       ownerNew.active = true;
@@ -48,6 +46,7 @@ validateRooter.post("/", async (req, res) => {
     }
   } catch (e) {
     return res.sendStatus(500);
+
   }
 });
 
