@@ -16,17 +16,20 @@ import MoreButton from '../../UI/MoreButton/MoreButton';
 import Rating from '../../UI/RestaurantPageUI/Rating';
 
 import { ParallaxUp } from '../../UI/Animations/Parallax';
+import Hide from '../../UI/Animations/Hide';
 
 
 export default function CountryPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const oneCountry = useAppSelector((state) => state.countries.oneCountry);
+  console.log(oneCountry, 'ONECOUNTRY');
+  
   const user = useAppSelector((state) => state.user);
   // console.log('-------------',oneCountry?.Restaurants[0].Ratings[0].rating)
   const restiks = oneCountry?.Restaurants;
   const ymapRef = useRef(null);
-  console.log(restiks);
+ 
 
   useEffect(() => {
     void dispatch(oneCountryActionThunk(Number(id)));
@@ -78,7 +81,6 @@ export default function CountryPage(): JSX.Element {
 
   useEffect(() => {
     if (restiks?.length && !ymapRef.current) loadMap();
-    console.log(ymapRef);
   }, [restiks]);
 
   return (
@@ -86,15 +88,17 @@ export default function CountryPage(): JSX.Element {
 
       <div className={style.pageContainer}>
         <div className={style.cuisine}>
-        
           <Reveal>
             <>
               <h1>{oneCountry?.name}</h1>
               <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
             </>
           </Reveal>
+
           <ParallaxUp>
-            <img style={{ width: '400px' }, {paddingTop:'320px'}} src={pizza} alt="" />
+          <Reveal>
+            <img style={({ width: '400px' }, { paddingTop: '320px', paddingLeft:'18px'})} src={`${STATIC_URL}/miniImg/${oneCountry?.miniImg}`} alt="" />
+            </Reveal>
           </ParallaxUp>
         </div>
       </div>
@@ -131,7 +135,7 @@ export default function CountryPage(): JSX.Element {
             </div>
             <Reveal>
               <div className={style.image}>
-                <img src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`} alt="" />
+                <img style={{ width: '700px'}} src={`${STATIC_URL}/img/restaurants/${el.Images[0].image}`} alt="" />
               </div>
             </Reveal>
           </div>

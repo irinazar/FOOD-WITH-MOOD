@@ -208,6 +208,7 @@ lkRouter.post("/newrestaurant", upload.array("file", 3), async (req, res) => {
 
       await Rating.create({
         restaurantId: newRestaurantId,
+        userId:1,
         rating: 0,
       });
 

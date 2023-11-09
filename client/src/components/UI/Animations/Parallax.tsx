@@ -1,5 +1,5 @@
 import React, {  useRef } from 'react';
-import { motion, useInView, useAnimation, useScroll, useTransform } from 'framer-motion';
+import { motion,  useScroll, useTransform } from 'framer-motion';
 
 type Props = {
   children: JSX.Element;
@@ -20,7 +20,7 @@ export function ParallaxUp({ children, width = 'fit-content' }: Props):JSX.Eleme
 
 
   return (
-    <div ref={ref} style={{  width }}>
+    <div ref={ref} style={{ position: 'relative', width }}>
       <motion.div
       style={{y: textY}}
       >{children}</motion.div>

@@ -17,7 +17,10 @@ export default function NewNavBar(): JSX.Element {
     isAdmin: boolean;
   };
 
+<<<<<<< HEAD
   // console.log(user.id);
+=======
+>>>>>>> dev
   const owner = useAppSelector((state) => state.authOwner) as {
     id: number;
     status: string;

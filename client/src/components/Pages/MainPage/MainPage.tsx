@@ -6,6 +6,7 @@ import Categories from '../Categories/Categories';
 import Description from '../MainPageDescription.tsx/Description';
 import { STATIC_URL } from '../UserAccount/ui/UserInfo';
 
+
 export default function MainPage(): JSX.Element {
   return (
     <>
