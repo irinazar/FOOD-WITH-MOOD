@@ -112,7 +112,6 @@ restaurantRouter.post("/:id/addComment", async (req, res) => {
     
     newComment.commentReply = newComment.CommentReplies.map((reply) => reply.body);
     
-console.log(newComment, 'NEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEWCOMMENT!!!!!!!!');
     res.json(newComment);
   } catch (error) {
     console.log(error);
@@ -180,7 +179,6 @@ restaurantRouter.post("/:id/booking", async (req, res) => {
 
 restaurantRouter.delete("/:id/comments/:commentId", async (req, res) => {
   const { id, commentId } = req.params;
-console.log(id, commentId, 'AAAAAAAAAAAAAAAAAAAAAAAAAA');
   if (Number.isNaN(+id) || Number.isNaN(+commentId)) {
     res.status(400).json({ message: "Invalid IDs" });
     return;

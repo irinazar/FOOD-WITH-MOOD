@@ -21,7 +21,6 @@ function UserInfo({ userlk }: UserInfoProps): JSX.Element {
   const [overlay, setOverlay] = useState(<OverlayTwo />);
   const { handlerSubmit } = useLkHooks();
 
-  console.log(userlk);
 
   return (
     <div className={style.usercardinfo}>

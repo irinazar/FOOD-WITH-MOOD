@@ -53,7 +53,6 @@ function ModalNewRestorant({
     const coords: number[] = e.get('coords');
     const newCoordinates = { lat: coords[0], lng: coords[1] };
     setMapCoordinates(newCoordinates);
-    console.log(newCoordinates);
   };
 
   const loadMap = (): void => {
