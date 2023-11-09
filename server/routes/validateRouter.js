@@ -46,7 +46,6 @@ validateRooter.post("/", async (req, res) => {
     }
   } catch (e) {
     return res.sendStatus(500);
-
   }
 });
 

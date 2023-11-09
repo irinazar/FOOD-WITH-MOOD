@@ -26,16 +26,23 @@ userRouter.post("/signup", async (req, res) => {
 
     if (!created) return res.sendStatus(403);
 
+    // if (!created) {
+    //   const user = await User.findOne({ where: { email: email } });
+    //   await user.destroy();
+    //   return res.sendStatus(403);
+    // }
+
     const codeEntry = await Confirm.create({
       randomString: confirm,
       userId: user.id,
     });
 
     sendConfirmationCodeEmail(email, confirm);
-    const sessionUser = JSON.parse(JSON.stringify(user));
-    delete sessionUser.password;
-    req.session.user = sessionUser;
-    return res.status(201).json(sessionUser);
+    // const sessionUser = JSON.parse(JSON.stringify(user));
+    // delete sessionUser.password;
+    // req.session.user = sessionUser;
+    // return res.status(201).json(sessionUser);
+    return res.sendStatus(200);
   } catch (e) {
     return res.sendStatus(500);
   }
@@ -48,14 +55,24 @@ userRouter.post("/login", async (req, res) => {
       const user = await User.findOne({
         where: { email },
       });
+
       if (!(await bcrypt.compare(password, user.password))) {
         return res.sendStatus(401);
       }
 
-      const sessionUser = JSON.parse(JSON.stringify(user));
-      delete sessionUser.password;
-      req.session.user = sessionUser;
-      return res.json(sessionUser);
+      if (user) {
+        const confirm = await Confirm.findOne({ where: { userId: user.id } });
+
+        if (confirm) {
+          confirm.destroy();
+          user.destroy();
+        } else {
+          const sessionUser = JSON.parse(JSON.stringify(user));
+          delete sessionUser.password;
+          req.session.user = sessionUser;
+          return res.json(sessionUser);
+        }
+      }
     } catch (e) {
       return res.sendStatus(500);
     }
@@ -64,12 +81,10 @@ userRouter.post("/login", async (req, res) => {
 });
 
 userRouter.get("/check", (req, res) => {
-
   if (req.session.user) {
     return res.json(req.session.user);
   }
   return res.sendStatus(401);
-  
 });
 
 userRouter.get("/logout", (req, res) => {
