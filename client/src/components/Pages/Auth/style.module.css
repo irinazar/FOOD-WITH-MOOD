@@ -1,15 +1,15 @@
 .divRegist {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
-  margin-bottom: 322px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .divRegistLogin {
   display: flex;
   justify-content: center;
   margin-top: 50px;
-  margin-bottom: 231px;
+  margin-bottom: 65px;
 }
 .formRegist {
   margin-bottom: 15px;
@@ -18,7 +18,7 @@
   display: flex;
   justify-content: center;
   margin-top: 94px;
-  margin-bottom: 412px;
+  margin-bottom: 60px;
 }
 
 .registrLink {

@@ -9,6 +9,7 @@ import {
 } from '../../../features/redux/slices/oneRestaurantSlice/oneRestaurantThunk';
 import { STATIC_URL } from '../../Pages/UserAccount/ui/UserInfo';
 import style from './style.module.css';
+import { Reveal } from '../Animations/Reveal';
 
 type CommentProp = {
   comments: CommentType[];
@@ -59,6 +60,7 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
           </button>
         </form>
         {comments?.map((el) => (
+        <Reveal>
           <div key={uuidv4()}>
             <article className="p-2 text-base bg-white rounded-lg dark:bg-gray-900">
               <footer className="flex justify-between items-center mb-2">
@@ -124,6 +126,7 @@ function CommentSection({ comments }: CommentProp): JSX.Element {
               </article>
             ))}
           </div>
+        </Reveal>
         ))}
       </div>
     </section>
