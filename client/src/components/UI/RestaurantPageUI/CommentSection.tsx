@@ -12,7 +12,6 @@ import { STATIC_URL } from '../../Pages/UserAccount/ui/UserInfo';
 import style from './style.module.css';
 import { Reveal } from '../Animations/Reveal';
 
-
 type CommentProp = {
   comments: CommentType[];
 };
