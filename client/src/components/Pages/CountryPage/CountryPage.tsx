@@ -90,13 +90,15 @@ export default function CountryPage(): JSX.Element {
           <Reveal>
             <>
               <h1>{oneCountry?.name}</h1>
-              <p style={{ fontSize: '25px' }}>{oneCountry?.description}</p>
+              <p  
+              // style={{ fontSize: '25px' }}
+              >{oneCountry?.description}</p>
             </>
           </Reveal>
 
           <ParallaxUp>
           <Reveal>
-            <img style={({ width: '400px' }, { paddingTop: '320px', paddingLeft:'18px'})} src={`${STATIC_URL}/miniImg/${oneCountry?.miniImg}`} alt="" />
+            <img className={style.imgmy}  src={`${STATIC_URL}/miniImg/${oneCountry?.miniImg}`} alt="" />
             </Reveal>
           </ParallaxUp>
         </div>
