@@ -81,10 +81,12 @@ userRouter.post("/login", async (req, res) => {
 });
 
 userRouter.get("/check", (req, res) => {
+
   if (req.session.user) {
     return res.json(req.session.user);
   }
   return res.sendStatus(401);
+  
 });
 
 userRouter.get("/logout", (req, res) => {
