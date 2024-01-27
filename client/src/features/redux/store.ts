@@ -15,7 +15,6 @@ import countryReducer from './slices/country/CountrySlice';
 const store = configureStore({
   reducer: {
     user: userReducer,
-
     authOwner: authOwnerReducer,
     role: roleReducer,
 

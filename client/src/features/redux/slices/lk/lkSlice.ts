@@ -27,9 +27,7 @@ const initialState: {
   currentOwner: OwnerType | null;
   currentUserLk: UserLkType | null;
   comments: CommentResponseType[] | null;
-
   favorite: FavoriteType[] | null;
-
   bookings: {
     bookings: BookingResponse[];
   };
@@ -38,9 +36,7 @@ const initialState: {
   currentOwner: null,
   currentUserLk: null,
   comments: null,
-
   favorite: null,
-
   bookings: {
     bookings: [],
   },
