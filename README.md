@@ -4,10 +4,10 @@ cd client
 npm i 
 
 cd server 
+// Вам необходимо накатить базу данных в DBeaver
+npm run db 
 
 npm i
-
-npm run db 
 
 npm run start 
 
